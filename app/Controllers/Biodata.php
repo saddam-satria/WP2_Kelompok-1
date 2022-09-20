@@ -25,9 +25,10 @@ class Biodata extends BaseController
         // $value2 = $this->request->getVar("value2");
         
         $result = $this->matematikaModel->sum((int)$value1,(int)$value2);
-        echo "Hasil Penjumlahan Dari " . $value1. " + " . $value2 . "=" . $result;
+        echo "Contoh 2: Hasil Penjumlahan Dari " . $value1. " + " . $value2 . "=" . $result;
 
-
+        
+        return view("example",compact("value1","value2", "result"));
 
 
     }
