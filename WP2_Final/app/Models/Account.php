@@ -2,58 +2,56 @@
 
 namespace App\Models;
 
-use App\Helpers\DatetimeHelper;
-use CodeIgniter\Model;
-use Ramsey\Uuid\Uuid;
 
-class Account extends Model
+use Michalsn\Uuid\UuidModel;
+
+class Account extends UuidModel
 {
-    protected $DBGroup          = 'default';
     protected $table            = 'account';
     protected $primaryKey       = 'id';
-    protected $useAutoIncrement = false;
-    protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
         "email", "firstname", "lastname", "address", "image", "gender", "verificationCode",
-        "isMember", "isAdmin",
+        "isMember", "isAdmin", "password"
     );
-
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $uuidVersion = "uuid4";
+    protected $uuidUseBytes = false;
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules      = array(
+        "email" => "required|valid_email|is_unique[account.email]"
+    );
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ["addUUID"];
+    protected $beforeInsert   = ["hashingPassword", "setVerificationCode"];
     protected $afterInsert    = [];
-    protected $beforeUpdate   = ["setUpdatedAt"];
+    protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
     protected $beforeFind     = [];
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function addUUID(array $data)
+    public function hashingPassword(array $data)
     {
-        $uuid = Uuid::uuid4();
-        $data["id"] = $uuid->toString();
+        $data = $data["data"];
+        $data["password"] = password_hash($data["password"], PASSWORD_BCRYPT);
+        $data["data"] = $data;
         return $data;
     }
-    public function setUpdatedAt(array $data)
+    public function setVerificationCode(array $data)
     {
-        $data["updated_at"] = DatetimeHelper::now();
+        $payload = $data["email"] . "-" . date_create()->getTimestamp();
+        define("SECRET_KEY", "LAUNDRY WAR");
+        $data = $data["data"];
+        $data["verificationCode"] = strtoupper(hash_hmac("sha256", $payload, SECRET_KEY));
+        $data["data"] = $data;
         return $data;
     }
 }

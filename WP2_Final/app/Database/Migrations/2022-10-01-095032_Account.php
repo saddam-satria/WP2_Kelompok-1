@@ -19,6 +19,10 @@ class Account extends Migration
                 "type" => "VARCHAR",
                 "constraint" => 255,
             ),
+            "password" => array(
+                "type" => "VARCHAR",
+                "constraint" => 255
+            ),
             "firstname" => array(
                 "type" => "VARCHAR",
                 "constraint" => 100,

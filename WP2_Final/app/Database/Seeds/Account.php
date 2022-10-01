@@ -4,7 +4,7 @@ namespace App\Database\Seeds;
 
 use App\Models\Account as ModelsAccount;
 use CodeIgniter\Database\Seeder;
-use Ramsey\Uuid\Uuid;
+
 
 class Account extends Seeder
 {
@@ -15,8 +15,8 @@ class Account extends Seeder
             "firstname" => "admin",
             "address" => "admin",
             "gender" => "LAKI-LAKI",
-            "verificationCode" => "ADMIN!@#",
             "isAdmin" => true,
+            "password" => "admin"
         );
         $account_model = new ModelsAccount();
         $account_model->insert($data);

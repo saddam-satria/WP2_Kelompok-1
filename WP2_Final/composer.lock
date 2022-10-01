@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac414014681f5a1f66ddd326a4b22bae",
+    "content-hash": "cd8bf38152e2ae7689c14d4246eb2b84",
     "packages": [
         {
             "name": "brick/math",
@@ -250,6 +250,59 @@
                 }
             ],
             "time": "2021-09-02T17:10:53+00:00"
+        },
+        {
+            "name": "michalsn/codeigniter4-uuid",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/michalsn/codeigniter4-uuid.git",
+                "reference": "c8bbd961401015307bc72f6f6aa93509ffac1d5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/michalsn/codeigniter4-uuid/zipball/c8bbd961401015307bc72f6f6aa93509ffac1d5f",
+                "reference": "c8bbd961401015307bc72f6f6aa93509ffac1d5f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "ramsey/uuid": "^4.0"
+            },
+            "require-dev": {
+                "codeigniter4/codeigniter4": "dev-develop",
+                "phpunit/phpunit": "8.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Michalsn\\Uuid\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "michalsn",
+                    "homepage": "https://github.com/michalsn",
+                    "role": "Developer"
+                }
+            ],
+            "description": "UUID package for CodeIgniter 4 with support for Model and Entity.",
+            "homepage": "https://github.com/michalsn/codeigniter4-uuid",
+            "keywords": [
+                "codeigniter4",
+                "entity",
+                "model",
+                "uuid"
+            ],
+            "support": {
+                "issues": "https://github.com/michalsn/codeigniter4-uuid/issues",
+                "source": "https://github.com/michalsn/codeigniter4-uuid/tree/v1.0.1"
+            },
+            "time": "2021-05-03T12:47:44+00:00"
         },
         {
             "name": "psr/log",
