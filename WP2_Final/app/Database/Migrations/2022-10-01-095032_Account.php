@@ -53,14 +53,8 @@ class Account extends Migration
                 "type" => "BOOLEAN",
                 "default" => false,
             ),
-            "createdAt" => array(
-                "type" => "DATETIME",
-                "default" => "NOW()"
-            ),
-            "updatedAt" => array(
-                "type" => "DATETIME",
-                "null" => true
-            )
+            'created_at datetime default current_timestamp',
+            'updated_at datetime default current_timestamp on update current_timestamp',
         ));
         $this->forge->addPrimaryKey("id");
         $this->forge->addUniqueKey(array("email", "verificationCode"));
