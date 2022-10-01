@@ -21,9 +21,9 @@ app/Config/Routes.php -> merupakan file yang mengatur url (endpoint)
 pada file app/Config/Routes.php terdapat tambahan URL yaitu matakuliah/new dengan dua method yang berbeda POST & GET
 
 Penjelesan:
-    - GET
+    - GET {BASE_URL}/matakuliah/new
     Untuk menampilkan formulir pengisian mata kuliah
-    - POST
+    - POST {BASE_URL}/matakuliah/new
     Untuk memasukan data yang diinput ke table
 
 ```
