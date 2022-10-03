@@ -10,7 +10,7 @@ class Service extends Seeder
     public function run()
     {
         $data = array(
-            "serviceName" => "nyuci",
+            "serviceName" => "nyuCI",
             "servicePrice" => 20000
         );
 

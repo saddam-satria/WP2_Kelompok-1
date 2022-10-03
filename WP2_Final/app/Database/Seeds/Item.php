@@ -10,7 +10,7 @@ class Item extends Seeder
     public function run()
     {
         $data = array(
-            "itemName" => "t-shirt",
+            "itemName" => "T-shirt",
             "itemPrice" => 3000,
             "quantityPerKG" => 4,
         );

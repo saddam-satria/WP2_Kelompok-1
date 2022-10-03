@@ -32,8 +32,8 @@ class Service extends Model
     protected $cleanValidationRules = true;
 
     // Callbacks
-    protected $allowCallbacks = false;
-    protected $beforeInsert   = [];
+    protected $allowCallbacks = true;
+    protected $beforeInsert   = ["transformToLower"];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -41,4 +41,15 @@ class Service extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function transformToLower(array $data)
+    {
+        $data = $data["data"];
+
+        $data["serviceName"] = strtolower($data["serviceName"]);
+
+        $data["data"] = $data;
+
+        return $data;
+    }
 }

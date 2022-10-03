@@ -29,7 +29,7 @@ class Account extends UuidModel
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = ["hashingPassword", "setVerificationCode"];
+    protected $beforeInsert   = ["hashingPassword", "setVerificationCode", "transformToLower"];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -37,6 +37,23 @@ class Account extends UuidModel
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function transformToLower(array $data)
+    {
+        $data = $data["data"];
+
+        $data["email"] = strtolower($data["email"]);
+        $data["firstname"] = strtolower($data["firstname"]);
+        $data["address"] = strtolower($data["address"]);
+
+        if (isset($data["lastname"])) {
+            $data["lastname"] = strtolower($data["lastname"]);
+        }
+
+        $data["data"] = $data;
+
+        return $data;
+    }
 
     public function hashingPassword(array $data)
     {
