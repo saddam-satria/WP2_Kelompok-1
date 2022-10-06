@@ -11,5 +11,8 @@ class All extends Seeder
         $this->call("Account");
         $this->call("Service");
         $this->call("Item");
+        $this->call("Package");
+        $this->call("Voucher");
+        // $this->call("Cart");
     }
 }
