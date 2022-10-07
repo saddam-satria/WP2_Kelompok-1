@@ -1,0 +1,16 @@
+:root {
+  --primary: #4663be;
+  --secondary: #8dbafe;
+  --optional: #21aee4;
+  --text: #85f1fe;
+  --text-dark: #535353;
+}
+
+@media only screen and (max-width: 520px) {
+  #form-login {
+    order: 2;
+  }
+  #form-login-image {
+    order: 1;
+  }
+}
