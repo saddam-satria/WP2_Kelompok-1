@@ -20,8 +20,15 @@ class LoginController extends BaseController
     public function login()
     {
 
-        $result = $this->accountService->login($this->request->getVar("email"), $this->request->getVar("password"));
+        $rules = array(
+            "email" => array("required", "valid_email")
+        );
 
+        if (!$this->validate($rules)) {
+            return redirect()->to(base_url("auth/login"))->with("failure", "akun anda tidak ditemukan");
+        }
+
+        $result = $this->accountService->login($this->request->getVar("email"), $this->request->getVar("password"));
         if (!$result) {
             return redirect()->to(base_url("auth/login"))->with("failure", "akun anda tidak ditemukan");
         }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Controllers\Auth\LoginController;
 use App\Repositories\AccountRepository;
 
 class AccountService
