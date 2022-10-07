@@ -27,4 +27,10 @@ class AccountService
 
         return $isPasswordMatch;
     }
+    public function signUp(string $email, string $firstname, string $lastname, string $password)
+    {
+        $response = $this->accountRepository->insertNewAccount($email, $firstname, $lastname, $password);
+
+        return $response;
+    }
 }

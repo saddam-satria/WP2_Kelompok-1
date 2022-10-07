@@ -36,6 +36,9 @@ $routes->get('/', 'Home::index');
 $routes->group("auth", function ($routes) {
     $routes->get("login", "Auth\LoginController::index");
     $routes->post("login", "Auth\LoginController::login");
+
+    $routes->get("signup", "Auth\RegisterController::index");
+    $routes->post("signup", "Auth\RegisterController::signup");
 });
 
 /*

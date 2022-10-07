@@ -44,7 +44,10 @@ class Account extends UuidModel
 
         $data["email"] = strtolower($data["email"]);
         $data["firstname"] = strtolower($data["firstname"]);
-        $data["address"] = strtolower($data["address"]);
+
+        if (isset($data["address"])) {
+            $data["address"] = strtolower($data["address"]);
+        }
 
         if (isset($data["lastname"])) {
             $data["lastname"] = strtolower($data["lastname"]);
