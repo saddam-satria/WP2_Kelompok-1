@@ -2,11 +2,7 @@
 <?= $this->section("content"); ?>
 
 <div style="height: 90vh;">
-    <?php if (session()->getFlashdata("failure")) : ?>
-        <div class="alert alert-danger text-lowercase" role="alert" id="login-failure">
-            <?= session()->getFlashdata("failure") ?>
-        </div>
-    <?php endif; ?>
+    <?= view("components/alert", array("key" => "failure")) ?>
     <div class="card">
         <div class="card-header px-5 py-2" style="background-color: #8dbafe; color: #535353;">
             <h4 class="mt-2">Login</h4>

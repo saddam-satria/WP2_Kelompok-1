@@ -19,16 +19,28 @@
                             <?= csrf_field() ?>
                             <div class="px-4">
                                 <div class="mb-3">
-                                    <input name="email" type="text" class="form-control py-2 px-3" placeholder="email anda" style="border-radius: 8px; background-color: #85f1fe;">
+                                    <input value="<?= set_value("email") ?>" name="email" type="text" class="form-control py-2 px-3" placeholder="email anda" style="border-radius: 8px; background-color: #85f1fe;">
+                                    <?php if (isset($validation) && $validation->getError("email")) : ?>
+                                        <?= view("components/errorMessage", array("message" => $validation->getError("email"))); ?>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="mb-3">
-                                    <input name="firstname" type="text" class="form-control py-2 px-3" placeholder="firstname" style="border-radius: 8px; background-color: #85f1fe;">
+                                    <input value="<?= set_value("firstname") ?>" name="firstname" type="text" class="form-control py-2 px-3" placeholder="firstname" style="border-radius: 8px; background-color: #85f1fe;">
+                                    <?php if (isset($validation) && $validation->getError("firstname")) : ?>
+                                        <?= view("components/errorMessage", array("message" => $validation->getError("firstname"))); ?>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="mb-3">
-                                    <input name="lastname" type="text" class="form-control py-2 px-3" placeholder="lastname" style="border-radius: 8px; background-color: #85f1fe;">
+                                    <input value="<?= set_value("lastname") ?>" name="lastname" type="text" class="form-control py-2 px-3" placeholder="lastname" style="border-radius: 8px; background-color: #85f1fe;">
+                                    <?php if (isset($validation) && $validation->getError("lastname")) : ?>
+                                        <?= view("components/errorMessage", array("message" => $validation->getError("lastname"))); ?>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="mb-3 mt-3">
                                     <input name="password" type="password" class="form-control py-2 px-3" placeholder="password" style="border-radius: 8px; background-color: #85f1fe;">
+                                    <?php if (isset($validation) && $validation->getError("password")) : ?>
+                                        <?= view("components/errorMessage", array("message" => $validation->getError("password"))); ?>
+                                    <?php endif; ?>
                                 </div>
                                 <h6 style="color: #fff;">sudah punya akun? <a href="<?= base_url("auth/login") ?>" class="text-decoration-none" style="color: #fff; font-weight: 700;">login</a></h6>
                                 <div class="d-flex justify-content-end">

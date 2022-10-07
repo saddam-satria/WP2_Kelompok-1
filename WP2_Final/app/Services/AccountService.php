@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Controllers\Auth\LoginController;
 use App\Repositories\AccountRepository;
 
 class AccountService
@@ -24,13 +23,19 @@ class AccountService
         $user = $user[0];
         $isPasswordMatch = password_verify($password, $user["password"]);
 
+        if ($isPasswordMatch) {
+            $session = session();
+            $sessionPayload = array(
+                "current_user" => $this->accountRepository->getByID($user["id"]),
+            );
+            $session->set($sessionPayload);
+        }
 
         return $isPasswordMatch;
     }
     public function signUp(string $email, string $firstname, string $lastname, string $password)
     {
         $response = $this->accountRepository->insertNewAccount($email, $firstname, $lastname, $password);
-
         return $response;
     }
 }

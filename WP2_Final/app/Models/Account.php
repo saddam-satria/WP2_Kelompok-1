@@ -20,9 +20,7 @@ class Account extends UuidModel
     protected $uuidUseBytes = false;
 
     // Validation
-    protected $validationRules      = array(
-        "email" => "required|valid_email|is_unique[account.email]"
-    );
+    protected $validationRules      = [];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

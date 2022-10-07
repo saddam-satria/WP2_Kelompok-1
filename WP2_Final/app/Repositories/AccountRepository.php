@@ -35,4 +35,8 @@ class AccountRepository extends Account
         );
         return $this->insert($data);
     }
+    public function getByID(string $id)
+    {
+        return $this->where("id", $id)->find();
+    }
 }

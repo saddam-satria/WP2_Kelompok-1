@@ -19,7 +19,7 @@ class LoginController extends BaseController
     }
     public function login()
     {
-
+        $session = session();
         $rules = array(
             "email" => array("required", "valid_email")
         );
