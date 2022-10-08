@@ -162,7 +162,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $sessionCookieName = 'ci_session';
+    public $sessionCookieName = 'current_user';
 
     /**
      * --------------------------------------------------------------------------
@@ -174,7 +174,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $sessionExpiration = 7200;
+    public $sessionExpiration = 86400;
 
     /**
      * --------------------------------------------------------------------------
@@ -381,7 +381,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $CSRFCookieName = 'csrf_cookie_name';
+    public $CSRFCookieName = 'CSRF_TOKEN';
 
     /**
      * --------------------------------------------------------------------------
@@ -394,7 +394,7 @@ class App extends BaseConfig
      *
      * @var int
      */
-    public $CSRFExpire = 7200;
+    public $CSRFExpire = 3100;
 
     /**
      * --------------------------------------------------------------------------

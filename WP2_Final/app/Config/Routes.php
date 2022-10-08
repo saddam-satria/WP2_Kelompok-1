@@ -39,6 +39,9 @@ $routes->group("auth", function ($routes) {
 
     $routes->get("signup", "Auth\RegisterController::index");
     $routes->post("signup", "Auth\RegisterController::signup");
+
+
+    $routes->get("logout", "Auth\LogoutController::logout");
 });
 
 /*
