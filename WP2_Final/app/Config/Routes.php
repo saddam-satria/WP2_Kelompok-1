@@ -41,7 +41,7 @@ $routes->group("auth", function ($routes) {
     $routes->post("signup", "Auth\RegisterController::signup");
 
 
-    $routes->get("logout", "Auth\LogoutController::logout");
+    $routes->post("logout", "Auth\LogoutController::logout");
 });
 
 $routes->group("user", function ($routes) {
