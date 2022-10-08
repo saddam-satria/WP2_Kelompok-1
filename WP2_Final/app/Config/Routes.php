@@ -44,6 +44,11 @@ $routes->group("auth", function ($routes) {
     $routes->get("logout", "Auth\LogoutController::logout");
 });
 
+$routes->group("user", function ($routes) {
+    $routes->get("dashboard", "User/DashboardController::index");
+});
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

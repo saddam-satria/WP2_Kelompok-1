@@ -19,6 +19,7 @@
 
 <body>
 
+    <?= view("components/navbar"); ?>
     <div class="container mt-5">
         <?= $this->renderSection("content"); ?>
     </div>
