@@ -1,4 +1,4 @@
-<div class="py-1" style="background-color: #4663be;">
+<div class="py-1" style="background-color: #4663be; position: sticky; top: 0;">
     <div class="container">
         <div class="d-flex align-items-center">
             <div class="d-flex align-items-center">
