@@ -19,7 +19,7 @@
                             </div>
                             <div class="card-footer" style="background-color: #4663be;">
                                 <div class="d-flex">
-                                    <a href="#" class="btn btn-sm" style="background-color: #85f1fe;">profile</a>
+                                    <a href="<?= base_url("user/profile") ?>" class="btn btn-sm" style="background-color: #85f1fe;">profile</a>
                                     <div class="ms-auto">
                                         <form action="<?= base_url("auth/logout") ?>" method="POST">
                                             <?= csrf_field() ?>
