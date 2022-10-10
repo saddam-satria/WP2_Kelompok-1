@@ -1,11 +1,14 @@
-const loginAlert = document.querySelector('#login-failure');
+const failureAlert = document.querySelector('#failure');
 const errorMessages = document.querySelectorAll('#error-message');
 const btnBars = document.querySelector('#button-bars');
 const userSidebar = document.querySelector('#user-sidebar');
+const avatars = document.querySelectorAll('.avatars');
+const previewAvatar = document.querySelector('#preview-avatar');
+const avatarSelected = document.querySelector('#avatar-selected');
 
-if (loginAlert) {
+if (failureAlert) {
   setTimeout(() => {
-    loginAlert.remove();
+    failureAlert.remove();
   }, 2000);
 }
 
@@ -24,3 +27,12 @@ btnBars.addEventListener('click', () => {
 btnBars.addEventListener('onhover', () => {
   userSidebar.classList.toggle('user-sidebar-active');
 });
+
+if (avatars.length > 0 && previewAvatar && avatarSelected) {
+  avatars.forEach((avatar) => {
+    avatar.addEventListener('click', () => {
+      previewAvatar.src = avatar.src;
+      avatarSelected.value = avatar.src;
+    });
+  });
+}
