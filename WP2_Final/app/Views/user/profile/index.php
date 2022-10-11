@@ -26,7 +26,7 @@
                 <label for="address" class="form-label">Alamat</label>
                 <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;" disabled><?= session()->current_user[0]["address"] ?></textarea>
             </div>
-            <div class="ms-auto">
+            <div class="ml-auto">
                 <a href="<?= base_url("user/profile?edit=" . true) ?>" class="btn btn-sm" style="background-color: #85f1fe;">Edit</a>
             </div>
         </div>
@@ -46,7 +46,7 @@
                         <label for="confirmation_new_password" class="form-label">Konfirmasi Password Baru</label>
                         <input name="confirmation_new_password" type="password" class="form-control" id="confirmation_new_password" placeholder="********">
                     </div>
-                    <div class="ms-auto">
+                    <div class="ml-auto">
                         <button type="submit" class="btn btn-sm" style="background-color: #85f1fe;">Update Password</button>
                     </div>
                 </div>
