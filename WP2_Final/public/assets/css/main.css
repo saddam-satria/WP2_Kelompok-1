@@ -5,3 +5,12 @@
   --text: #85f1fe;
   --text-dark: #535353;
 }
+
+@media screen and (max-width: 480px) {
+  .rotate-2 {
+    order: 2;
+  }
+  .rotate-1 {
+    order: 1;
+  }
+}
