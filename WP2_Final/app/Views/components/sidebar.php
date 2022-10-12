@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" style="padding: 5rem 0px;">
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?= base_url("user/dashboard") ?>" style="background-color: <?= str_contains(uri_string(), "dashboard") ? "#21aee4" : "transparent" ?>;">
             <i class="fa-solid fa-gauge"></i>
             <span>Dashboard</span>
         </a>
