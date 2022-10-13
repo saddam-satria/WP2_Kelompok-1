@@ -42,6 +42,8 @@ class DashboardController extends BaseController
     {
         $title = "Tambah Cucian Baru";
         $default_service = $this->request->getVar("service");
-        return view("user/order/insert", compact("title", "default_service"));
+        $services = array("nyuci", "gosok", "all in one", "sneakers");
+        $packages = array("premium", "standart", "super");
+        return view("user/order/insert", compact("title", "default_service", "services", "packages"));
     }
 }
