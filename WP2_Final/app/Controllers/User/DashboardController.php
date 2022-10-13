@@ -41,6 +41,7 @@ class DashboardController extends BaseController
     public function add()
     {
         $title = "Tambah Cucian Baru";
-        return view("user/order/insert", compact("title"));
+        $default_service = $this->request->getVar("service");
+        return view("user/order/insert", compact("title", "default_service"));
     }
 }
