@@ -27,7 +27,7 @@
                 <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;" disabled><?= session()->current_user[0]["address"] ?></textarea>
             </div>
             <div class="ml-auto">
-                <a href="<?= base_url("user/profile?edit=" . true) ?>" class="btn btn-sm" style="background-color: #85f1fe;">Edit</a>
+                <a href="<?= base_url("user/profile?edit=" . true) ?>" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Edit</a>
             </div>
         </div>
 
@@ -47,7 +47,7 @@
                         <input name="confirmation_new_password" type="password" class="form-control" id="confirmation_new_password" placeholder="********">
                     </div>
                     <div class="ml-auto">
-                        <button type="submit" class="btn btn-sm" style="background-color: #85f1fe;">Update Password</button>
+                        <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Update Password</button>
                     </div>
                 </div>
             </form>

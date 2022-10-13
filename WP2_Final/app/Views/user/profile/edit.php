@@ -58,7 +58,7 @@
                     <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;"><?= session()->current_user[0]["address"] ?></textarea>
                 </div>
                 <div class="ms-auto">
-                    <button type="submit" class="btn btn-sm" style="background-color: #85f1fe;">Simpan Perubahan</button>
+                    <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Simpan Perubahan</button>
                 </div>
             </div>
         </form>

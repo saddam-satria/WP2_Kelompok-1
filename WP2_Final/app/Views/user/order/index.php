@@ -4,6 +4,12 @@
 
 <?= view("components/alert", array("key" => "error")) ?>
 
+<?= view("components/empty_data", array("message" => "cucian anda masih kosong")) ?>
+
+<section class="py-3 px-5 mt-5" style="background-color: #4663be; border-radius: 10px;">
+    <h5 class="text-white">List Cucian Anda</h5>
+</section>
+
 <section class="py-3 mt-5">
     <div class="d-flex mb-2">
         <span style="color: #535353;">Service Name</span>
