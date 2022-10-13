@@ -46,18 +46,22 @@
                     <div class="modal fade" id="modalClothes" tabindex="-1" role="dialog" aria-labelledby="modalClothesTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                <div class="modal-header" style="background-color: #4663be;">
+                                    <h5 class="modal-title text-white" id="exampleModalLongTitle">Pilih Jenis Pakaian</h5>
                                 </div>
                                 <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <div class="d-flex flex-column my-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="">
+                                            <div class="d-flex flex-column">
+                                                <h6>Baju / Kaos</h6>
+                                                <span>3 pcs / kg</span>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-sm mx-2" style="background-color: #85f1fe; color: #000;">Pilih</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
