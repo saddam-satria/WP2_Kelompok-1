@@ -28,4 +28,19 @@ class DashboardController extends BaseController
         );
         return view("user/dashboard", compact("services"));
     }
+    public function orders()
+    {
+        $title = "Cucian Anda";
+        return view("user/order/index", compact("title"));
+    }
+    public function histories()
+    {
+        $title = "Riwayat Cucian Anda";
+        return view("user/order/history", compact("title"));
+    }
+    public function add()
+    {
+        $title = "Tambah Cucian Baru";
+        return view("user/order/insert", compact("title"));
+    }
 }
