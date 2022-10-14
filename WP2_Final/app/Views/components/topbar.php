@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15 ml-1">
             <img src="<?= base_url("android-chrome-192x192.png") ?>" alt="logo koperasi" width="60">
         </div>

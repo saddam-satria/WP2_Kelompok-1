@@ -35,7 +35,8 @@ class DashboardController extends BaseController
                 "image" => "assets/img/sneakers.png"
             ),
         );
-        return view("user/dashboard", compact("services"));
+        $currentOrder = $this->orderService->getNewestOrder();
+        return view("user/dashboard", compact("services", "currentOrder"));
     }
     public function orders()
     {

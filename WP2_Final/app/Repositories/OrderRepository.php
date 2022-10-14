@@ -15,7 +15,12 @@ class OrderRepository extends Order
     public function getOrder(string $columns = "*", ?int $limit = null, int $offset = 0)
     {
         $order = $this->query->select($columns);
-        return $order->get($limit, $offset);
+        return $order->get($limit, $offset)->getResult();
+    }
+    public function getNewestOrder(string $columns = "*", ?int $limit = null, int $offset = 0)
+    {
+        $order = $this->query->select($columns);
+        return $order->orderBy("created_at")->get($limit, $offset)->getFirstRow();
     }
     public function getOrderByUser(string $columns = "*", string $user_id)
     {

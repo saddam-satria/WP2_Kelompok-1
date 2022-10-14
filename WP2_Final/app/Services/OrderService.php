@@ -25,4 +25,8 @@ class OrderService
     {
         return $this->orderRepository->getTotalData($column, $allias);
     }
+    public function getNewestOrder()
+    {
+        return $this->orderRepository->getNewestOrder();
+    }
 }
