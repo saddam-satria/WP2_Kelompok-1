@@ -3,9 +3,18 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
+use App\Repositories\OrderRepository;
+use App\Services\OrderService;
 
 class DashboardController extends BaseController
 {
+    private $orderService;
+
+    public function __construct()
+    {
+        $this->orderService = new OrderService(new OrderRepository());
+    }
+
     public function index()
     {
         $services = array(
@@ -31,12 +40,14 @@ class DashboardController extends BaseController
     public function orders()
     {
         $title = "Cucian Anda";
-        return view("user/order/index", compact("title"));
+        $orders = $this->orderService->orderUser(session()->current_user[0]["id"]);
+        return view("user/order/index", compact("title", "orders"));
     }
     public function histories()
     {
         $title = "Riwayat Cucian Anda";
-        return view("user/order/history", compact("title"));
+        $histories = $this->orderService->historyOrderUser(session()->current_user[0]["id"]);
+        return view("user/order/history", compact("title", "histories"));
     }
     public function add()
     {
