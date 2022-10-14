@@ -49,13 +49,9 @@
         <div class="d-flex justify-content-end py-3">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <?php if ($currentPage > 1) : ?>
-                        <li class="page-item"><a class="page-link" href="<?= base_url("user/histories?page=" . $currentPage - 1) ?>">Previous</a></li>
-                    <?php endif ?>
                     <?php for ($i = 1; $i <= $totalData; $i++) : ?>
                         <li class="page-item"><a class="page-link" href="<?= base_url("user/histories?page=" . $i) ?>"><?= $i ?></a></li>
                     <?php endfor ?>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
                 </ul>
             </nav>
         </div>
