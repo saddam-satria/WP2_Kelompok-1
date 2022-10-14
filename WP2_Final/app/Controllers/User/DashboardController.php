@@ -46,8 +46,15 @@ class DashboardController extends BaseController
     public function histories()
     {
         $title = "Riwayat Cucian Anda";
-        $histories = $this->orderService->historyOrderUser(session()->current_user[0]["id"]);
-        return view("user/order/history", compact("title", "histories"));
+        if (is_null($this->request->getVar("page")) || $this->request->getVar("page") == 0) {
+            return redirect()->to(base_url("user/histories?page=1"));
+        }
+
+        $currentPage = $this->request->getVar("page");
+        $histories = $this->orderService->historyOrderUser(session()->current_user[0]["id"], "*", $currentPage);
+        $data = $this->orderService->getTotalData()[0];
+        $totalData = $data->total_data > 9 ? (int)$data->total_data / 10 : 1;
+        return view("user/order/history", compact("title", "histories", "totalData", "currentPage"));
     }
     public function add()
     {

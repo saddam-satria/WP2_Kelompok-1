@@ -22,9 +22,13 @@ class OrderRepository extends Order
         $currentOrder = $this->query->select($columns);
         return $currentOrder->where("account_id", $user_id)->get()->getResult();
     }
-    public function getOrderUserByStatus(string $columns = "*", string $user_id, bool $status = false)
+    public function getOrderUserByStatus(string $columns = "*", string $user_id, bool $status = false, ?int $limit = null, int $offset = 0)
     {
         $currenHistory = $this->query->select($columns);
-        return $currenHistory->where("account_id", $user_id)->where("orderStatus", $status)->get()->getResult();
+        return $currenHistory->where("account_id", $user_id)->where("orderStatus", $status)->get($limit, $offset)->getResult();
+    }
+    public function getTotalData(string $column = "", string $allias = "")
+    {
+        return $this->query->selectCount($column, $allias)->get()->getResultObject();
     }
 }

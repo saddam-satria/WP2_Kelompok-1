@@ -16,8 +16,13 @@ class OrderService
     {
         return $this->orderRepository->getOrderByUser($columns, $user_id);
     }
-    public function historyOrderUser(string $user_id, $columns = "*")
+    public function historyOrderUser(string $user_id, $columns = "*", ?int $page = null)
     {
-        return $this->orderRepository->getOrderUserByStatus($columns, $user_id, true);
+        $paginate = ($page - 1) * 10;
+        return $this->orderRepository->getOrderUserByStatus($columns, $user_id, true, 10, $paginate);
+    }
+    public function getTotalData(string $column = "*", string $allias = "total_data")
+    {
+        return $this->orderRepository->getTotalData($column, $allias);
     }
 }
