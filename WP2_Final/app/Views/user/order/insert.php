@@ -54,11 +54,11 @@
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="">
                                             <div class="d-flex flex-column">
-                                                <h6>Baju / Kaos</h6>
+                                                <h6 class="clothes-list">Baju / Kaos</h6>
                                                 <span>3 pcs / kg</span>
                                             </div>
                                             <div>
-                                                <button type="button" class="btn btn-sm mx-2" style="background-color: #85f1fe; color: #000;">Pilih</button>
+                                                <button type="button" class="btn btn-sm mx-2" style="background-color: #85f1fe; color: #000;" id="clothes-btn">Pilih</button>
                                             </div>
                                         </div>
                                     </div>
