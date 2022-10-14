@@ -50,6 +50,7 @@ $routes->group("user", function ($routes) {
     $routes->get("orders", "User/DashboardController::orders");
     $routes->get("histories", "User/DashboardController::histories");
     $routes->get("new-order", "User/DashboardController::add");
+    $routes->get("cart", "User/CartController::index");
 });
 
 
