@@ -110,7 +110,7 @@
     </div>
 </section>
 
-
+<?= view("components/cart_notification") ?>
 
 
 <?= $this->endSection(); ?>

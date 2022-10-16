@@ -33,6 +33,8 @@
 <?php endif ?>
 
 
+<?= view("components/cart_notification") ?>
+
 
 
 <?= $this->endSection(); ?>

@@ -81,4 +81,7 @@
 
 </div>
 
+<?= view("components/cart_notification") ?>
+
+
 <?= $this->endSection(); ?>

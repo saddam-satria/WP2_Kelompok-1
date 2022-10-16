@@ -47,7 +47,7 @@
         </div>
 
         <div class="col-sm-12 col-md-2">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center" style="height: 100%;">
                 <form action="#">
                     <button type="submit" class="btn btn-sm">
                         <i class="fas fa-trash" style="font-size: 1.5em;"></i>
