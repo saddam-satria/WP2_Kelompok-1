@@ -45,12 +45,13 @@ $routes->group("auth", function ($routes) {
 });
 
 $routes->group("user", function ($routes) {
-    $routes->get("dashboard", "User/DashboardController::index");
-    $routes->get("profile", "User/ProfileController::index");
-    $routes->get("orders", "User/DashboardController::orders");
-    $routes->get("histories", "User/DashboardController::histories");
-    $routes->get("new-order", "User/DashboardController::add");
-    $routes->get("cart", "User/CartController::index");
+    $routes->get("dashboard", "User\DashboardController::index");
+    $routes->get("profile", "User\ProfileController::index");
+    $routes->get("orders", "User\OrderController::index");
+    $routes->get("order/(:num)", "User\OrderController::detail/$1");
+    $routes->get("histories", "User\OrderController::histories");
+    $routes->get("new-order", "User\OrderController::create");
+    $routes->get("cart", "User\CartController::index");
 });
 
 
