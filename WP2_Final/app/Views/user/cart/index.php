@@ -9,7 +9,7 @@
 </section>
 
 <section class="py-3 mt-4">
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-sm-12 col-md-2">
             <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="">
         </div>
@@ -56,8 +56,16 @@
             </div>
         </div>
 
+
+    </div>
+
+    <div class="d-flex mt-5">
+        <div class="ml-auto">
+            <a href="#" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Checkout</a>
+        </div>
     </div>
 </section>
+
 
 
 
