@@ -12,6 +12,7 @@ class DashboardController extends BaseController
 
     public function __construct()
     {
+        // dd(session()->current_user[0]);
         $this->orderService = new OrderService(new OrderRepository());
     }
 

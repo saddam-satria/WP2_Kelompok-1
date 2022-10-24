@@ -10,7 +10,7 @@
 
             <?= csrf_field() ?>
             <div class="d-flex flex-column align-items-center mb-5">
-                <img id="preview-avatar" style="width: 120px; height: 120px; object-fit: cover;" class="img-fluid rounded-circle" src="<?= is_null(session()->current_user[0]["image"]) ? base_url("assets/img/avatar.jpg")  : base_url("assets/" . session()->current_user[0]["image"])  ?>" alt="asdsa" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></img>
+                <img id="preview-avatar" style="width: 120px; height: 120px; object-fit: cover;" class="img-fluid rounded-circle" src="<?= is_null($currentUser->image) ? base_url("assets/img/avatar.jpg")  : $currentUser->image  ?>" alt="asdsa" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></img>
                 <button type="button" class="btn btn-sm btn-primary mt-3" data-toggle="modal" data-target="#exampleModalCenter">
                     Pilih Avatar
                 </button>
@@ -45,21 +45,21 @@
             <div class="d-flex flex-column">
                 <div class="mb-3">
                     <label for="firstname" class="form-label">Firstname</label>
-                    <input value="<?= session()->current_user[0]["firstname"] ?>" type="text" class="form-control" name="firstname" id="firstname">
+                    <input value="<?= $currentUser->firstname ?>" type="text" class="form-control" name="firstname" id="firstname">
                     <?php if (isset($validation) && $validation->getError("firstname")) : ?>
                         <?= view("components/errorMessage", array("message" => $validation->getError("firstname"))); ?>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="lastname" class="form-label">Lastname</label>
-                    <input name="lastname" value="<?= session()->current_user[0]["lastname"] ?>" type="text" class="form-control" id="lastname">
+                    <input name="lastname" value="<?= $currentUser->lastname ?>" type="text" class="form-control" id="lastname">
                     <?php if (isset($validation) && $validation->getError("lastname")) : ?>
                         <?= view("components/errorMessage", array("message" => $validation->getError("lastname"))); ?>
                     <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input name="email" value="<?= session()->current_user[0]["email"] ?>" type="text" class="form-control" id="email">
+                    <input name="email" value="<?= $currentUser->email ?>" type="text" class="form-control" id="email">
                     <?php if (isset($validation) && $validation->getError("email")) : ?>
                         <?= view("components/errorMessage", array("message" => $validation->getError("email"))); ?>
                     <?php endif; ?>
@@ -67,13 +67,13 @@
                 <div class="mb-3">
                     <label for="gender" class="form-label">Jenis Kelamin</label>
                     <select class="custom-select text-capitalize" id="gender" name="gender">
-                        <option value="LAKI-LAKI" <?= str_contains(session()->current_user[0]["gender"], "laki-laki") ? "selected" : "" ?>>Laki Laki</option>
-                        <option value="PEREMPUAN" <?= str_contains(session()->current_user[0]["gender"], "perempuan") ? "selected" : "" ?>>Perempuan</option>
+                        <option value="LAKI-LAKI" <?= str_contains($currentUser->gender, "laki-laki") ? "selected" : "" ?>>Laki Laki</option>
+                        <option value="PEREMPUAN" <?= str_contains($currentUser->gender, "perempuan") ? "selected" : "" ?>>Perempuan</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="address" class="form-label">Alamat</label>
-                    <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;"><?= session()->current_user[0]["address"] ?></textarea>
+                    <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;"><?= $currentUser->address ?></textarea>
                 </div>
                 <div class="ms-auto">
                     <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Simpan Perubahan</button>

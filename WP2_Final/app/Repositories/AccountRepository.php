@@ -12,9 +12,9 @@ class AccountRepository extends Account
         $db = \Config\Database::connect();
         $this->query = $db->table("account");
     }
-    public function getByEmail(string $email)
+    public function getByEmail(string $email, $columns = array("*"))
     {
-        return $this->where("email", $email)->findAll();
+        return $this->query->select($columns)->where("email", $email)->get()->getResultObject();
     }
     public function insertNewAccount(
         string $email,

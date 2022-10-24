@@ -16,7 +16,7 @@ class OrderController extends BaseController
     public function index()
     {
         $title = "Cucian Anda";
-        $orders = $this->orderService->orderUser(session()->current_user[0]["id"]);
+        $orders = $this->orderService->orderUser(session()->current_user[0]->id);
         return view("user/order/index", compact("title", "orders"));
     }
 
@@ -44,7 +44,7 @@ class OrderController extends BaseController
         }
 
         $currentPage = $this->request->getVar("page");
-        $histories = $this->orderService->historyOrderUser(session()->current_user[0]["id"], "*", $currentPage);
+        $histories = $this->orderService->historyOrderUser(session()->current_user[0]->id, "*", $currentPage);
         $data = $this->orderService->getTotalData()[0];
         $totalData = $data->total_data > 9 ? (int)$data->total_data / 10 : 1;
         return view("user/order/history", compact("title", "histories", "totalData", "currentPage"));

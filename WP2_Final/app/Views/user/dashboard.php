@@ -10,7 +10,7 @@
             <div class="col-sm-12 col-md-6 rotate-2">
                 <div class="d-flex flex-column justify-content-center" style="height: 100%;">
                     <h6 class="text-white mb-3" style="font-weight: 600;">Selamat Datang</h6>
-                    <span class="text-white text-capitalize"><?= session()->current_user[0]["firstname"] .  ' ' . session()->current_user[0]["lastname"]  ?></span>
+                    <span class="text-white text-capitalize"><?= session()->current_user[0]->firstname .  ' ' . session()->current_user[0]->lastname  ?></span>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 rotate-1">

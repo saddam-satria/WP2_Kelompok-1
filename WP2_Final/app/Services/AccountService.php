@@ -21,12 +21,12 @@ class AccountService
         }
 
         $user = $user[0];
-        $isPasswordMatch = password_verify($password, $user["password"]);
+        $isPasswordMatch = password_verify($password, $user->password);
 
         if ($isPasswordMatch) {
             $session = session();
             $sessionPayload = array(
-                "current_user" => $this->accountRepository->getByID($user["id"]),
+                "current_user" => $this->accountRepository->getByID($user->id),
             );
             $session->set($sessionPayload);
         }
@@ -50,6 +50,15 @@ class AccountService
         );
 
         $response = $this->accountRepository->update($user_id, $data);
-        var_dump($response);
+
+        if (!$response) return false;
+
+        $session = session();
+        $sessionPayload = array(
+            "current_user" => $this->accountRepository->getByID($user_id),
+        );
+        $session->set($sessionPayload);
+
+        return true;
     }
 }

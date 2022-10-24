@@ -26,15 +26,15 @@
 
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="img-profile rounded-circle" src="<?= is_null(session()->current_user[0]["image"]) ? base_url("assets/img/avatar.jpg")  : base_url("assets/" . session()->current_user[0]["image"])  ?>" alt="avatar">
+                    <img class="img-profile rounded-circle" src="<?= is_null(session()->current_user[0]->image) ? base_url("assets/img/avatar.jpg")  : session()->current_user[0]->image ?>" alt="avatar">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                     <div style="width: 16rem;">
                         <div class="py-3 text-center">
-                            <img class="img-profile rounded-circle" src="<?= is_null(session()->current_user[0]["image"]) ? base_url("assets/img/avatar.jpg")  : base_url("assets/" . session()->current_user[0]["image"])  ?>" alt="avatar" style="width: 120px; height: 120px; object-fit: cover;">
+                            <img class="img-profile rounded-circle" src="<?= is_null(session()->current_user[0]->image) ? base_url("assets/img/avatar.jpg")  : session()->current_user[0]->image  ?>" alt="avatar" style="width: 120px; height: 120px; object-fit: cover;">
                             <div class="py-3">
-                                <h5 class="mt-3" style="color: #4663be;"><?= session()->current_user[0]["firstname"] . " " . session()->current_user[0]["lastname"] ?></h5>
-                                <span style="color: #21aee4;"><?= session()->current_user[0]["email"] ?></span>
+                                <h5 class="mt-3" style="color: #4663be;"><?= session()->current_user[0]->firstname . " " . session()->current_user[0]->lastname ?></h5>
+                                <span style="color: #21aee4;"><?= session()->current_user[0]->email ?></span>
                             </div>
                         </div>
                     </div>

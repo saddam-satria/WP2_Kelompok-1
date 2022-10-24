@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-sm-12 col-md-6">
         <div class="d-flex justify-content-center mb-5">
-            <img style="width: 120px; height: 120px; object-fit: cover;" class="img-fluid rounded-circle" src="<?= is_null(session()->current_user[0]["image"]) ? base_url("assets/img/avatar.jpg")  : base_url("assets/" . session()->current_user[0]["image"])  ?>" alt="asdsa" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></img>
+            <img style="width: 120px; height: 120px; object-fit: cover;" class="img-fluid rounded-circle" src="<?= is_null($currentUser->image) ? base_url("assets/img/avatar.jpg")  : $currentUser->image  ?>" alt="asdsa" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"></img>
         </div>
         <div class="d-flex flex-column">
             <div class="mb-3">
@@ -16,7 +16,7 @@
             </div>
             <div class="mb-3">
                 <label for="lastname" class="form-label">Lastname</label>
-                <input value="<?= $currentUser->lastname == "" ? "-" : $currentUser->firstname  ?>" type="text" class="form-control" id="lastname" disabled>
+                <input value="<?= $currentUser->lastname == "" ? "-" : $currentUser->lastname  ?>" type="text" class="form-control" id="lastname" disabled>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
