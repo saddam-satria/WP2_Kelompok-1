@@ -6,9 +6,14 @@ use App\Models\Account;
 
 class AccountRepository extends Account
 {
+    private $query;
+    public function __construct()
+    {
+        $db = \Config\Database::connect();
+        $this->query = $db->table("account");
+    }
     public function getByEmail(string $email)
     {
-
         return $this->where("email", $email)->findAll();
     }
     public function insertNewAccount(
@@ -35,8 +40,8 @@ class AccountRepository extends Account
         );
         return $this->insert($data);
     }
-    public function getByID(string $id)
+    public function getByID(string $id, $columns = "*")
     {
-        return $this->where("id", $id)->find();
+        return $this->query->select($columns)->where("id", $id)->get()->getResultObject();
     }
 }

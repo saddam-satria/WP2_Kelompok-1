@@ -7,7 +7,7 @@ use App\Repositories\AccountRepository;
 class AccountService
 {
 
-    private $accountRepository;
+    public $accountRepository;
     public function __construct(AccountRepository $accountRepository)
     {
         $this->accountRepository = $accountRepository;
@@ -37,5 +37,19 @@ class AccountService
     {
         $response = $this->accountRepository->insertNewAccount($email, $firstname, $lastname, $password);
         return $response;
+    }
+    public function updateProfile($user_id, string $email, string $firstname, ?string $lastname, string $address, ?string $image, string $gender)
+    {
+        $data = array(
+            "email" => $email,
+            "firstname" => $firstname,
+            "lastname" => $lastname,
+            "address" => $address,
+            "image" => $image,
+            "gender" => $gender
+        );
+
+        $response = $this->accountRepository->update($user_id, $data);
+        var_dump($response);
     }
 }

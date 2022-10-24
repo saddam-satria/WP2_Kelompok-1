@@ -12,19 +12,23 @@
         <div class="d-flex flex-column">
             <div class="mb-3">
                 <label for="firstname" class="form-label">Firstname</label>
-                <input value="<?= session()->current_user[0]["firstname"] ?>" type="text" class="form-control" id="firstname" disabled>
+                <input value="<?= $currentUser->firstname ?>" type="text" class="form-control" id="firstname" disabled>
             </div>
             <div class="mb-3">
                 <label for="lastname" class="form-label">Lastname</label>
-                <input value="<?= session()->current_user[0]["lastname"] ? session()->current_user[0]["lastname"] : "-" ?>" type="text" class="form-control" id="lastname" disabled>
+                <input value="<?= $currentUser->lastname == "" ? "-" : $currentUser->firstname  ?>" type="text" class="form-control" id="lastname" disabled>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input value="<?= session()->current_user[0]["email"] ?>" type="text" class="form-control" id="email" disabled>
+                <input value="<?= $currentUser->email ?>" type="text" class="form-control" id="email" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">gender</label>
+                <input value="<?= $currentUser->gender  ?>" type="text" class="form-control" id="email" disabled>
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Alamat</label>
-                <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;" disabled><?= session()->current_user[0]["address"] ?></textarea>
+                <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;" disabled><?= $currentUser->address == "" ? "-" : $currentUser->address   ?></textarea>
             </div>
             <div class="ml-auto">
                 <a href="<?= base_url("user/profile?edit=" . true) ?>" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Edit</a>
