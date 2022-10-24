@@ -22,7 +22,7 @@ class ProfileController extends BaseController
         $currentUser = $this->accountService->accountRepository->getByID(session()->current_user[0]["id"], array("firstname", "email", "lastname", "gender", "image", "address"));
         $currentUser = $currentUser[0];
 
-        dd($currentUser);
+        // dd($currentUser);
 
         return view("user/profile/index", compact("currentUser"));
     }
@@ -51,6 +51,6 @@ class ProfileController extends BaseController
         }
 
         $avatar = $this->request->getVar("avatar") == "" ? null : $this->request->getVar("avatar");
-        $result = $this->accountService->updateProfile(session()->current_user[0]["id"], $this->request->getVar("firstname"), $this->request->getVar("lastname"), $this->request->getVar("email"), $this->request->getVar("address"), $avatar, $this->request->getVar("gender"));
+        $result = $this->accountService->updateProfile(session()->current_user[0]["id"], $this->request->getVar("email"), $this->request->getVar("firstname"), $this->request->getVar("lastname"), $this->request->getVar("address"), $avatar, $this->request->getVar("gender"));
     }
 }
