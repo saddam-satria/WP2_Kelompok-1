@@ -4,30 +4,30 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Role extends Migration
+class Category extends Migration
 {
     public function up()
     {
         $this->forge->addField(array(
-            "roleId" => array(
+            "categoryId" => array(
                 "type" => "INT",
                 "null" => false,
                 "auto_increment" =>  true,
             ),
-            "name" => array(
+            "categoryName" => array(
                 "type" => "VARCHAR",
-                "constraint" => 128,
+                "constraint" => 45,
             ),
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp',
         ));
 
-        $this->forge->addPrimaryKey(array("roleId"));
-        $this->forge->createTable("role");
+        $this->forge->addPrimaryKey(array("categoryId"));
+        $this->forge->createTable("category");
     }
 
     public function down()
     {
-        $this->forge->dropTable("role");
+        $this->forge->dropTable("category");
     }
 }
