@@ -17,8 +17,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
-$routes->setDefaultMethod('index');
+// $routes->setDefaultController('Home');
+// $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
@@ -33,6 +33,14 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->group("/auth", function($routes){
+    $routes->get("login", "Auth\LoginController::index");
+    $routes->post("login", "Auth\LoginController::login");
+    $routes->post("logout", "Auth\LogoutController::logout");
+});
+$routes->group("user", function($routes){
+    $routes->get("dashboard","User/Dashboard::index");
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
