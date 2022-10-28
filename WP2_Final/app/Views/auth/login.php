@@ -1,7 +1,7 @@
 <?= $this->extend("layouts/main"); ?>
 <?= $this->section("content"); ?>
 
-<div class="container  mt-5">
+<div class="container my-5">
     <div style="height: 90vh;">
         <?= view("components/alert", array("key" => "failure")) ?>
         <div class="card">

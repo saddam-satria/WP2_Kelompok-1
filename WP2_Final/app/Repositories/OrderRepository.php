@@ -10,7 +10,7 @@ class OrderRepository extends Order
     public function __construct()
     {
         $db = \Config\Database::connect();
-        $this->query = $db->table("order");
+        $this->query = $db->table("laundry_order");
     }
     public function getOrder(string $columns = "*", ?int $limit = null, int $offset = 0)
     {
