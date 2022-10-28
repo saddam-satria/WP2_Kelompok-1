@@ -2,7 +2,12 @@
 
 <?= $this->section("content"); ?>
 
-<?= view("components/alert", array("key" => "error")) ?>
+<?php if (session()->getFlashdata("success")) : ?>
+    <?= view("components/alert", array("key" => "success", "alert" => "success")) ?>
+<?php else : ?>
+    <?= view("components/alert", array("key" => "error")) ?>
+<?php endif; ?>
+
 
 <div class="row">
     <div class="col-sm-12 col-md-6">
@@ -36,19 +41,29 @@
         </div>
 
         <div class="my-5">
-            <form>
+            <form action="<?= base_url("/user/update-password") ?>" method="POST">
                 <div class="d-flex flex-column">
                     <div class="mb-3">
                         <label for="old_password" class="form-label">Password Lama</label>
                         <input name="old_password" type="password" class="form-control" id="old_password" placeholder="********">
+                        <?php if (isset($validation) && $validation->getError("old_password")) : ?>
+                            <?= view("components/errorMessage", array("message" => $validation->getError("old_password"))); ?>
+                        <?php endif; ?>
                     </div>
+
                     <div class="mb-3">
                         <label for="new_password" class="form-label">Password Baru</label>
                         <input name="new_password" type="password" class="form-control" id="new_password" placeholder="********">
+                        <?php if (isset($validation) && $validation->getError("new_password")) : ?>
+                            <?= view("components/errorMessage", array("message" => $validation->getError("new_password"))); ?>
+                        <?php endif; ?>
                     </div>
                     <div class="mb-3">
                         <label for="confirmation_new_password" class="form-label">Konfirmasi Password Baru</label>
                         <input name="confirmation_new_password" type="password" class="form-control" id="confirmation_new_password" placeholder="********">
+                        <?php if (isset($validation) && $validation->getError("confirmation_new_password")) : ?>
+                            <?= view("components/errorMessage", array("message" => $validation->getError("confirmation_new_password"))); ?>
+                        <?php endif; ?>
                     </div>
                     <div class="ml-auto">
                         <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Update Password</button>

@@ -59,4 +59,34 @@ class ProfileController extends BaseController
 
         if ($result) return redirect()->to(base_url('/user/profile'))->with("success", "berhasil update profile");
     }
+    public function updatePassword()
+    {
+
+        $rules = array(
+            "old_password" => array("required"),
+            "new_password" => array("required", "min_length[8]"),
+            "confirmation_new_password" => array("matches[new_password]", "required")
+        );
+
+
+        if (!$this->validate($rules)) {
+            helper("form");
+            $validation = $this->validator;
+            $currentUser = $this->accountService->accountRepository->getByID(session()->current_user[0]->id, array("firstname", "email", "lastname", "gender", "image", "address"));
+            $currentUser = $currentUser[0];
+
+            return view("user/profile/index", compact("validation", "currentUser"));
+        }
+
+        $session = session();
+        $user_id = $session->current_user[0]->id;
+        $new_password = $this->request->getVar("new_password");
+        $old_password = $this->request->getVar("old_password");
+        $result = $this->accountService->updatePassword($user_id, $new_password, $old_password);
+
+        if (!$result) return redirect()->to(base_url("/user/profile"))->with("error", "password salah");
+
+
+        return redirect()->to(base_url("/user/profile"))->with("success", "berhasil mengubah password");
+    }
 }

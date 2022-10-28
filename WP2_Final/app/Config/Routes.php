@@ -48,6 +48,7 @@ $routes->group("user", function ($routes) {
     $routes->get("dashboard", "User\DashboardController::index");
     $routes->get("profile", "User\ProfileController::index");
     $routes->post("profile", "User\ProfileController::update");
+    $routes->post("update-password", "User\ProfileController::updatePassword");
     $routes->get("orders", "User\OrderController::index");
     $routes->get("order/(:num)", "User\OrderController::detail/$1");
     $routes->get("histories", "User\OrderController::histories");

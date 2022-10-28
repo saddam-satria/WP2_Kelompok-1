@@ -61,4 +61,24 @@ class AccountService
 
         return true;
     }
+    public function updatePassword($user_id, $new_password, $old_password)
+    {
+
+
+        $user = $this->accountRepository->getByID($user_id, array("password"))[0];
+        $prevPassword =  password_verify($old_password, $user->password);
+
+        if (!$prevPassword) {
+            return false;
+        }
+
+        $data = array(
+            "password" => password_hash($new_password, PASSWORD_BCRYPT)
+        );
+
+
+        $response = $this->accountRepository->update($user_id, $data);
+
+        return $response;
+    }
 }
