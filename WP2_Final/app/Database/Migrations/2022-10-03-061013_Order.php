@@ -38,6 +38,11 @@ class Order extends Migration
                     "type" => "FLOAT",
                     "default" => 0
                 ),
+                "status" => array(
+                    "type" => "VARCHAR",
+                    "constraint" => 100,
+                    "null" => true
+                ),
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default current_timestamp on update current_timestamp',
             )
@@ -45,11 +50,11 @@ class Order extends Migration
         $this->forge->addPrimaryKey("orderID");
         $this->forge->addUniqueKey(array("token"));
         $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
-        $this->forge->createTable("order");
+        $this->forge->createTable("laundry_order");
     }
 
     public function down()
     {
-        $this->forge->dropTable("order");
+        $this->forge->dropTable("laundry_order");
     }
 }
