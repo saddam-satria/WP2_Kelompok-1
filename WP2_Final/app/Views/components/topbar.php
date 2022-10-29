@@ -20,7 +20,24 @@
                 </a>
                 <!-- Dropdown - Alerts -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-
+                    <div class="card">
+                        <div class="card-header text-white" style="background-color: #4663be;">
+                            <h5>Notifikasi</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <span>12 09 2001</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <span>12 09 2001</span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="text-decoration-none">Semua Notifikasi</a>
+                        </div>
+                    </div>
                 </div>
             </li>
 
@@ -28,22 +45,26 @@
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="img-profile rounded-circle" src="<?= is_null(session()->current_user[0]->image) ? base_url("assets/img/avatar.jpg")  : session()->current_user[0]->image ?>" alt="avatar">
                 </a>
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                    <div style="width: 16rem;">
-                        <div class="py-3 text-center">
-                            <img class="img-profile rounded-circle" src="<?= is_null(session()->current_user[0]->image) ? base_url("assets/img/avatar.jpg")  : session()->current_user[0]->image  ?>" alt="avatar" style="width: 120px; height: 120px; object-fit: cover;">
-                            <div class="py-3">
-                                <h5 class="mt-3" style="color: #4663be;"><?= session()->current_user[0]->firstname . " " . session()->current_user[0]->lastname ?></h5>
-                                <span style="color: #21aee4;"><?= session()->current_user[0]->email ?></span>
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="py-3 text-center">
+                                <img class="img-profile rounded-circle" src="<?= is_null(session()->current_user[0]->image) ? base_url("assets/img/avatar.jpg")  : session()->current_user[0]->image  ?>" alt="avatar" style="width: 120px; height: 120px; object-fit: cover;">
+                                <div class="py-3">
+                                    <h5 class="mt-3" style="color: #4663be;"><?= session()->current_user[0]->firstname . " " . session()->current_user[0]->lastname ?></h5>
+                                    <span style="color: #21aee4;"><?= session()->current_user[0]->email ?></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="p-2 d-flex justify-content-between" style="background-color: #4663be;">
-                        <a href="<?= base_url("user/profile") ?>" class="btn btn-sm" style="background-color: #85f1fe;">profile</a>
-                        <form action="<?= base_url("auth/logout") ?>" method="POST">
-                            <?= csrf_field() ?>
-                            <button type="submit" class="btn btn-sm" style="background-color: #85f1fe;">logout</button>
-                        </form>
+                        <div class="card-footer" style="background-color: #4663be;">
+                            <div class="d-flex justify-content-between">
+                                <a href="<?= base_url("user/profile") ?>" class="btn btn-sm" style="background-color: #85f1fe;">profile</a>
+                                <form action="<?= base_url("auth/logout") ?>" method="POST">
+                                    <?= csrf_field() ?>
+                                    <button type="submit" class="btn btn-sm" style="background-color: #85f1fe;">logout</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </li>

@@ -16,7 +16,7 @@
             <?= view("components/topbar"); ?>
 
             <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <div class="container-fluid my-5">
                 <?= $this->renderSection("content"); ?>
             </div>
 
