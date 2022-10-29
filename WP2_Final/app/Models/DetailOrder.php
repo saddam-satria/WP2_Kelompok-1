@@ -12,7 +12,7 @@ class DetailOrder extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
-        "order_id", "service", "package_id", "item_id", "quanity", "description", "progress"
+        "order_id", "service", "package", "item", "quantity", "description", "progress"
     );
 
     // Dates
@@ -30,7 +30,7 @@ class DetailOrder extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
+    protected $beforeInsert   = ["transformToLower"];
     protected $afterInsert    = [];
     protected $beforeUpdate   = [];
     protected $afterUpdate    = [];
@@ -38,4 +38,18 @@ class DetailOrder extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function transformToLower(array $data)
+    {
+        $data = $data["data"];
+
+        $data["description"] = strtolower($data["description"]);
+        $data["package"] = strtolower($data["package"]);
+        $data["item"] = strtolower($data["item"]);
+        $data["service"] = strtolower($data["service"]);
+
+        $data["data"] = $data;
+
+        return $data;
+    }
 }

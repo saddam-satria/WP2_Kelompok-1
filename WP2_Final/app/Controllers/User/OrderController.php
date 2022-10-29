@@ -32,8 +32,8 @@ class OrderController extends BaseController
         $default_service = $this->request->getVar("service");
         $services = array("nyuci", "gosok", "all in one", "sneakers");
         $packages = $this->packageRepository->getPackages(array("packageName"));
-        $items = $this->itemRepository->getItems(array("itemName","quantityPerKG","itemLogo"));
-        return view("user/order/insert", compact("title", "default_service", "services", "packages","items"));
+        $items = $this->itemRepository->getItems(array("itemName", "quantityPerKG", "itemLogo"));
+        return view("user/order/insert", compact("title", "default_service", "services", "packages", "items"));
     }
 
 

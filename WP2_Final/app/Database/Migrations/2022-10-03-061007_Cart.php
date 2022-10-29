@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class DetailCart extends Migration
+class Cart extends Migration
 {
     public function up()
     {
@@ -18,13 +18,13 @@ class DetailCart extends Migration
                     "type" => "VARCHAR",
                     "constraint" => 50
                 ),
-                "package_id" => array(
-                    "type" => "INT",
-                    "constraint" => 3,
+                "package" => array(
+                    "type" => "VARCHAR",
+                    "constraint" => 50
                 ),
-                "item_id" => array(
-                    "type" => "INT",
-                    "constraint" => 3,
+                "item" => array(
+                    "type" => "VARCHAR",
+                    "constraint" => 50
                 ),
                 "quantity" => array(
                     "type" => "INT",
@@ -38,8 +38,8 @@ class DetailCart extends Migration
         );
         $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
         // $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
-        $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
-        $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "CASCADE");
+        // $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
+        // $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "CASCADE");
         $this->forge->createTable("cart");
     }
 

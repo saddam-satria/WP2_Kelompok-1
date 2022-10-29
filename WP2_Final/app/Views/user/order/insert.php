@@ -2,7 +2,14 @@
 
 <?= $this->section("content"); ?>
 
-<?= view("components/alert", array("key" => "error")) ?>
+<?php if (session()->getFlashdata("success")) : ?>
+    <?= view("components/alert", array("key" => "success", "alert" => "success")) ?>
+<?php else : ?>
+    <?= view("components/alert", array("key" => "error")) ?>
+<?php endif; ?>
+
+
+
 <section class="py-3 px-5 mt-5" style="background-color: #4663be; border-radius: 10px;">
     <h5 class="text-white">Cucian Baru</h5>
 </section>
@@ -10,11 +17,14 @@
 <section class="py-3 mt-4">
     <div class="row">
         <div class="col-sm-12 col-md-6">
-            <form method="POST" action="#">
+            <form method="POST" action="<?= base_url("user/new-order") ?>" method="POST">
                 <div class="d-flex flex-column">
                     <div class="mb-3">
                         <label for="service_name" class="form-label">Jenis Layanan</label>
-                        <input value="<?= $default_service; ?>" type="text" class="form-control" name="service_name" id="service_name" disabled data-toggle="modal" data-target="#modalService">
+                        <input value="<?= $default_service; ?>" type="text" class="form-control" name="service_name" id="service_name" readonly data-toggle="modal" data-target="#modalService">
+                        <?php if (!is_null(session()->getFlashdata("validation")) && session()->getFlashdata("validation")["service_name"]) : ?>
+                            <?= view("components/errorMessage", array("message" => session()->getFlashdata("validation")["service_name"])); ?>
+                        <?php endif; ?>
                         <button type="button" data-toggle="modal" data-target="#modalService" class="btn btn-sm btn-primary my-2">pilih</button>
                     </div>
 
@@ -39,7 +49,10 @@
 
                     <div class="mb-3">
                         <label for="clothes" class="form-label">Pilih Jenis Pakaian</label>
-                        <input name="clothes" type="text" class="form-control" id="clothes" disabled>
+                        <input name="clothes" type="text" class="form-control" id="clothes" readonly>
+                        <?php if (!is_null(session()->getFlashdata("validation")) && session()->getFlashdata("validation")["clothes"]) : ?>
+                            <?= view("components/errorMessage", array("message" => session()->getFlashdata("validation")["clothes"])); ?>
+                        <?php endif; ?>
                         <button type="button" data-toggle="modal" data-target="#modalClothes" class="btn btn-sm btn-primary my-2">pilih</button>
                     </div>
                     <!-- Modal Clothes -->
@@ -50,12 +63,12 @@
                                     <h5 class="modal-title text-white" id="exampleModalLongTitle">Pilih Jenis Pakaian</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <?php foreach($items as $item):?>
+                                    <?php foreach ($items as $item) : ?>
                                         <div class="d-flex flex-column my-3">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="">
                                                 <div class="d-flex flex-column">
-                                                    <h6 class="clothes-list"><?= $item->itemName?></h6>
+                                                    <h6 class="clothes-list"><?= $item->itemName ?></h6>
                                                     <span><?= $item->quantityPerKG ?> pcs / kg</span>
                                                 </div>
                                                 <div>
@@ -63,7 +76,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    <?php endforeach;?>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
@@ -73,11 +86,17 @@
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Jumlah</label>
                         <input name="quantity" type="text" class="form-control" id="quantity" placeholder="0">
+                        <?php if (!is_null(session()->getFlashdata("validation")) && session()->getFlashdata("validation")["quantity"]) : ?>
+                            <?= view("components/errorMessage", array("message" => session()->getFlashdata("validation")["quantity"])); ?>
+                        <?php endif; ?>
                     </div>
 
                     <div class="mb-3">
                         <label for="package" class="form-label">Pilih Paket</label>
-                        <input name="package" type="text" class="form-control" id="package" disabled>
+                        <input name="package" type="text" class="form-control" id="package" readonly>
+                        <?php if (!is_null(session()->getFlashdata("validation")) && session()->getFlashdata("validation")["package"]) : ?>
+                            <?= view("components/errorMessage", array("message" => session()->getFlashdata("validation")["package"])); ?>
+                        <?php endif; ?>
                         <button type="button" data-toggle="modal" data-target="#modalPackage" class="btn btn-sm btn-primary my-2">pilih</button>
                     </div>
                     <!-- Modal Package -->
@@ -100,8 +119,11 @@
 
 
                     <div class="mb-3">
-                        <label for="address" class="form-label">Keterangan</label>
-                        <textarea name="address" rows="4" id="address" class="form-control" style="resize: none;"></textarea>
+                        <label for="description" class="form-label">Keterangan</label>
+                        <textarea name="description" rows="4" id="description" class="form-control" style="resize: none;"></textarea>
+                        <?php if (!is_null(session()->getFlashdata("validation")) && session()->getFlashdata("validation")["description"]) : ?>
+                            <?= view("components/errorMessage", array("message" => session()->getFlashdata("validation")["description"])); ?>
+                        <?php endif; ?>
                     </div>
                     <div class="ml-auto">
                         <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Tambah</button>

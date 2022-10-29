@@ -15,7 +15,7 @@ class Cart extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
-        "account_id", "service", "package_id", "item_id", "quantity", "description"
+        "account_id", "service", "package", "item", "quantity", "description"
     );
 
     // Dates
@@ -47,6 +47,9 @@ class Cart extends Model
         $data = $data["data"];
 
         $data["description"] = strtolower($data["description"]);
+        $data["package"] = strtolower($data["package"]);
+        $data["item"] = strtolower($data["item"]);
+        $data["service"] = strtolower($data["service"]);
 
         $data["data"] = $data;
 
