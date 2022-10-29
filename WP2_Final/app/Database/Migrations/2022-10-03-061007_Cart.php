@@ -14,9 +14,9 @@ class DetailCart extends Migration
                     "type" => "VARCHAR",
                     "constraint" => 150,
                 ),
-                "service_id" => array(
-                    "type" => "INT",
-                    "constraint" => 3,
+                "service" => array(
+                    "type" => "VARCHAR",
+                    "constraint" => 50
                 ),
                 "package_id" => array(
                     "type" => "INT",
@@ -37,7 +37,7 @@ class DetailCart extends Migration
             )
         );
         $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
-        $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
+        // $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
         $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
         $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "CASCADE");
         $this->forge->createTable("cart");

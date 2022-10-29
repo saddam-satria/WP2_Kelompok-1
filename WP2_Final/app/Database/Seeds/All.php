@@ -8,7 +8,7 @@ class All extends Seeder
 {
     public function run()
     {
-        $this->call("Account");
+        // $this->call("Account");
         $this->call("Service");
         $this->call("Item");
         $this->call("Package");

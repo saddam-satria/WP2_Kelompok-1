@@ -50,18 +50,20 @@
                                     <h5 class="modal-title text-white" id="exampleModalLongTitle">Pilih Jenis Pakaian</h5>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="d-flex flex-column my-3">
-                                        <div class="d-flex justify-content-between align-items-center mb-3">
-                                            <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="">
-                                            <div class="d-flex flex-column">
-                                                <h6 class="clothes-list">Baju / Kaos</h6>
-                                                <span>3 pcs / kg</span>
-                                            </div>
-                                            <div>
-                                                <button type="button" class="btn btn-sm mx-2" style="background-color: #85f1fe; color: #000;" id="clothes-btn">Pilih</button>
+                                    <?php foreach($items as $item):?>
+                                        <div class="d-flex flex-column my-3">
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="">
+                                                <div class="d-flex flex-column">
+                                                    <h6 class="clothes-list"><?= $item->itemName?></h6>
+                                                    <span><?= $item->quantityPerKG ?> pcs / kg</span>
+                                                </div>
+                                                <div>
+                                                    <button type="button" class="btn btn-sm mx-2" style="background-color: #85f1fe; color: #000;" id="clothes-btn">Pilih</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php endforeach;?>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +90,7 @@
                                 <div class="modal-body">
                                     <div class="d-flex flex-column my-3">
                                         <?php foreach ($packages as $package) : ?>
-                                            <span style="cursor: pointer;" class="text-capitalize mb-3 package-list"><?= $package ?></span>
+                                            <span style="cursor: pointer;" class="text-capitalize mb-3 package-list"><?= $package->packageName ?></span>
                                         <?php endforeach ?>
                                     </div>
                                 </div>

@@ -9,6 +9,7 @@ use App\Services\AccountService;
 class ProfileController extends BaseController
 {
     private $accountService;
+
     public function __construct()
     {
         $this->accountService = new AccountService(new AccountRepository());

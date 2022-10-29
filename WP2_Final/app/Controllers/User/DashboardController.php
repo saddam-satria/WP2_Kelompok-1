@@ -9,7 +9,6 @@ use App\Services\OrderService;
 class DashboardController extends BaseController
 {
     private $orderService;
-
     public function __construct()
     {
         // dd(session()->current_user[0]);

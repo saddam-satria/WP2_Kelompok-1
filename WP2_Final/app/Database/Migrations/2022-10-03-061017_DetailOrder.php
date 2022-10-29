@@ -10,9 +10,9 @@ class DetailOrder extends Migration
     {
         $this->forge->addField(
             array(
-                "service_id" => array(
-                    "type" => "INT",
-                    "constraint" => 3,
+                "service" => array(
+                    "type" => "VARCHAR",
+                    "constraint" => 50,
                 ),
                 "package_id" => array(
                     "type" => "INT",
@@ -35,7 +35,7 @@ class DetailOrder extends Migration
                 'updated_at datetime default current_timestamp on update current_timestamp',
             )
         );
-        $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
+        // $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
         $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
         $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "CASCADE");
         $this->forge->createTable("detail_order");

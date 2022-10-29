@@ -3,15 +3,21 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
+use App\Repositories\ItemRepository;
 use App\Repositories\OrderRepository;
+use App\Repositories\PackageRepository;
 use App\Services\OrderService;
 
 class OrderController extends BaseController
 {
     private $orderService;
+    private $itemRepository;
+    private $packageRepository;
     public function __construct()
     {
         $this->orderService =  new OrderService(new OrderRepository());
+        $this->itemRepository = new ItemRepository();
+        $this->packageRepository = new PackageRepository();
     }
     public function index()
     {
@@ -25,8 +31,9 @@ class OrderController extends BaseController
         $title = "Tambah Cucian Baru";
         $default_service = $this->request->getVar("service");
         $services = array("nyuci", "gosok", "all in one", "sneakers");
-        $packages = array("premium", "standart", "super");
-        return view("user/order/insert", compact("title", "default_service", "services", "packages"));
+        $packages = $this->packageRepository->getPackages(array("packageName"));
+        $items = $this->itemRepository->getItems(array("itemName","quantityPerKG","itemLogo"));
+        return view("user/order/insert", compact("title", "default_service", "services", "packages","items"));
     }
 
 

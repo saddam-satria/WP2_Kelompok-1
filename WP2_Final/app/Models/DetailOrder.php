@@ -12,7 +12,7 @@ class DetailOrder extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
-        "order_id", "service_id", "package_id", "item_id", "quanity", "description", "progress"
+        "order_id", "service", "package_id", "item_id", "quanity", "description", "progress"
     );
 
     // Dates
