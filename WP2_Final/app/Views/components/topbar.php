@@ -24,7 +24,7 @@
                         <div class="card-header text-white" style="background-color: #4663be;">
                             <h5>Notifikasi</h5>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="overflow-y: auto; height: 20vh;">
                             <div class="d-flex justify-content-between mb-3">
                                 <span>Lorem ipsum dolor sit amet.</span>
                                 <span>12 09 2001</span>
@@ -33,9 +33,22 @@
                                 <span>Lorem ipsum dolor sit amet.</span>
                                 <span>12 09 2001</span>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="text-decoration-none">Semua Notifikasi</a>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <span>12 09 2001</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <span>12 09 2001</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <span>12 09 2001</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Lorem ipsum dolor sit amet.</span>
+                                <span>12 09 2001</span>
+                            </div>
                         </div>
                     </div>
                 </div>
