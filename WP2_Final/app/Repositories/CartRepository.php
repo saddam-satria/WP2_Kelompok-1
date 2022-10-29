@@ -17,4 +17,8 @@ class CartRepository extends Cart
     {
         return $this->cartTable->select($columns)->get()->getResultObject();
     }
+    public function getCartsByUser(string $user_id, array $columns = ["*"])
+    {
+        return $this->cartTable->select($columns)->where("account_id", $user_id)->get()->getResultObject();
+    }
 }

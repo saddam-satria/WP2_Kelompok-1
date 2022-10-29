@@ -17,7 +17,10 @@ class CartController extends BaseController
     }
     public function index()
     {
-        $carts = $this->cartRepository->getCarts();
+        $session = session();
+        $current_user = $session->current_user[0];
+
+        $carts = $this->cartRepository->getCartsByUser($current_user->id);
         return view("user/cart/index", compact("carts"));
     }
     public function store()
