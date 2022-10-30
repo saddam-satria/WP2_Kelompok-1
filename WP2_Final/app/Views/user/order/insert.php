@@ -19,6 +19,7 @@
         <div class="col-sm-12 col-md-6">
             <form method="POST" action="<?= base_url("user/add-to-cart") ?>" method="POST">
                 <div class="d-flex flex-column">
+
                     <div class="mb-3">
                         <label for="service_name" class="form-label">Jenis Layanan</label>
                         <input value="<?= $default_service; ?>" type="text" class="form-control" name="service_name" id="service_name" readonly data-toggle="modal" data-target="#modalService">

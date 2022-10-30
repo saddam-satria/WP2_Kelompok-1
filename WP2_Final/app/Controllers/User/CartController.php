@@ -39,6 +39,13 @@ class CartController extends BaseController
     }
     public function store()
     {
+
+
+        $cart_id = $this->request->getVar("cart_id");
+        $item_id = $this->request->getVar("item_id");
+
+
+        die;
         $session = session();
 
         $currentCart = $session->cart_id;
