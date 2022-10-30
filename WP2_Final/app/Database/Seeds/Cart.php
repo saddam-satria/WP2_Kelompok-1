@@ -10,12 +10,9 @@ class Cart extends Seeder
     public function run()
     {
         $data = array(
-            "account_id" => "87244a73-ed24-45be-ab3b-d035125ced69",
-            "service" => "nyuci",
+            "account_id" => "3c499014-13e5-4f79-93a1-31889c75e14c",
+            "service_id" => 1,
             "package_id" => 1,
-            "item_id" => 1,
-            "quantity" => 10,
-            "description" => "testing aja"
         );
 
         $cart = new ModelsCart();
