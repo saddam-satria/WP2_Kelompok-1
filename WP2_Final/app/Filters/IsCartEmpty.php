@@ -35,18 +35,20 @@ class IsCartEmpty implements FilterInterface
         $isSelectItemPage = str_contains($currentPATH, "select-item");
 
         if (!is_null($currentCart) && !$isSelectItemPage) {
-            return redirect()->to(base_url("/user/select-item"));
+
+            return redirect()->to(base_url("/user/select-item"))->with("error", "keranjang sudah terisi, silahkan tambahkan pakaian");
         }
 
         $cartRepository = new CartRepository();
 
         $cart = $cartRepository->getCartsByUser($account_id, array("cartId"));
         if (count($cart) > 0 && !$isSelectItemPage && is_null($currentCart)) {
+
             $sessionPayload = array(
                 "cart_id" => $cart[0]->cartId
             );
             $session->set($sessionPayload);
-            return redirect()->to(base_url("/user/select-item"));
+            return redirect()->to(base_url("/user/select-item"))->with("error", "keranjang sudah terisi, silahkan tambahkan pakaian");
         }
     }
 

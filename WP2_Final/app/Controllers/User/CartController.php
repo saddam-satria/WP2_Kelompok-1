@@ -33,9 +33,9 @@ class CartController extends BaseController
         $cart_id = $session->cart_id;
         $itemRepository = new ItemRepository();
         $items = $itemRepository->getItems();
-
+        $title = "Tambah Pakaian";
         $cart = $this->cartRepository->getDetailCart($cart_id, array("serviceName", "packageName"))[0];
-        return view("user/cart/insert_item", compact("cart", "items"));
+        return view("user/cart/insert_item", compact("cart", "items", "title"));
     }
     public function store()
     {
