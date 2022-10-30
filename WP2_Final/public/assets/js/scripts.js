@@ -11,12 +11,6 @@ const serviceList = document.querySelectorAll('.service-list');
 const packageInput = document.querySelector('#package');
 const packageList = document.querySelectorAll('.package-list');
 
-const clothesInput = document.querySelector('#clothes');
-const clothesList = document.querySelectorAll('.clothes-list');
-const clothesBtn = document.querySelector('#clothes-btn');
-
-const quantityInput = document.querySelector('#quantity');
-
 if (failureAlert) {
   setTimeout(() => {
     failureAlert.remove();
@@ -53,21 +47,5 @@ if (packageInput || packageList.length > 0) {
     package.addEventListener('click', () => {
       packageInput.value = package.textContent;
     });
-  });
-}
-
-if (clothesInput || clothesList.length > 0 || clothesBtn) {
-  clothesList.forEach((clothes) => {
-    clothesBtn.addEventListener('click', () => {
-      clothesInput.value = clothes.textContent;
-    });
-  });
-}
-
-if (quantityInput) {
-  quantityInput.addEventListener('change', (quantity) => {
-    if (quantity.currentTarget.value.match(/\s|\D|\,<>+=-``/)) {
-      quantity.currentTarget.value = '';
-    }
   });
 }

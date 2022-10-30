@@ -28,12 +28,19 @@ class OrderController extends BaseController
 
     public function create()
     {
+        $session = session();
+
+        $currentCart = $session->cart_id;
+
+        if (!is_null($currentCart)) {
+            return redirect()->to(base_url("/user/select-item"));
+        }
+
         $title = "Tambah Cucian Baru";
         $default_service = $this->request->getVar("service");
         $services = array("nyuci", "gosok", "all in one", "sneakers");
         $packages = $this->packageRepository->getPackages(array("packageName"));
-        $items = $this->itemRepository->getItems(array("itemName", "quantityPerKG", "itemLogo"));
-        return view("user/order/insert", compact("title", "default_service", "services", "packages", "items"));
+        return view("user/order/insert", compact("title", "default_service", "services", "packages"));
     }
 
 

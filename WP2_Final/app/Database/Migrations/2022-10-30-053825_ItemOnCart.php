@@ -11,8 +11,8 @@ class ItemOnCart extends Migration
         $this->forge->addField(
             array(
                 "cart_id" => array(
-                    "type" => "VARCHAR",
-                    "constraint" => 150,
+                    "type" => "INT",
+                    "constraint" => 3,
                 ),
                 "item_id" => array(
                     "type" => "INT",

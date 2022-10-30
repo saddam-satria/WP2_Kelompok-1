@@ -53,7 +53,8 @@ $routes->group("user", function ($routes) {
     $routes->get("order/(:num)", "User\OrderController::detail/$1");
     $routes->get("histories", "User\OrderController::histories");
     $routes->get("new-order", "User\OrderController::create");
-    $routes->post("new-order", "User\CartController::store");
+    $routes->post("add-to-cart", "User\CartController::store");
+    $routes->get("select-item", "User\CartController::create");
     $routes->get("cart", "User\CartController::index");
 });
 

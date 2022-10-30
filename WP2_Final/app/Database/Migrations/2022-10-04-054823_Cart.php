@@ -11,8 +11,9 @@ class Cart extends Migration
         $this->forge->addField(
             array(
                 "cartId" => array(
-                    "type" => "VARCHAR",
-                    "constraint" => 150,
+                    "type" => "INT",
+                    "constraint" => 3,
+                    "auto_increment" => true
                 ),
                 "account_id" => array(
                     "type" => "VARCHAR",

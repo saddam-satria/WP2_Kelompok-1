@@ -2,22 +2,29 @@
 
 namespace App\Models;
 
+use CodeIgniter\Model;
 
-use Michalsn\Uuid\UuidModel;
 
-class Cart extends UuidModel
+class Cart extends Model
 {
+    protected $DBGroup          = 'default';
     protected $table            = 'cart';
     protected $primaryKey       = 'cartId';
+    protected $useAutoIncrement = true;
+    protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
-        "account_id", "service_id", "package_id", "cartId"
+        "account_id", "service_id", "package_id"
     );
-    protected $uuidVersion = "uuid4";
-    protected $uuidUseBytes = false;
-    protected $uuidFields = array("cartId");
+
+    // Dates
+    protected $useTimestamps = false;
+    protected $dateFormat    = 'datetime';
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];

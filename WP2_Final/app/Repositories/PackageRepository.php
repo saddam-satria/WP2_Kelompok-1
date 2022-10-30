@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Item;
 
-class PackageRepository extends Item{
+class PackageRepository extends Item
+{
     private $packageTable;
     public function __construct()
     {
@@ -12,6 +14,10 @@ class PackageRepository extends Item{
     }
     public function getPackages(array $columns = ["*"])
     {
-       return $this->packageTable->select($columns)->get()->getResultObject();
+        return $this->packageTable->select($columns)->get()->getResultObject();
+    }
+    public function getPackageByName(string $packageName, $columns = ["*"])
+    {
+        return $this->packageTable->select($columns)->where("packageName", $packageName)->get()->getResultObject();
     }
 }
