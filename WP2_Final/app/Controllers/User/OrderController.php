@@ -29,7 +29,6 @@ class OrderController extends BaseController
     public function create()
     {
         $session = session();
-
         $currentCart = $session->cart_id;
 
         if (!is_null($currentCart)) {

@@ -52,10 +52,13 @@ $routes->group("user", function ($routes) {
     $routes->get("orders", "User\OrderController::index");
     $routes->get("order/(:num)", "User\OrderController::detail/$1");
     $routes->get("histories", "User\OrderController::histories");
-    $routes->get("new-order", "User\OrderController::create");
-    $routes->post("add-to-cart", "User\CartController::store");
-    $routes->get("select-item", "User\CartController::create");
-    $routes->get("cart", "User\CartController::index");
+
+    $routes->group("", array("filter" => "isCartEmpty"), function ($routes) {
+        $routes->post("add-to-cart", "User\CartController::store");
+        $routes->get("new-order", "User\OrderController::create");
+        $routes->get("select-item", "User\CartController::create");
+    });
+    $routes->get("/", "User\CartController::index");
 });
 
 

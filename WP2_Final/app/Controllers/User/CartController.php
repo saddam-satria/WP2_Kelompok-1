@@ -39,13 +39,6 @@ class CartController extends BaseController
     }
     public function store()
     {
-        $session = session();
-        $currentCart = $session->cart_id;
-
-        if (!is_null($currentCart)) {
-            return redirect()->to(base_url("/user/select-item"));
-        }
-
 
         $rules = array(
             "service_name" => ["required"],
@@ -61,13 +54,11 @@ class CartController extends BaseController
 
 
 
-
+        $session = session();
         $currentUser = $session->current_user[0];
         $account_id = $currentUser->id;
         $service = $this->request->getVar("service_name");
         $package = $this->request->getVar("package");
-
-
 
 
         $result = $this->cartService->insertToCart($account_id, $service, $package);
