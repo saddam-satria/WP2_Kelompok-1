@@ -13,10 +13,11 @@ class Cart extends UuidModel
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
-        "account_id", "service_id", "package_id",
+        "account_id", "service_id", "package_id", "cartId"
     );
     protected $uuidVersion = "uuid4";
     protected $uuidUseBytes = false;
+    protected $uuidFields = array("cartId");
 
     // Validation
     protected $validationRules      = [];

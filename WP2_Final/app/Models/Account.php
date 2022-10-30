@@ -66,7 +66,7 @@ class Account extends UuidModel
     public function setVerificationCode(array $data)
     {
         $payload = $data["email"] . "-" . date_create()->getTimestamp();
-        define("SECRET_KEY", "LAUNDRY WAR");
+        define("SECRET_KEY", getenv("SECRET_KEY"));
         $data = $data["data"];
         $data["verificationCode"] = strtoupper(hash_hmac("sha256", $payload, SECRET_KEY));
         $data["data"] = $data;
