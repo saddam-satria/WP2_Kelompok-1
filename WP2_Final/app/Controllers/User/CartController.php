@@ -3,6 +3,7 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
+use App\Models\ItemOnCart;
 use App\Repositories\CartRepository;
 use App\Repositories\ItemRepository;
 use App\Repositories\PackageRepository;
@@ -35,7 +36,7 @@ class CartController extends BaseController
         $items = $itemRepository->getItems();
         $title = "Tambah Pakaian";
         $cart = $this->cartRepository->getDetailCart($cart_id, array("serviceName", "packageName"))[0];
-        return view("user/cart/insert_item", compact("cart", "items", "title"));
+        return view("user/cart/insert_item", compact("cart", "items", "title", "cart_id"));
     }
     public function store()
     {
@@ -73,5 +74,45 @@ class CartController extends BaseController
         $session->set($sessionPayload);
 
         return redirect()->to(base_url("/user/select-item"))->with("success", "berhasil ditambahkan ke keranjang");
+    }
+    public function storeItem()
+    {
+        $cart_id = $this->request->getVar("cart_id");
+        $clothes = $this->request->getVar("clothes");
+        $quantity = (int)$this->request->getVar("quantity");
+        $description = $this->request->getVar("description");
+
+        $itemRepository = new ItemRepository();
+        $cartItemModel = new ItemOnCart();
+        $item_id = $itemRepository->getItemByName($clothes)[0]->itemID;
+
+        $data = array(
+            "cart_id" => $cart_id,
+            "item_id" => $item_id,
+            "quantity" => $quantity,
+            "description" => $description
+        );
+
+        $result = $cartItemModel->insert($data, false);
+
+        if (!$result) {
+            return redirect()->to(base_url("/user/select-item"))->with("error", "gagal ditambahkan ke keranjang");
+        }
+        $session = session();
+
+        $cartRepository = new CartRepository();
+        $current_user = $session->current_user[0];
+        $account_id = $current_user->id;
+        $detailCart = $cartRepository->getDetailCartByAccount($account_id, array("package.packageName", "service.serviceName", "cart.cartId", "item_on_cart.quantity", "item_on_cart.description", "item.itemName", "service.servicePrice", "package.packagePrice", "item.itemPrice", "item.quantityPerKG", "item.itemLogo"));
+
+
+        dd($detailCart);
+        $payload = array(
+            "cart" => $detailCart
+        );
+
+        $session->set($payload);
+
+        return redirect()->to(base_url("/user/select-item"));
     }
 }

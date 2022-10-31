@@ -58,6 +58,7 @@ $routes->group("user", function ($routes) {
         $routes->get("new-order", "User\OrderController::create");
         $routes->get("select-item", "User\CartController::create");
     });
+    $routes->post("add-item-to-cart", "User\CartController::storeItem");
     $routes->get("/", "User\CartController::index");
 });
 
