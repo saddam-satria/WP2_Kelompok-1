@@ -10,6 +10,10 @@ class ItemOnCart extends Migration
     {
         $this->forge->addField(
             array(
+                "id" => array(
+                    "type" => "INT",
+                    "auto_increment" => true
+                ),
                 "cart_id" => array(
                     "type" => "INT",
                     "constraint" => 3,
@@ -28,7 +32,7 @@ class ItemOnCart extends Migration
                 'updated_at datetime default current_timestamp on update current_timestamp',
             )
         );
-        // $this->forge->addPrimaryKey(array("cartId"));
+        $this->forge->addPrimaryKey(array("id"));
         // $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
         // $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
         // $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");

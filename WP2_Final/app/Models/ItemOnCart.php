@@ -8,6 +8,8 @@ class ItemOnCart extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'item_on_cart';
+    protected $primaryKey       = "id";
+    protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
