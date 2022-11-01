@@ -5,6 +5,8 @@
 
 <div class="my-5">
 
+    <?= view("components/alert", array("key" => "error")) ?>
+
     <section class="py-4 px-5" style="background-color: #4663be; border-radius: 20px;">
         <div class="row">
             <div class="col-sm-12 col-md-6 rotate-2">
@@ -41,9 +43,10 @@
             <div class="col-sm-12 col-md-6 rotate-2">
                 <div class="d-flex flex-column justify-content-center" style="height: 100%;">
                     <h6 class="text-white mb-3 py-2 text-capitalize">penukaran kupon diskon</h6>
-                    <form action="#">
+                    <form action="<?= base_url("/user/claim-voucher") ?>" method="POST">
                         <div class="d-flex">
-                            <input type="text" class="form-control" placeholder="kupon diskon" name="coupon" style="color: #000;">
+                            <?= csrf_field() ?>
+                            <input type="text" class="form-control" placeholder="kupon diskon" name="voucher" style="color: #000;">
                             <button type="submit" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Pakai</button>
                         </div>
                     </form>

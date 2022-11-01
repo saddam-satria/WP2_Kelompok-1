@@ -64,6 +64,8 @@ $routes->group("user", array("filter" => "getCart"), function ($routes) {
         $routes->get("select-item", "User\CartController::create");
     });
     $routes->get("cart", "User\CartController::index");
+
+    $routes->post("claim-voucher", "User/VoucherController::claimingVoucher");
 });
 
 
