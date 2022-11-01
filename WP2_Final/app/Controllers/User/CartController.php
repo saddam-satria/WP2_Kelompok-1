@@ -21,11 +21,10 @@ class CartController extends BaseController
     }
     public function index()
     {
-        $session = session();
-        $current_user = $session->current_user[0];
-        $cart_id = $session->cart_id;
 
-        $carts = $this->cartRepository->getCartByID($cart_id)[0];
+        $session = session();
+        $carts = $session->cart;
+
         return view("user/cart/index", compact("carts"));
     }
     public function create()
@@ -106,7 +105,6 @@ class CartController extends BaseController
         $detailCart = $cartRepository->getDetailCartByAccount($account_id, array("package.packageName", "service.serviceName", "cart.cartId", "item_on_cart.quantity", "item_on_cart.description", "item.itemName", "service.servicePrice", "package.packagePrice", "item.itemPrice", "item.quantityPerKG", "item.itemLogo"));
 
 
-        dd($detailCart);
         $payload = array(
             "cart" => $detailCart
         );

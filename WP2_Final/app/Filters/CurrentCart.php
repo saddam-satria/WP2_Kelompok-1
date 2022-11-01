@@ -7,7 +7,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class IsCartEmpty implements FilterInterface
+class CurrentCart implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -27,11 +27,10 @@ class IsCartEmpty implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $session = session();
-        $cart = $session->cart_id;
+        $currentCart = $session->cart_id;
 
-
-        if (is_null($cart)) {
-            return redirect()->to(base_url("/user/new-order"));
+        if (!is_null($currentCart)) {
+            return redirect()->to(base_url("/user/select-item"));
         }
     }
 

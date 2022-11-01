@@ -7,7 +7,7 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class IsCartEmpty implements FilterInterface
+class GetCart implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -27,11 +27,26 @@ class IsCartEmpty implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $session = session();
-        $cart = $session->cart_id;
+        $current_user = $session->current_user[0];
+        $account_id = $current_user->id;
+        $cartRepository = new CartRepository();
+        $detailCart = $cartRepository->getDetailCartByAccount($account_id, array("package.packageName", "service.serviceName", "cart.cartId", "item_on_cart.quantity", "item_on_cart.description", "item.itemName", "service.servicePrice", "package.packagePrice", "item.itemPrice", "item.quantityPerKG", "item.itemLogo"));
+        $cart = $cartRepository->getCartsByUser($account_id, array("cartId"));
+
+        if (count($cart) > 0) {
+            $sessionPayload = array(
+                "cart_id" => $cart[0]->cartId
+            );
+            $session->set($sessionPayload);
+        }
 
 
-        if (is_null($cart)) {
-            return redirect()->to(base_url("/user/new-order"));
+
+        if (count($detailCart) > 0) {
+            $payload = array(
+                "cart" => $detailCart
+            );
+            $session->set($payload);
         }
     }
 

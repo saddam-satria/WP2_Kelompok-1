@@ -44,7 +44,7 @@ $routes->group("auth", function ($routes) {
     $routes->post("logout", "Auth\LogoutController::logout");
 });
 
-$routes->group("user", function ($routes) {
+$routes->group("user", array("filter" => "getCart"), function ($routes) {
     $routes->get("dashboard", "User\DashboardController::index");
     $routes->get("profile", "User\ProfileController::index");
     $routes->post("profile", "User\ProfileController::update");
@@ -53,13 +53,17 @@ $routes->group("user", function ($routes) {
     $routes->get("order/(:num)", "User\OrderController::detail/$1");
     $routes->get("histories", "User\OrderController::histories");
 
-    $routes->group("", array("filter" => "isCartEmpty"), function ($routes) {
-        $routes->post("add-to-cart", "User\CartController::store");
+    $routes->group("", array("filter" => "currentCart"), function ($routes) {
         $routes->get("new-order", "User\OrderController::create");
+    });
+
+    $routes->post("add-item-to-cart",  "User\CartController::storeItem");
+    $routes->post("add-to-cart", "User\CartController::store");
+
+    $routes->group("", array("filter" => "isCartEmpty"), function ($routes) {
         $routes->get("select-item", "User\CartController::create");
     });
-    $routes->post("add-item-to-cart", "User\CartController::storeItem");
-    $routes->get("/", "User\CartController::index");
+    $routes->get("cart", "User\CartController::index");
 });
 
 

@@ -23,7 +23,9 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        "isCartEmpty" => \App\Filters\IsCartEmpty::class
+        "isCartEmpty" => \App\Filters\IsCartEmpty::class,
+        "getCart" => \App\Filters\GetCart::class,
+        "currentCart" => \App\Filters\CurrentCart::class
     ];
 
     /**

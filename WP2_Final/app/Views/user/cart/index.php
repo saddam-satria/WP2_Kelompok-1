@@ -8,7 +8,7 @@
     <h5 class="text-white">Keranjang</h5>
 </section>
 
-<?php if (count($carts) > 0) : ?>
+<?php if (!is_null($carts) && count($carts) > 0) : ?>
 
     <section class="py-3 mt-5">
 
