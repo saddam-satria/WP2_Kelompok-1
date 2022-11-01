@@ -10,8 +10,8 @@ class VoucherOnAccountRepository extends VoucherOnAccount
     {
         $data = array(
             "voucher_id" => $voucher_id,
-            "user_id" => $user_id
+            "account_id" => $user_id
         );
-        return $this->insert($data);
+        return $this->insert($data, false);
     }
 }

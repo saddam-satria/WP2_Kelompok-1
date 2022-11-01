@@ -23,5 +23,7 @@ class VoucherController extends BaseController
         if (!$result) {
             return redirect()->to(base_url("/user/dashboard"))->with("error", "voucher tidak dapat di klaim");
         }
+
+        return redirect()->to(base_url("/user/dashboard"))->with("success", "voucher berhasil ditambahkan, pakai sekarang");
     }
 }

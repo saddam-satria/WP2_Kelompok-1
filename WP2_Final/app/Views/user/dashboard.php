@@ -5,7 +5,13 @@
 
 <div class="my-5">
 
-    <?= view("components/alert", array("key" => "error")) ?>
+    <?php if (session()->getFlashdata("success")) : ?>
+        <?= view("components/alert", array("key" => "success", "alert" => "success")) ?>
+    <?php else : ?>
+        <?= view("components/alert", array("key" => "error")) ?>
+    <?php endif; ?>
+
+
 
     <section class="py-4 px-5" style="background-color: #4663be; border-radius: 20px;">
         <div class="row">

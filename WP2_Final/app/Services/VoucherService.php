@@ -27,7 +27,7 @@ class VoucherService
         $voucher = $voucherModel[0];
 
 
-        $isExpire = date("Y-m-d H:i:s") > $voucher->expire;
+        $isExpire = date("Y-m-d") > $voucher->expire;
 
 
         if ($isExpire) {
