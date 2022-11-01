@@ -11,7 +11,7 @@ class Service extends Seeder
     {
         $data = array(
             "serviceName" => "nyuCI",
-            "servicePrice" => 20000
+            "servicePrice" => 1000
         );
 
         $serviceModel = new ModelsService();
