@@ -17,7 +17,7 @@ class CartController extends BaseController
     public function __construct()
     {
         $this->cartRepository = new CartRepository();
-        $this->cartService = new CartService($this->cartRepository, new ServiceRepository(), new PackageRepository());
+        $this->cartService = new CartService($this->cartRepository, new ServiceRepository(), new PackageRepository(), new ItemOnCart());
     }
     public function index()
     {
@@ -67,11 +67,6 @@ class CartController extends BaseController
             return redirect()->to(base_url("/user/new-order"))->with("error", "terjadi kesalahan");
         }
 
-        $sessionPayload = array(
-            "cart_id" => $result,
-        );
-        $session->set($sessionPayload);
-
         return redirect()->to(base_url("/user/select-item"))->with("success", "berhasil ditambahkan ke keranjang");
     }
     public function storeItem()
@@ -81,36 +76,39 @@ class CartController extends BaseController
         $quantity = (int)$this->request->getVar("quantity");
         $description = $this->request->getVar("description");
 
-        $itemRepository = new ItemRepository();
-        $cartItemModel = new ItemOnCart();
-        $item_id = $itemRepository->getItemByName($clothes)[0]->itemID;
-
-        $data = array(
-            "cart_id" => $cart_id,
-            "item_id" => $item_id,
-            "quantity" => $quantity,
-            "description" => $description
-        );
-
-        $result = $cartItemModel->insert($data, false);
+        $result = $this->cartService->insertItemOnCart($cart_id, $clothes, $quantity, $description);
 
         if (!$result) {
             return redirect()->to(base_url("/user/select-item"))->with("error", "gagal ditambahkan ke keranjang");
         }
-        $session = session();
-
-        $cartRepository = new CartRepository();
-        $current_user = $session->current_user[0];
-        $account_id = $current_user->id;
-        $detailCart = $cartRepository->getDetailCartByAccount($account_id, array("package.packageName", "service.serviceName", "cart.cartId", "item_on_cart.quantity", "item_on_cart.description", "item.itemName", "service.servicePrice", "package.packagePrice", "item.itemPrice", "item.quantityPerKG", "item.itemLogo"));
-
-
-        $payload = array(
-            "cart" => $detailCart
-        );
-
-        $session->set($payload);
 
         return redirect()->to(base_url("/user/select-item"));
+    }
+
+    public function updateCart()
+    {
+        $itemOnCartID = $this->request->getVar("item-id");
+        $action = $this->request->getVar("action");
+
+        if ($action == "delete") {
+            return $this->deleteItemOnCart($itemOnCartID, $action);
+        }
+
+        $result = $this->cartService->updateCart($itemOnCartID, $action);
+
+        if (!$result) {
+            return redirect()->to(base_url("/user/cart"))->with("error", "gagal update keranjang");
+        }
+
+        return redirect()->to(base_url("/user/cart"))->with("success", "berhasil update keranjang");
+    }
+    private function deleteItemOnCart(string $itemOnCart_id, string $action)
+    {
+        $result = $this->cartService->updateCart($itemOnCart_id, $action);
+        if (!$result) {
+            return redirect()->to(base_url("/user/cart"))->with("error", "gagal menghapus keranjang");
+        }
+
+        return redirect()->to(base_url("/user/cart"))->with("success", "berhasil menghapus keranjang");
     }
 }

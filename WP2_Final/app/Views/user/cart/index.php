@@ -2,22 +2,29 @@
 $cartSummary = 0;
 $cart = $carts[0];
 $cartAsKG = 0;
-foreach ($carts as $cart) {
-    $qty = (float) $cart->quantity / $cart->quantityPerKG;
-    $cartAsKG = $cartAsKG + $qty;
-    $cartSummary = $cartSummary + $qty * $cart->itemPrice;
+
+if (!is_null($carts)) {
+    foreach ($carts as $cart) {
+        $qty = (float) $cart->quantity / $cart->quantityPerKG;
+        $cartAsKG = $cartAsKG + $qty;
+        $cartSummary = $cartSummary + $qty * $cart->itemPrice;
+    }
+
+
+    $cartSummary = $cartSummary + $cart->servicePrice + $cart->packagePrice;
 }
-
-
-$cartSummary = $cartSummary + $cart->servicePrice + $cart->packagePrice;
-
 ?>
 
 <?= $this->extend("layouts/user/dashboard"); ?>
 
 <?= $this->section("content"); ?>
 
-<?= view("components/alert", array("key" => "error")) ?>
+<?php if (session()->getFlashdata("success")) : ?>
+    <?= view("components/alert", array("key" => "success", "alert" => "success")) ?>
+<?php else : ?>
+    <?= view("components/alert", array("key" => "error")) ?>
+<?php endif; ?>
+
 
 <section class="py-3 px-5 mt-5" style="background-color: #4663be; border-radius: 10px;">
     <h5 class="text-white">Keranjang</h5>
@@ -37,18 +44,18 @@ $cartSummary = $cartSummary + $cart->servicePrice + $cart->packagePrice;
                                 <span><?= $cart->quantity / $cart->quantityPerKG ?> kg</span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <form action="#">
-                                    <button type="submit" class="btn btn-sm btn-primary">-</button>
+                                <form action="<?= base_url("/user/cart?item-id=" . $cart->id . "&action=decrease") ?>" method="POST">
+                                    <button type="submit" class="btn btn-sm btn-<?= (int) $cart->quantity > 1 ? "primary" : "secondary" ?>" <?= (int)$cart->quantity > 1 ? "" : "disabled" ?>>-</button>
                                 </form>
 
                                 <span class="badge badge-sm badge-primary mx-1"><?= $cart->quantity ?> pcs</span>
 
-                                <form action="#">
+                                <form action="<?= base_url("/user/cart?item-id=" . $cart->id . "&action=increase") ?>" method="POST">
                                     <button type="submit" class="btn btn-sm btn-primary">+</button>
                                 </form>
                             </div>
                             <div>
-                                <form action="#">
+                                <form action="<?= base_url("/user/cart?item-id=" . $cart->id . "&action=delete") ?>" method="POST">
                                     <button type="submit" class="btn btn-sm btn-danger">x</button>
                                 </form>
                             </div>

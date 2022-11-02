@@ -30,7 +30,7 @@ class GetCart implements FilterInterface
         $current_user = $session->current_user[0];
         $account_id = $current_user->id;
         $cartRepository = new CartRepository();
-        $detailCart = $cartRepository->getDetailCartByAccount($account_id, array("package.packageName", "service.serviceName", "cart.cartId", "item_on_cart.quantity", "item_on_cart.description", "item.itemName", "service.servicePrice", "package.packagePrice", "item.itemPrice", "item.quantityPerKG", "item.itemLogo"));
+        $detailCart = $cartRepository->getDetailCartByAccount($account_id, array("item_on_cart.id", "package.packageName", "service.serviceName", "cart.cartId", "item_on_cart.quantity", "item_on_cart.description", "item.itemName", "service.servicePrice", "package.packagePrice", "item.itemPrice", "item.quantityPerKG", "item.itemLogo"));
         $cart = $cartRepository->getCartsByUser($account_id, array("cartId"));
 
         if (count($cart) > 0) {

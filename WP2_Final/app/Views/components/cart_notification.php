@@ -1,16 +1,20 @@
 <?php
 $cartSummary = 0;
 $carts = session()->cart;
-$cart = $carts[0];
 $cartAsKG = 0;
-foreach ($carts as $cart) {
-    $qty = (float) $cart->quantity / $cart->quantityPerKG;
-    $cartAsKG = $cartAsKG + $qty;
-    $cartSummary = $cartSummary + $qty * $cart->itemPrice;
+
+if (!is_null($carts)) {
+    $cart = $carts[0];
+    foreach ($carts as $cart) {
+        $qty = (float) $cart->quantity / $cart->quantityPerKG;
+        $cartAsKG = $cartAsKG + $qty;
+        $cartSummary = $cartSummary + $qty * $cart->itemPrice;
+    }
+
+    $cartSummary = $cartSummary + $cart->servicePrice + $cart->packagePrice;
 }
 
 
-$cartSummary = $cartSummary + $cart->servicePrice + $cart->packagePrice;
 
 ?>
 
