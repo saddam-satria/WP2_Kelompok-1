@@ -86,8 +86,12 @@ class CartService
 
         return true;
     }
-    public function updateCart(string $item_id, string $action)
+    public function updateCart(?string $item_id, string $action)
     {
+
+        if ($action == "reset") {
+            return $this->resetCart();
+        }
 
         if ($action == "delete") {
             return $this->deleteItemOnCart($item_id);
@@ -141,5 +145,20 @@ class CartService
 
 
         return $this->itemOnCartModel->delete($item_id);
+    }
+    private function resetCart()
+    {
+        $session  = session();
+
+        $cart_id = $session->cart_id;
+        $response = $this->cartRepository->delete($cart_id);
+
+        if (!$response) {
+            return false;
+        }
+
+        $session->remove("cart");
+        $session->remove("cart_id");
+        return true;
     }
 }

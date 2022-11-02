@@ -95,7 +95,9 @@ if (!is_null($carts)) {
             </div>
         </div>
         <div class="d-flex my-5 justify-content-end">
-            <a href="#" class="btn btn-md mx-2 btn-danger">reset</a>
+            <form action="<?= base_url("/user/cart?action=reset") ?>" method="post">
+                <button type="submit" class="btn btn-md mx-2 btn-danger">reset</button>
+            </form>
             <a href="#" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Checkout</a>
         </div>
 

@@ -94,6 +94,10 @@ class CartController extends BaseController
             return $this->deleteItemOnCart($itemOnCartID, $action);
         }
 
+        if ($action == "reset") {
+            return $this->resetCart($action, $itemOnCartID);
+        }
+
         $result = $this->cartService->updateCart($itemOnCartID, $action);
 
         if (!$result) {
@@ -110,5 +114,14 @@ class CartController extends BaseController
         }
 
         return redirect()->to(base_url("/user/cart"))->with("success", "berhasil menghapus keranjang");
+    }
+    private function resetCart(string $action, ?string $item_id)
+    {
+        $result = $this->cartService->updateCart($item_id, $action);
+        if (!$result) {
+            return redirect()->to(base_url("/user/cart"))->with("error", "gagal reset keranjang");
+        }
+
+        return redirect()->to(base_url("/user/cart"))->with("success", "berhasil reset keranjang");
     }
 }
