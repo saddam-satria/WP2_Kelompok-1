@@ -129,6 +129,17 @@ class CartService
     }
     private function deleteItemOnCart($item_id)
     {
+        $session  = session();
+
+        $cart_id = $session->cart_id;
+
+        $cart = $this->itemOnCartModel->where("cart_id", $cart_id)->findAll();
+
+        if (count($cart) < 2) {
+            $session->remove("cart");
+        }
+
+
         return $this->itemOnCartModel->delete($item_id);
     }
 }
