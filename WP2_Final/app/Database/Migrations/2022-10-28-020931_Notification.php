@@ -24,7 +24,9 @@ class Notification extends Migration
                 ),
                 "message" => array(
                     "type" => "TEXT",
-                )
+                ),
+                'created_at datetime default current_timestamp',
+                'updated_at datetime default current_timestamp on update current_timestamp',
             )
         );
 
