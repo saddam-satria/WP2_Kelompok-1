@@ -14,26 +14,14 @@ class DetailOrder extends Migration
                     "type" => "VARCHAR",
                     "constraint" => 150,
                 ),
-                "service" => array(
-                    "type" => "VARCHAR",
-                    "constraint" => 50
-                ),
-                "package" => array(
-                    "type" => "VARCHAR",
-                    "constraint" => 50
-                ),
-                "item" => array(
-                    "type" => "VARCHAR",
-                    "constraint" => 50
+                "item_id" => array(
+                    "type" => "INT",
                 ),
                 "quantity" => array(
                     "type" => "INT",
                 ),
                 "description" => array(
                     "type" => "TEXT",
-                ),
-                "progress" => array(
-                    "type" => "enum('DITERIMA', 'SEDANG DICUCI', 'SUDAH SELESAI', 'SELESAI')"
                 ),
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default current_timestamp on update current_timestamp',
@@ -42,6 +30,7 @@ class DetailOrder extends Migration
         // $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
         // $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
         $this->forge->addForeignKey("order_id", "laundry_order", "orderID", "CASCADE", "CASCADE");
+        $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "CASCADE");
         $this->forge->createTable("detail_order");
     }
 

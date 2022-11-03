@@ -18,30 +18,54 @@ class Order extends Migration
                     "type" => "VARCHAR",
                     "constraint" => 150,
                 ),
-                "total" => array(
-                    "type" => "FLOAT",
+                "totalItem" => array(
+                    "type" => "INT",
                     "default" => 0,
+                ),
+                "amount" => array(
+                    "type" => "FLOAT",
+                ),
+                "status" => array(
+                    "type" => "enum('DITERIMA', 'SEDANG DICUCI', 'SUDAH SELESAI', 'SUDAH DI AMBIL')"
                 ),
                 "paymentMethod" => array(
                     "type" => "VARCHAR",
                     "constraint" => 100,
                 ),
-                "orderStatus" => array(
+                "isFinish" => array(
                     "type" => "BOOLEAN",
                     "default" => false
                 ),
-                "token" => array(
-                    "type" => "VARCHAR",
-                    "constraint" => 15
+                "isTrouble" => array(
+                    "type" => "BOOLEAN",
+                    "default" => false
+                ),
+                "description" => array(
+                    "type" => "TEXT",
+                    "null" => true
                 ),
                 "discount" => array(
                     "type" => "FLOAT",
                     "default" => 0
                 ),
-                "status" => array(
-                    "type" => "VARCHAR",
-                    "constraint" => 100,
+                "voucherCode" => array(
+                    "type" => "FLOAT",
                     "null" => true
+                ),
+                "token" => array(
+                    "type" => "VARCHAR",
+                    "constraint" => 15
+                ),
+                "payment" => array(
+                    "type" => "float",
+                ),
+                "service_id" => array(
+                    "type" => "INT",
+                    "constraint" => 3,
+                ),
+                "package_id" => array(
+                    "type" => "INT",
+                    "constraint" => 3,
                 ),
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default current_timestamp on update current_timestamp',
@@ -50,6 +74,8 @@ class Order extends Migration
         $this->forge->addPrimaryKey("orderID");
         $this->forge->addUniqueKey(array("token"));
         $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
+        $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
+        $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
         $this->forge->createTable("laundry_order");
     }
 
