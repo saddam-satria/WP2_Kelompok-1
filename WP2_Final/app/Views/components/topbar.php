@@ -1,3 +1,12 @@
+<?php
+
+$notificationRepository = new App\Repositories\NotificationRepository();
+$currentUser = session()->current_user[0];
+$notifications = $notificationRepository->getNotificationByAccount($currentUser->email, array("message", "created_at"));
+
+?>
+
+
 <nav class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow">
     <a class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15 ml-1">
@@ -16,7 +25,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-bell fa-fw"></i>
                     <!-- Counter - Alerts -->
-                    <span class="badge badge-danger badge-counter">3+</span>
+                    <span class="badge badge-danger badge-counter"><?= count($notifications) ?></span>
                 </a>
                 <!-- Dropdown - Alerts -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -25,30 +34,18 @@
                             <h5>Notifikasi</h5>
                         </div>
                         <div class="card-body" style="overflow-y: auto; height: 20vh;">
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <span>12 09 2001</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <span>12 09 2001</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <span>12 09 2001</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <span>12 09 2001</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <span>12 09 2001</span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Lorem ipsum dolor sit amet.</span>
-                                <span>12 09 2001</span>
-                            </div>
+                            <?php if (count($notifications) > 0) : ?>
+                                <?php foreach ($notifications as $notification) : ?>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span><?= $notification->message ?></span>
+                                        <span><?= date_format(date_create($notification->created_at), "Y-m-d") ?></span>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <div class="d-flex justify-content-center align-items-center mb-3" style="height: 100%;">
+                                    <h6>Notifikasi Kosong</h6>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ class Notification extends Migration
                     "type" => "VARCHAR",
                     "constraint" => 150
                 ),
-                "FROM" => array(
+                "from" => array(
                     "type" => "VARCHAR",
                     "constraint" => 150
                 ),
