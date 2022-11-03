@@ -31,6 +31,7 @@ class Order extends Migration
                 "paymentMethod" => array(
                     "type" => "VARCHAR",
                     "constraint" => 100,
+                    "null" => true
                 ),
                 "isFinish" => array(
                     "type" => "BOOLEAN",
