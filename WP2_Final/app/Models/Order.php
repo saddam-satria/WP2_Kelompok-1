@@ -8,7 +8,7 @@ use Michalsn\Uuid\UuidModel;
 class Order extends UuidModel
 {
     protected $table            = 'laundry_order';
-    protected $primaryKey       = 'orderID';
+    protected $primaryKey       = 'id';
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;

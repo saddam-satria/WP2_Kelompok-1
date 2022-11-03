@@ -10,7 +10,7 @@ class Order extends Migration
     {
         $this->forge->addField(
             array(
-                "orderID" => array(
+                "id" => array(
                     "type" => "VARCHAR",
                     "constraint" => 150,
                 ),
@@ -71,7 +71,7 @@ class Order extends Migration
                 'updated_at datetime default current_timestamp on update current_timestamp',
             )
         );
-        $this->forge->addPrimaryKey("orderID");
+        $this->forge->addPrimaryKey("id");
         $this->forge->addUniqueKey(array("token"));
         $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
         $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
