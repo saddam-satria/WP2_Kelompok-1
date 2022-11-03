@@ -61,10 +61,13 @@ $routes->group("user", array("filter" => "getCart"), function ($routes) {
     $routes->post("add-to-cart", "User\CartController::store");
 
     $routes->group("", array("filter" => "isCartEmpty"), function ($routes) {
+        $routes->get("checkout", "User\CheckoutController::index");
         $routes->get("select-item", "User\CartController::create");
+        $routes->post("select-voucher", "User\CheckoutController::selectVoucher");
     });
     $routes->get("cart", "User\CartController::index");
     $routes->post("cart", "User\CartController::updateCart");
+
 
     $routes->post("claim-voucher", "User/VoucherController::claimingVoucher");
 });

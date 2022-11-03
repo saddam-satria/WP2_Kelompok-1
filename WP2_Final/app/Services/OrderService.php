@@ -29,4 +29,7 @@ class OrderService
     {
         return $this->orderRepository->getNewestOrder();
     }
+    public function insertOrder()
+    {
+    }
 }

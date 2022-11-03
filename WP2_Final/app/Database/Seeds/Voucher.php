@@ -10,8 +10,8 @@ class Voucher extends Seeder
     public function run()
     {
         $data = array(
-            "discount" => 20,
-            "isPercentage" => true,
+            "discount" => 2000,
+            "isPercentage" => false,
             "expire" => "2022-12-09"
         );
         $voucherModel = new ModelsVoucher();

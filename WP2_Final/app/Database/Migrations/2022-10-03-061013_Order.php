@@ -50,8 +50,9 @@ class Order extends Migration
                     "default" => 0
                 ),
                 "voucherCode" => array(
-                    "type" => "FLOAT",
-                    "null" => true
+                    "type" => "VARCHAR",
+                    "null" => true,
+                    "constraint" => 20
                 ),
                 "token" => array(
                     "type" => "VARCHAR",
