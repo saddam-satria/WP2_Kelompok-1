@@ -7,6 +7,7 @@ use App\Models\Order;
 class OrderRepository extends Order
 {
     private $query;
+    private  $statusOrder = array('DITERIMA', 'SEDANG DICUCI', 'SUDAH SELESAI', 'SUDAH DI AMBIL');
     public function __construct()
     {
         $db = \Config\Database::connect();
@@ -35,5 +36,9 @@ class OrderRepository extends Order
     public function getTotalData(string $column = "", string $allias = "")
     {
         return $this->query->selectCount($column, $allias)->get()->getResultObject();
+    }
+    public function getStatusOrder(): array
+    {
+        return $this->statusOrder;
     }
 }
