@@ -12,6 +12,9 @@ class CheckoutController extends BaseController
         $title = "Checkout";
         $session = session();
         $currentCart = $session->cart;
+        if (is_null($currentCart)) {
+            return redirect()->to(base_url("/user/select-item"))->with("error", "keranjang masih kosong");
+        };
         $currentUser = $session->current_user[0];
         $voucherRepository = new VoucherRepository();
         $vouchers = $voucherRepository->getVoucherOnAccount($currentUser->id, array("voucherCode", "discount", "isPercentage", "expire"));
