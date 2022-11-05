@@ -31,5 +31,8 @@ class LoginController extends BaseController
         if (!$result) {
             return redirect()->to(base_url("auth/login"))->with("failure", "akun anda tidak ditemukan");
         }
+
+
+        return redirect()->to(base_url("user/dashboard"));
     }
 }

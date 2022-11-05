@@ -62,6 +62,7 @@ $routes->group("user", array("filter" => "getCart"), function ($routes) {
 
     $routes->group("", array("filter" => "isCartEmpty"), function ($routes) {
         $routes->get("checkout", "User\CheckoutController::index");
+        $routes->post("payment", "User\CheckoutController::payment");
         $routes->get("select-item", "User\CartController::create");
         $routes->post("select-voucher", "User\CheckoutController::selectVoucher");
     });

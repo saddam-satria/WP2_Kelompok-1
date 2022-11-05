@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Repositories\VoucherRepository;
+use App\Services\PaymentService;
 
 class CheckoutController extends BaseController
 {
@@ -64,5 +65,14 @@ class CheckoutController extends BaseController
     {
         $voucher = $this->request->getVar("voucher");
         return redirect()->to(base_url("/user/checkout?voucher=" . $voucher));
+    }
+    public function payment()
+    {
+        $paymentSerivce = new PaymentService();
+        $result = $paymentSerivce->payment($this->request->getVar("voucher"));
+
+        if (!$result) {
+            return redirect()->to(base_url("/user/dashboard"))->with("error", "gagal checkout");
+        }
     }
 }

@@ -13,7 +13,7 @@ class Order extends UuidModel
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
-        "account_id", "totalItem", "paymentMethod", "status", "token", "discount", "amount", "isFinish", "isTrouble", "description", "discount", "voucherCode", "payment", "service_id", "package_id",
+        "account_id", "totalItem", "paymentMethod", "status", "token", "amount", "isFinish", "isTrouble", "description", "discount", "voucherCode", "payment", "service_id", "package_id",
     );
     protected $uuidVersion = "uuid4";
     protected $uuidUseBytes = false;

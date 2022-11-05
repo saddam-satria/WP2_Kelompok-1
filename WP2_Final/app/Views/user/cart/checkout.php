@@ -126,7 +126,9 @@
 
     <div class=" d-flex my-5 justify-content-end">
         <a href="<?= base_url("/user/cart") ?>" class="btn btn-md mx-2 btn-warning">kembali</a>
-        <a href="#" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Bayar</a>
+        <form action="<?= is_null($currentVoucher) ? base_url("/user/payment")  : base_url("/user/payment?voucher=" . $currentVoucher) ?>" method="POST">
+            <button type="submit" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Bayar</button>
+        </form>
     </div>
 </section>
 
