@@ -23,15 +23,15 @@ class OrderRepository extends Order
         $order = $this->query->select($columns);
         return $order->orderBy("created_at")->get($limit, $offset)->getFirstRow();
     }
-    public function getOrderByUser(string $columns = "*", string $user_id)
+    public function getOrderByUser(string $user_id, array $columns = ["*"])
     {
         $currentOrder = $this->query->select($columns);
-        return $currentOrder->where("account_id", $user_id)->get()->getResult();
+        return $currentOrder->where("isFinish", false)->where("account_id", $user_id)->join("service", "service.serviceID = laundry_order.service_id")->join("package", "package.packageID = laundry_order.package_id")->get()->getResult();
     }
     public function getOrderUserByStatus(string $columns = "*", string $user_id, bool $status = false, ?int $limit = null, int $offset = 0)
     {
         $currenHistory = $this->query->select($columns);
-        return $currenHistory->where("account_id", $user_id)->where("orderStatus", $status)->get($limit, $offset)->getResult();
+        return $currenHistory->where("account_id", $user_id)->where("status", $status)->get($limit, $offset)->getResult();
     }
     public function getTotalData(string $column = "", string $allias = "")
     {

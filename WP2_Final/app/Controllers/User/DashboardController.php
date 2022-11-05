@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Repositories\OrderRepository;
+use App\Repositories\ServiceRepository;
 use App\Services\OrderService;
 
 class DashboardController extends BaseController
@@ -17,24 +18,8 @@ class DashboardController extends BaseController
 
     public function index()
     {
-        $services = array(
-            array(
-                "name" => "nyuci",
-                "image" => "assets/img/nyuci.png"
-            ),
-            array(
-                "name" => "gosok",
-                "image" => "assets/img/gosok.png"
-            ),
-            array(
-                "name" => "all in one",
-                "image" => "assets/img/allinone.png"
-            ),
-            array(
-                "name" => "sneakers",
-                "image" => "assets/img/sneakers.png"
-            ),
-        );
+        $serviceRepository = new ServiceRepository();
+        $services = $serviceRepository->getServices();
         $currentOrder = $this->orderService->getNewestOrder();
         return view("user/dashboard", compact("services", "currentOrder"));
     }

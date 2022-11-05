@@ -39,7 +39,7 @@
                                 <div class="modal-body">
                                     <div class="d-flex flex-column my-3">
                                         <?php foreach ($services as $service) : ?>
-                                            <span style="cursor: pointer;" class="text-capitalize mb-3 service-list"><?= $service ?></span>
+                                            <span style="cursor: pointer;" class="text-capitalize mb-3 service-list"><?= $service->serviceName ?></span>
                                         <?php endforeach ?>
                                     </div>
                                 </div>

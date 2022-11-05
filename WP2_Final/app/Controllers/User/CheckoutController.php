@@ -72,7 +72,7 @@ class CheckoutController extends BaseController
         $result = $paymentSerivce->payment($this->request->getVar("voucher"));
 
         if (!$result) {
-            return redirect()->to(base_url("/user/dashboard"))->with("error", "gagal checkout");
+            return redirect()->to(base_url("/user/orders"))->with("error", "gagal checkout");
         }
     }
 }

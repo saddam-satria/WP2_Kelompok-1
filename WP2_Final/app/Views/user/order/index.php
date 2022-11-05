@@ -2,7 +2,11 @@
 
 <?= $this->section("content"); ?>
 
-<?= view("components/alert", array("key" => "error")) ?>
+<?php if (session()->getFlashdata("success")) : ?>
+    <?= view("components/alert", array("key" => "success", "alert" => "success")) ?>
+<?php else : ?>
+    <?= view("components/alert", array("key" => "error")) ?>
+<?php endif; ?>
 
 <?php if (count($orders) > 0) : ?>
 
@@ -11,21 +15,23 @@
     </section>
 
     <section class="py-3 mt-5">
-        <div class="d-flex mb-2">
-            <span style="color: #535353;">Service Name</span>
-            <div class="ml-auto">
-                <span style="color: #535353;">20 kg</span>
-            </div>
-        </div>
-        <div class="d-flex">
-            <div class="d-flex align-items-center text-white" style="border-radius: 20px; background-color: #21aee4; flex:0.99">
-                <div class="py-2 text-center" style="width: 50%; border-radius: 20px; background-color: #8dbafe;">
-                    50%
+        <?php foreach ($orders as $order) : ?>
+            <div class="d-flex mb-4">
+                <span style="color: #535353;" class="text-capitalize"><?= $order->serviceName ?></span>
+                <div class="ml-auto">
+                    <span style="color: #535353;"><?= $order->totalItem ?> kg</span>
                 </div>
-                <span class="ml-4">Progress</span>
             </div>
-            <a href="#" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Detail</a>
-        </div>
+            <div class="d-flex mb-4">
+                <div class="d-flex align-items-center text-white" style="border-radius: 20px; background-color: #21aee4; flex:0.99">
+                    <div class="py-2 text-center" style="width:  <?= str_contains(strtolower($order->status), "diterima") ? "25%" : str_contains(strtolower($order->status), ("sedang dicuci" ? "50%" : str_contains(strtolower($order->status), "sudah selesai")) ? "75%" : "100%") ?>; border-radius: 20px; background-color: #8dbafe;">
+                        <?= str_contains(strtolower($order->status), "diterima") ? "25%" : str_contains(strtolower($order->status), ("sedang dicuci" ? "50%" : str_contains(strtolower($order->status), "sudah selesai")) ? "75%" : "100%") ?>
+                    </div>
+                    <span class="ml-4"><?= $order->status ?></span>
+                </div>
+                <a href="<?= $order->id ?>" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Detail</a>
+            </div>
+        <?php endforeach; ?>
     </section>
 
 <?php else : ?>

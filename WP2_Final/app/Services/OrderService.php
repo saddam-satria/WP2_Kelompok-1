@@ -12,10 +12,6 @@ class OrderService
         $this->orderRepository = $orderRepository;
     }
 
-    public function orderUser(string $user_id, $columns = "*")
-    {
-        return $this->orderRepository->getOrderByUser($columns, $user_id);
-    }
     public function historyOrderUser(string $user_id, $columns = "*", ?int $page = null)
     {
         $paginate = ($page - 1) * 10;

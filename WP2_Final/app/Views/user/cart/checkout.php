@@ -9,41 +9,43 @@
 <section class="py-3 mt-4">
 
     <div>
-        <div class="mb-3">
-            <h5>Pakai Voucher</h5>
-        </div>
-        <div style="overflow: auto; white-space: nowrap">
-            <?php foreach ($vouchers as $voucher) : ?>
-                <div class="d-inline-block pr-2">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <span><?= $voucher->voucherCode ?></span>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-flex flex-column">
-                                <span>Potongan</span>
-                                <?php if ($voucher->isPercentage) : ?>
-                                    <span><?= $voucher->discount ?> %</span>
-                                <?php else : ?>
-                                    <span>Rp. <?= number_format($voucher->discount) ?></span>
-                                <?php endif ?>
+        <?php if (count($vouchers) > 0) : ?>
+            <div class="mb-3">
+                <h5>Pakai Voucher</h5>
+            </div>
+            <div style="overflow: auto; white-space: nowrap">
+                <?php foreach ($vouchers as $voucher) : ?>
+                    <div class="d-inline-block pr-2">
+                        <div class="card">
+                            <div class="card-header bg-primary text-white">
+                                <span><?= $voucher->voucherCode ?></span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex flex-column">
+                                    <span>Potongan</span>
+                                    <?php if ($voucher->isPercentage) : ?>
+                                        <span><?= $voucher->discount ?> %</span>
+                                    <?php else : ?>
+                                        <span>Rp. <?= number_format($voucher->discount) ?></span>
+                                    <?php endif ?>
 
-                                <div class="py-2">
-                                    <span>Masa Berlaku: <?= date_format(date_create($voucher->expire), "d-m-Y") ?></span>
+                                    <div class="py-2">
+                                        <span>Masa Berlaku: <?= date_format(date_create($voucher->expire), "d-m-Y") ?></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer bg-transparent">
-                            <form action="<?= base_url("/user/select-voucher?voucher=" . $voucher->voucherCode) ?>" method="POST">
-                                <button class="btn btn-sm btn-primary" type="submit">Pakai</button>
-                            </form>
+                            <div class="card-footer bg-transparent">
+                                <form action="<?= base_url("/user/select-voucher?voucher=" . $voucher->voucherCode) ?>" method="POST">
+                                    <button class="btn btn-sm btn-primary" type="submit">Pakai</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach ?>
+                <?php endforeach ?>
 
-        </div>
-        <hr class="sidebar-divider d-md-block my-5">
+            </div>
+            <hr class="sidebar-divider d-md-block my-5">
+        <?php endif; ?>
         <div>
             <div class="row">
                 <div class="col-sm-12 col-md-8">

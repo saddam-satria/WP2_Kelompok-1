@@ -14,7 +14,7 @@ class ServiceRepository extends Service
     }
     public function getServices($columns = array("*"))
     {
-        return $this->serviceTable->select($columns)->get()->getResultArray();
+        return $this->serviceTable->select($columns)->get()->getResultObject();
     }
     public function getServiceByName(string $serviceName, $columns = ["*"])
     {

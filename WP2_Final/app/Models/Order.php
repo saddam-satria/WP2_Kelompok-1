@@ -2,21 +2,22 @@
 
 namespace App\Models;
 
-use Michalsn\Uuid\UuidModel;
+use CodeIgniter\Model;
 // use CodeIgniter\Model;
 
-class Order extends UuidModel
+class Order extends Model
 {
+    protected $DBGroup          = 'default';
     protected $table            = 'laundry_order';
     protected $primaryKey       = 'id';
+    protected $useAutoIncrement = true;
+    protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
         "account_id", "totalItem", "paymentMethod", "status", "token", "amount", "isFinish", "isTrouble", "description", "discount", "voucherCode", "payment", "service_id", "package_id",
     );
-    protected $uuidVersion = "uuid4";
-    protected $uuidUseBytes = false;
 
     // Validation
     protected $validationRules      = array();
