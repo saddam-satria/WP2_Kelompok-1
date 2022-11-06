@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Account;
 use App\Repositories\AccountRepository;
 
 class AccountService
@@ -35,7 +36,11 @@ class AccountService
     }
     public function signUp(string $email, string $firstname, string $lastname, string $password)
     {
-        $response = $this->accountRepository->insertNewAccount($email, $firstname, $lastname, $password);
+        $accountModel = new Account();
+        $data = array(
+            "email" => $email, "firstname" =>  $firstname, "lastname" => $lastname, "password" => $password
+        );
+        $response = $accountModel->insert($data);
         return $response;
     }
     public function updateProfile($user_id, string $email, string $firstname, ?string $lastname, string $address, ?string $image, string $gender)
