@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\DetailOrder;
+use App\Models\Order;
 use App\Repositories\CartRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PackageRepository;
@@ -73,8 +74,8 @@ class PaymentService
             "discount" => $discount,
             "voucherCode" => $voucherUsed
         );
-        $orderRepository = new OrderRepository();
-        $order_id = $orderRepository->insert($data);
+        $orderModel = new Order();
+        $order_id = $orderModel->insert($data);
 
 
         if (!$order_id) {

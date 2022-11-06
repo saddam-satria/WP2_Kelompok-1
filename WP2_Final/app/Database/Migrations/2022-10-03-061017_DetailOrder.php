@@ -11,7 +11,8 @@ class DetailOrder extends Migration
         $this->forge->addField(
             array(
                 "order_id" => array(
-                    "type" => "INT",
+                    "type" => "VARCHAR",
+                    "constraint" => 150
                 ),
                 "item_id" => array(
                     "type" => "INT",

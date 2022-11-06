@@ -25,6 +25,10 @@ class Notification extends Migration
                 "message" => array(
                     "type" => "TEXT",
                 ),
+                "isReed" => array(
+                    "type" => "BOOLEAN",
+                    "default" => false
+                ),
                 'created_at datetime default current_timestamp',
                 'updated_at datetime default current_timestamp on update current_timestamp',
             )

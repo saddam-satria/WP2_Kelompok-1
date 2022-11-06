@@ -11,8 +11,8 @@ class Order extends Migration
         $this->forge->addField(
             array(
                 "id" => array(
-                    "type" => "INT",
-                    "auto_increment" => true
+                    "type" => "VARCHAR",
+                    "constraint" => 150
                 ),
                 "account_id" => array(
                     "type" => "VARCHAR",

@@ -50,7 +50,7 @@ $routes->group("user", array("filter" => "getCart"), function ($routes) {
     $routes->post("profile", "User\ProfileController::update");
     $routes->post("update-password", "User\ProfileController::updatePassword");
     $routes->get("orders", "User\OrderController::index");
-    $routes->get("order/(:num)", "User\OrderController::detail/$1");
+    $routes->get("order/(:any)", "User\OrderController::detail/$1");
     $routes->get("histories", "User\OrderController::histories");
 
     $routes->group("", array("filter" => "currentCart"), function ($routes) {
