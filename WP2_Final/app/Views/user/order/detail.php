@@ -25,7 +25,7 @@
                 <div class="modal fade" id="listOrder" tabindex="-1" role="dialog" aria-labelledby="listOrderTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header text-white" style="background-color: #4663be;">
                                 <h5 class="modal-title" id="exampleModalLongTitle">Rincian Cucian</h5>
                             </div>
                             <div class="modal-body px-4">

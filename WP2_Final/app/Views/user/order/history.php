@@ -23,15 +23,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>
-                        <a href="#" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Rincian</a>
-                    </td>
-                </tr>
+                <?php foreach ($histories as $history) : ?>
+                    <tr>
+                        <th scope="row"><?= $history->token ?></th>
+                        <td><?= $history->totalItem ?> kg</td>
+                        <td><?= is_null($history->paymentMethod) ? "-" : $history->paymentMethod ?></td>
+                        <td><?= $history->created_at ?></td>
+                        <td>
+                            <a href="<?= base_url("/user/order/" . $history->id) ?>" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Rincian</a>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+
             </tbody>
         </table>
 

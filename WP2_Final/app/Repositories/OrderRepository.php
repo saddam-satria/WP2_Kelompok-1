@@ -32,7 +32,7 @@ class OrderRepository extends Order
     public function getOrderUserByStatus(string $columns = "*", string $user_id, bool $status = false, ?int $limit = null, int $offset = 0)
     {
         $currenHistory = $this->query->select($columns);
-        return $currenHistory->where("account_id", $user_id)->where("isFinish", $status)->get($limit, $offset)->getResult();
+        return $currenHistory->where("account_id", $user_id)->where("isFinish", $status)->get($limit, $offset)->getResultObject();
     }
     public function getTotalData(string $column = "", string $allias = "")
     {

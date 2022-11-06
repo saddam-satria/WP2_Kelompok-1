@@ -70,7 +70,7 @@ class OrderController extends BaseController
         $db = \Config\Database::connect();
         $detailOrder = $db->table("detail_order");
 
-        if ($order->payment < 1) {
+        if ($order->payment < 1 && !$order->isFinish) {
             return redirect()->to(base_url("/user/payment?id=" . $order->id));
         }
 
