@@ -29,17 +29,17 @@
         </div>
     </section>
 
-    <?php if (!is_null($currentOrder)) : ?>
+    <?php if (!is_null($order)) : ?>
         <section class="py-3 mt-5">
             <h5 style="color: #535353;">Cucian Anda Saat Ini</h5>
             <div class="d-flex">
                 <div class="d-flex align-items-center text-white" style="border-radius: 20px; background-color: #21aee4; flex:0.99">
-                    <div class="py-2 text-center" style="width: 50%; border-radius: 20px; background-color: #8dbafe;">
-                        50%
+                    <div class="py-2 text-center" style="width:<?= str_contains(strtolower($order->status), "diterima") ? "25%" : str_contains(strtolower($order->status), ("sedang dicuci" ? "50%" : str_contains(strtolower($order->status), "sudah selesai")) ? "75%" : "100%") ?>; border-radius: 20px; background-color: #8dbafe;">
+                        <?= str_contains(strtolower($order->status), "diterima") ? "25%" : str_contains(strtolower($order->status), ("sedang dicuci" ? "50%" : str_contains(strtolower($order->status), "sudah selesai")) ? "75%" : "100%") ?>
                     </div>
-                    <span class="ml-4">Progress</span>
+                    <span class="ml-4"><?= $order->status ?></span>
                 </div>
-                <a href="#" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Detail</a>
+                <a href="<?= base_url("/user/order/" . $order->id) ?>" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Detail</a>
             </div>
         </section>
     <?php endif ?>

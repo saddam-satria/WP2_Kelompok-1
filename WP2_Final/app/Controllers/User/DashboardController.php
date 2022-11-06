@@ -12,7 +12,6 @@ class DashboardController extends BaseController
     private $orderService;
     public function __construct()
     {
-        // dd(session()->current_user[0]);
         $this->orderService = new OrderService(new OrderRepository());
     }
 
@@ -20,7 +19,7 @@ class DashboardController extends BaseController
     {
         $serviceRepository = new ServiceRepository();
         $services = $serviceRepository->getServices();
-        $currentOrder = $this->orderService->getNewestOrder();
-        return view("user/dashboard", compact("services", "currentOrder"));
+        $order = $this->orderService->getNewestOrder();
+        return view("user/dashboard", compact("services", "order"));
     }
 }
