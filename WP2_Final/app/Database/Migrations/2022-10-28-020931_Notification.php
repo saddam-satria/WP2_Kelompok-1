@@ -25,7 +25,7 @@ class Notification extends Migration
                 "message" => array(
                     "type" => "TEXT",
                 ),
-                "isReed" => array(
+                "isRead" => array(
                     "type" => "BOOLEAN",
                     "default" => false
                 ),

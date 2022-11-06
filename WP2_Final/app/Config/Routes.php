@@ -52,6 +52,8 @@ $routes->group("user", array("filter" => "getCart"), function ($routes) {
     $routes->get("orders", "User\OrderController::index");
     $routes->get("order/(:any)", "User\OrderController::detail/$1");
     $routes->get("histories", "User\OrderController::histories");
+    $routes->get("notification/(:any)", "User\NotificationController::index/$1");
+    $routes->post("notification/(:any)", "User\NotificationController::updateIsRead/$1");
 
     $routes->group("", array("filter" => "currentCart"), function ($routes) {
         $routes->get("new-order", "User\OrderController::create");

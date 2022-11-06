@@ -2,7 +2,9 @@
 
 $notificationRepository = new App\Repositories\NotificationRepository();
 $currentUser = session()->current_user[0];
-$notifications = $notificationRepository->getNotificationByAccount($currentUser->email, array("message", "created_at"));
+$notifications = $notificationRepository->getNotificationByAccount($currentUser->email, array("message", "created_at", "isRead", "notificationId"));
+$totalNotifications = count($notificationRepository->getNotificationByAccountWhereNotRead($currentUser->email, array('message')));
+
 
 ?>
 
@@ -25,7 +27,7 @@ $notifications = $notificationRepository->getNotificationByAccount($currentUser-
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-bell fa-fw"></i>
                     <!-- Counter - Alerts -->
-                    <span class="badge badge-danger badge-counter"><?= count($notifications) ?></span>
+                    <span class="badge badge-danger badge-counter"><?= $totalNotifications ?></span>
                 </a>
                 <!-- Dropdown - Alerts -->
                 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -37,8 +39,10 @@ $notifications = $notificationRepository->getNotificationByAccount($currentUser-
                             <?php if (count($notifications) > 0) : ?>
                                 <?php foreach ($notifications as $notification) : ?>
                                     <div class="d-flex justify-content-between mb-3">
-                                        <span><?= $notification->message ?></span>
-                                        <span><?= date_format(date_create($notification->created_at), "Y-m-d") ?></span>
+                                        <a href="<?= base_url("/user/notification/" . $notification->notificationId) ?>" class="text-decoration-none text-dark" style="font-weight: <?= $notification->isRead ? "500" : "600" ?>;">
+                                            <span><?= substr($notification->message, 0, 15) ?> ...</span>
+                                        </a>
+                                        <span style="font-weight: <?= $notification->isRead ? "500" : "600" ?>;"><?= date_format(date_create($notification->created_at), "Y-m-d") ?></span>
                                     </div>
                                 <?php endforeach; ?>
                             <?php else : ?>

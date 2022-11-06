@@ -15,7 +15,7 @@ class Notification extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = array(
-        'to', "from", "message"
+        'to', "from", "message", 'isRead'
     );
 
     // Dates

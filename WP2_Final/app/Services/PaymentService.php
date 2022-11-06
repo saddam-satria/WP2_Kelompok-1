@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\DetailOrder;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Repositories\CartRepository;
 use App\Repositories\OrderRepository;
@@ -104,6 +105,18 @@ class PaymentService
         $cartRepository = new CartRepository();
 
         $cartRepository->delete($cart_id);
+
+        $notificationModel = new Notification();
+
+        $payloadNotification = array(
+            "to" => $currentUser->email,
+            "from" => "admin sistem",
+            "message" => "orderan dengan id" . $order_id . " " . "berhasil, silahkan melanjutkan ke pembayaran"
+        );
+
+        $notificationModel->insert($payloadNotification);
+
+
 
         return [
             "status" => true,

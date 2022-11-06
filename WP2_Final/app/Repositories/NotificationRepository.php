@@ -17,4 +17,8 @@ class NotificationRepository extends Notification
     {
         return $this->notificationTable->where("to", $email)->select($columns)->get()->getResultObject();
     }
+    public function getNotificationByAccountWhereNotRead(string $email, array $columns = ["*"])
+    {
+        return $this->notificationTable->where("to", $email)->where("isRead", false)->select($columns)->get()->getResultObject();
+    }
 }
