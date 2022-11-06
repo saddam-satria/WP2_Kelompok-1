@@ -3,6 +3,7 @@
 namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
+use App\Models\ItemOnCart;
 use App\Repositories\ItemRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\PackageRepository;
@@ -58,12 +59,24 @@ class OrderController extends BaseController
 
         $order = $orderModel[0];
 
+        $session = session();
+
+        $currentUser = $session->current_user[0];
+
+        if ($currentUser->id != $order->account_id) {
+            return redirect()->to(base_url("/user/orders"));
+        }
+
+        $db = \Config\Database::connect();
+        $detailOrder = $db->table("detail_order");
 
         if ($order->payment < 1) {
             return redirect()->to(base_url("/user/payment?id=" . $order->id));
         }
 
-        return view("user/order/detail", compact("title", "id", "order"));
+        $items = $detailOrder->select()->where("order_id", $order->id)->join("item", "item.itemID=detail_order.item_id")->get()->getResultObject();
+
+        return view("user/order/detail", compact("title", "id", "order", "items"));
     }
 
     public function histories()

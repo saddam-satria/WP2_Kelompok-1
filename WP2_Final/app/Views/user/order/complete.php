@@ -21,8 +21,8 @@
     <div class="row">
         <div class="col-sm-12 col-md-8">
             <div class="card">
-                <div class="card-header">
-                    <h5>Panduan</h5>
+                <div class="card-header" style="background-color: #4663be;">
+                    <h5 class="text-white">Panduan</h5>
                 </div>
                 <div class="card-body">
                     <ol class="text-capitalize">
