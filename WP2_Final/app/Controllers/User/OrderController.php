@@ -58,6 +58,11 @@ class OrderController extends BaseController
 
         $order = $orderModel[0];
 
+
+        if ($order->payment < 1) {
+            return redirect()->to(base_url("/user/payment?id=" . $order->id));
+        }
+
         return view("user/order/detail", compact("title", "id", "order"));
     }
 
@@ -82,6 +87,10 @@ class OrderController extends BaseController
 
 
         $orderModel = $orderRepository->getOrderByID($order_id, array("token", "id"));
+
+        if (count($orderModel) < 1) {
+            return redirect()->to(base_url("/user/orders"));
+        }
         $order = $orderModel[0];
 
 
