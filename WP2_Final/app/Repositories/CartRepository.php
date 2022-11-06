@@ -12,6 +12,7 @@ class CartRepository extends Cart
     {
         $database = \Config\Database::connect();
         $this->cartTable =  $database->table("cart");
+        $this->allowCallbacks();
     }
     public function getCarts(array $columns = ["*"])
     {

@@ -11,6 +11,7 @@ class PackageRepository extends Item
     {
         $database = \Config\Database::connect();
         $this->packageTable =  $database->table("package");
+        $this->allowCallbacks();
     }
     public function getPackages(array $columns = ["*"])
     {

@@ -49,8 +49,14 @@ class Order extends Model
     {
         $data = $data["data"];
 
-        $data["description"] = strtolower($data["description"]);
-        $data["paymentMethod"] = strtolower($data["paymentMethod"]);
+
+        if (isset($data["description"])) {
+            $data["description"] = strtolower($data["description"]);
+        }
+
+        if (isset($data["paymentMethod"])) {
+            $data["paymentMethod"] = strtolower($data["paymentMethod"]);
+        }
 
         $data["data"] = $data;
 

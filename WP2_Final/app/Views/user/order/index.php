@@ -29,7 +29,7 @@
                     </div>
                     <span class="ml-4"><?= $order->status ?></span>
                 </div>
-                <a href="<?= $order->id ?>" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Detail</a>
+                <a href="<?= base_url("/user/order/" . $order->id) ?>" class="btn btn-md mx-2" style="background-color: #85f1fe; color: #000;">Detail</a>
             </div>
         <?php endforeach; ?>
     </section>

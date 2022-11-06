@@ -11,6 +11,7 @@ class AccountRepository extends Account
     {
         $db = \Config\Database::connect();
         $this->query = $db->table("account");
+        $this->allowCallbacks();
     }
     public function getByEmail(string $email, $columns = array("*"))
     {

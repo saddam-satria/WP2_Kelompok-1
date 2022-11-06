@@ -6,6 +6,10 @@ use App\Models\VoucherOnAccount;
 
 class VoucherOnAccountRepository extends VoucherOnAccount
 {
+    public function __construct()
+    {
+        $this->allowCallbacks();
+    }
     public function insertVoucher(string $voucher_id, string $user_id)
     {
         $data = array(

@@ -48,7 +48,17 @@ class OrderController extends BaseController
     public function detail(string $id)
     {
         $title = "detail cucian";
-        return view("user/order/detail", compact("title", "id"));
+        $orderRepository = new OrderRepository();
+
+        $orderModel = $orderRepository->getOrderByID($id);
+
+        if (count($orderModel) < 1) {
+            return redirect()->to("/user/orders");
+        }
+
+        $order = $orderModel[0];
+
+        return view("user/order/detail", compact("title", "id", "order"));
     }
 
     public function histories()
@@ -63,5 +73,19 @@ class OrderController extends BaseController
         $data = $this->orderService->getTotalData()[0];
         $totalData = $data->total_data > 9 ? (int)$data->total_data / 10 : 1;
         return view("user/order/history", compact("title", "histories", "totalData", "currentPage"));
+    }
+    public function orderComplete()
+    {
+        $title = "Pembayaran";
+        $order_id = $this->request->getVar("id");
+        $orderRepository = new OrderRepository();
+
+
+        $orderModel = $orderRepository->getOrderByID($order_id, array("token", "id"));
+        $order = $orderModel[0];
+
+
+
+        return view("user/order/complete", compact("title", "order"));
     }
 }

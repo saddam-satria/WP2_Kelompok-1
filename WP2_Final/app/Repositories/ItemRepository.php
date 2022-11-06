@@ -11,6 +11,7 @@ class ItemRepository extends Item
     {
         $database = \Config\Database::connect();
         $this->itemTable =  $database->table("item");
+        $this->allowCallbacks();
     }
     public function getItems(array $columns = ["*"])
     {

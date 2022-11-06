@@ -11,6 +11,7 @@ class ServiceRepository extends Service
     {
         $database = \Config\Database::connect();
         $this->serviceTable =  $database->table("service");
+        $this->allowCallbacks();
     }
     public function getServices($columns = array("*"))
     {

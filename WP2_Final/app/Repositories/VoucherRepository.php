@@ -13,6 +13,7 @@ class VoucherRepository extends Voucher
         $database = \Config\Database::connect();
         $this->voucherTable =  $database->table("voucher");
         $this->voucheronAccountTable = $database->table("voucher_on_account");
+        $this->allowCallbacks();
     }
     public function getVoucherByID(string $voucherCode, array $columns = ["*"])
     {

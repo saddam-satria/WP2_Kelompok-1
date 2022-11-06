@@ -12,6 +12,7 @@ class OrderRepository extends Order
     {
         $db = \Config\Database::connect();
         $this->query = $db->table("laundry_order");
+        $this->allowCallbacks(true);
     }
     public function getOrder(string $columns = "*", ?int $limit = null, int $offset = 0)
     {
@@ -31,7 +32,7 @@ class OrderRepository extends Order
     public function getOrderUserByStatus(string $columns = "*", string $user_id, bool $status = false, ?int $limit = null, int $offset = 0)
     {
         $currenHistory = $this->query->select($columns);
-        return $currenHistory->where("account_id", $user_id)->where("status", $status)->get($limit, $offset)->getResult();
+        return $currenHistory->where("account_id", $user_id)->where("isFinish", $status)->get($limit, $offset)->getResult();
     }
     public function getTotalData(string $column = "", string $allias = "")
     {
@@ -40,5 +41,13 @@ class OrderRepository extends Order
     public function getStatusOrder(): array
     {
         return $this->statusOrder;
+    }
+    public function getOrderByCode(string $orderCode, array $columns = ["*"])
+    {
+        return $this->query->select($columns)->where("token", $orderCode)->get()->getResultObject();
+    }
+    public function getOrderByID(string $order_id, array $columns = ["*"])
+    {
+        return $this->query->select($columns)->where("id", $order_id)->get()->getResultObject();
     }
 }

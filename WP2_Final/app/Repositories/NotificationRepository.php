@@ -11,6 +11,7 @@ class NotificationRepository extends Notification
     {
         $database = \Config\Database::connect();
         $this->notificationTable =  $database->table("notification");
+        $this->allowCallbacks();
     }
     public function getNotificationByAccount(string $email, array $columns = ["*"])
     {

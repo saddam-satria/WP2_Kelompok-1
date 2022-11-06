@@ -16,7 +16,10 @@ class PaymentService
         $session = session();
         $currentCart = $session->cart;
         if (is_null($currentCart)) {
-            return false;
+            return [
+                "status" => false,
+                "data" => null
+            ];
         };
         $currentUser = $session->current_user[0];
 
@@ -73,8 +76,12 @@ class PaymentService
         $orderRepository = new OrderRepository();
         $order_id = $orderRepository->insert($data);
 
+
         if (!$order_id) {
-            return false;
+            return [
+                "status" => false,
+                "data" => null
+            ];
         }
 
         $detailOrderModel = new DetailOrder();
@@ -97,6 +104,9 @@ class PaymentService
 
         $cartRepository->delete($cart_id);
 
-        return true;
+        return [
+            "status" => true,
+            "data" => $order_id
+        ];
     }
 }
