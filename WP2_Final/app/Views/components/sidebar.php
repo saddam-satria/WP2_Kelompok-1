@@ -6,26 +6,27 @@
             <span>Dashboard</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url("user/orders") ?>" style="background-color: <?= str_contains(uri_string(), "orders") ? "#21aee4" : "transparent" ?>;">
-            <i class="fa-solid fa-clock"></i>
-            <span>Cucian Anda</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url("user/histories") ?>" style="background-color: <?= str_contains(uri_string(), "histories") ? "#21aee4" : "transparent" ?>;">
-            <i class="fa-solid fa-calendar-day"></i>
-            <span>Riwayat Cucian</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url("user/new-order") ?>" style="background-color: <?= str_contains(uri_string(), "new") ? "#21aee4" : "transparent" ?>;">
-            <i class="fa-solid fa-circle-plus"></i>
-            <span>Laundry Baru</span>
-        </a>
-    </li>
 
-
+    <?php if (!session()->current_user[0]->isAdmin) : ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("user/orders") ?>" style="background-color: <?= str_contains(uri_string(), "orders") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-clock"></i>
+                <span>Cucian Anda</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("user/histories") ?>" style="background-color: <?= str_contains(uri_string(), "histories") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-calendar-day"></i>
+                <span>Riwayat Cucian</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("user/new-order") ?>" style="background-color: <?= str_contains(uri_string(), "new") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>Laundry Baru</span>
+            </a>
+        </li>
+    <?php endif ?>
 
 
 
