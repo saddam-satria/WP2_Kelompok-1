@@ -44,7 +44,7 @@ $routes->group("auth", function ($routes) {
     $routes->post("logout", "Auth\LogoutController::logout");
 });
 
-$routes->group("user", array("filter" => "getCart"), function ($routes) {
+$routes->group("user", array("filter" => ["isLogged", "getCart"]), function ($routes) {
     $routes->get("dashboard", "User\DashboardController::index");
     $routes->get("profile", "User\ProfileController::index");
     $routes->post("profile", "User\ProfileController::update");

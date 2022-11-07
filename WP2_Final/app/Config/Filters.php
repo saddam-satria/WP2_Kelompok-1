@@ -25,7 +25,8 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         "isCartEmpty" => \App\Filters\IsCartEmpty::class,
         "getCart" => \App\Filters\GetCart::class,
-        "currentCart" => \App\Filters\CurrentCart::class
+        "currentCart" => \App\Filters\CurrentCart::class,
+        "isLogged" => \App\Filters\IsLoggedIn::class
     ];
 
     /**
