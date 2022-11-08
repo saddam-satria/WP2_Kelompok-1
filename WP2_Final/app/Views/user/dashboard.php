@@ -178,6 +178,63 @@
 
             <!-- Content Row -->
 
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                   <div class="card">
+                        <div class="card-header bg-primary text-white">
+                               <h5>User Terbaru</h5>
+                        </div>
+                       <div class="">
+                        <table class="table table-striped">
+                                <thead class="bg-primary text-white">
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Name</th>
+                                        <th>Alamat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($accounts as $account):?>
+                                    <tr>
+                                        <td><?= $account->email?></td>
+                                        <td><?= $account->firstname . " " . $account->lastname?></td>
+                                        <td><?= is_null($account->address) ? "-" : $account->address?></td>
+                                    </tr>
+                                    <?php endforeach?>
+                                </tbody>
+                            </table>
+                       </div>
+                   </div>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                   <div class="card">
+                        <div class="card-header bg-primary text-white">
+                               <h5>Orderan Terbaru</h5>
+                        </div>
+                       
+                        <table class="table table-striped">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Total</th>
+                                    <th>Waktu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($newestOrders as $order):?>
+                                <tr>
+                                    <td><?= $order->token?></td>
+                                    <td><?= number_format($order->amount,0,".",".")?></td>
+                                    <td><?= date_format(date_create($order->created_at), "d-m-Y H:i:s")?></td>
+                                </tr>
+                                <?php endforeach?>
+                            </tbody>
+                        </table>
+                   </div>
+                </div>
+            </div>
+
         <?php endif?>
 
 

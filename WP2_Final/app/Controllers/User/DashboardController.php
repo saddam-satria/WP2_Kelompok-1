@@ -38,12 +38,13 @@ class DashboardController extends BaseController
         $totalOrder = 0;
         $totalFinishOrder =0;
         $totalAccount = 0;
+        $accounts = null;
 
         if($isAdmin){
             $orderRepository = new OrderRepository();
             $orders = $orderRepository->getOrders();
             $accountRepository = new AccountRepository();
-
+            $accounts = $accountRepository->getAccounts(array("email","firstname","lastname", "address"), 5);
             $totalAccount = $accountRepository->getCountUser()[0];
 
             foreach($orders as $order)
@@ -61,8 +62,8 @@ class DashboardController extends BaseController
         }
 
         $orderByPercent = ($totalFinishOrder / $totalOrder) * 100;
-
+        $newestOrders = $orderRepository->getNewestOrderLimit(array("*"),false,5);
         
-        return view("user/dashboard", compact("services", "order", "totalAmount","totalKg","totalOrder","orderByPercent", "totalAccount"));
+        return view("user/dashboard", compact("services", "order", "totalAmount","totalKg","totalOrder","orderByPercent", "totalAccount", "accounts","newestOrders"));
     }
 }

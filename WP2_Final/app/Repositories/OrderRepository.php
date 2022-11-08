@@ -62,4 +62,7 @@ class OrderRepository extends Order
     {
         return $this->query->select($columns)->where("isFinish", $isFinish)->get()->getResultObject();
     }
+    public function getNewestOrderLimit(array $columns=["*"], bool $status=false,?int $limit = 0, ?int $offset =0){
+        return $this->query->select($columns)->where("isFinish", $status)->get($limit,$offset)->getResultObject();
+    }
 }
