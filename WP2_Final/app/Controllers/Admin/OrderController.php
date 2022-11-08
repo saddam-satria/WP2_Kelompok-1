@@ -22,7 +22,7 @@ class OrderController extends BaseController
     public function orderAjax()
     {
         $columns = array(
-            "paymentMethod",  "token", "amount", "email", "laundry_order.id AS orderID"
+            "paymentMethod",  "token", "amount", "email", "laundry_order.id AS orderID","status"
         );
         return DataTable::of($this->orderRepository->getOrdersAjax($columns))->format("amount", function ($amount) {
             return number_format($amount, 0, ".", ".");
@@ -40,33 +40,33 @@ class OrderController extends BaseController
                 </div>
 
             ';
-        })->add("status", function($row) {
-            return '
-            <div class="d-flex">
-                <a href="'.base_url("admin/order/edit/" .$row->orderID).'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-            </div>
-
-        ';
-        })->add("isFinish", function($row){
-            return '
-            <div class="d-flex">
-                <a href="'.base_url("admin/order/edit/" .$row->orderID).'" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
-            </div>
-        ';
         })->toJson(true);
     }
     public function edit(string $id)
     {
         $title = "Admin Edit Order";
-        $order = $this->orderRepository->getOrderByID($id, array("token","paymentMethod","status","totalItem","amount","payment","id", "description"));
+
+        $orderStatus = $this->orderRepository->getStatusOrder();
+      
+
+        $order = $this->orderRepository->getOrderByID($id, array("token","paymentMethod","status","totalItem","amount","payment","id", "description","isTrouble"));
 
         if(count($order) < 1)
         {
             return redirect()->to(base_url("admin/orders"));
         }
         $order = $order[0];
+        $statusOrders = [];
 
-        return view("admin/order/update", compact("title", "order"));
+        foreach ($orderStatus as $status) {
+            if($status != $order->status){
+                $statusOrders[] = $status;
+            }
+        }
+
+        
+
+        return view("admin/order/update", compact("title", "order","statusOrders"));
     }
     public function detail(string $id)
     {
@@ -88,6 +88,8 @@ class OrderController extends BaseController
             "payment" => $this->request->getVar("payment"),
             "paymentMethod" => $this->request->getVar("paymentMethod"),
             "description" => $this->request->getVar("description"),
+            "status" => $this->request->getVar("status"),
+            "isTrouble" => $this->request->getVar("isTrouble") == "on" 
         );
 
         if(count($order)< 1)
@@ -104,7 +106,10 @@ class OrderController extends BaseController
             return redirect()->to(base_url("/admin/order/edit/" . $id))->with("error", "nominal kurang");
         }
 
-
+        if(str_contains(strtolower($data['status']),"sudah di ambil"))
+        {
+            $data['isFinish'] = true; 
+        }
         
 
         $updatedOrder = $this->orderRepository->update($id, $data);
@@ -112,6 +117,9 @@ class OrderController extends BaseController
         if(!$updatedOrder){
             return redirect()->to(base_url("/admin/order/". $id))->with("error", "terjadi kesalahan");
         }
+
+
+
 
         return redirect()->to(base_url("/admin/order/edit/". $id))->with("success", "sukses mengubah data orderan");
 

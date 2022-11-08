@@ -182,7 +182,7 @@
                 <div class="col-sm-12 col-md-6">
                    <div class="card">
                         <div class="card-header bg-primary text-white">
-                               <h5>User Terbaru</h5>
+                               <h6>User Terbaru</h6>
                         </div>
                        <div class="">
                         <table class="table table-striped">
@@ -210,7 +210,7 @@
                 <div class="col-sm-12 col-md-6">
                    <div class="card">
                         <div class="card-header bg-primary text-white">
-                               <h5>Orderan Terbaru</h5>
+                               <h6>Orderan Terbaru</h6>
                         </div>
                        
                         <table class="table table-striped">

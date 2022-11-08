@@ -55,20 +55,6 @@
                     orderable: false,
                     searchable: false,
                 },
-                {
-                    data: 'status',
-                    name: "status",
-                    title: "Status Orderan",
-                    orderable: false,
-                    searchable: false,
-                },
-                {
-                    data: 'isFinish',
-                    name: "isFinish",
-                    title: "Order Selesai",
-                    orderable: false,
-                    searchable: false,
-                },
             ]
         });
     });
