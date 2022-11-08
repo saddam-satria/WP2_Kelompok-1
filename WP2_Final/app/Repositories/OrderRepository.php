@@ -54,4 +54,12 @@ class OrderRepository extends Order
     {
         return $this->query->select($columns)->join("account", "account.id = laundry_order.account_id");
     }
+    public function getOrders(array $columns = ["*"])
+    {
+        return $this->query->select($columns)->get()->getResultObject();
+    }
+    public function getOrderByFinish(bool $isFinish=false,array $columns=["*"] )
+    {
+        return $this->query->select($columns)->where("isFinish", $isFinish)->get()->getResultObject();
+    }
 }

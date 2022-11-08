@@ -45,4 +45,7 @@ class AccountRepository extends Account
     {
         return $this->query->select($columns)->where("id", $id)->get()->getResultObject();
     }
+    public function getCountUser(){
+        return $this->query->select("count(*) AS total_account")->where("isAdmin", false)->get()->getResultObject();
+    }
 }
