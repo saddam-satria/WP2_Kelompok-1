@@ -49,18 +49,20 @@ class DashboardController extends BaseController
             $accounts = $accountRepository->getAccounts(array("email","firstname","lastname", "address"), 5);
             $totalAccount = $accountRepository->getCountUser()[0];
 
-            foreach($orders as $order)
-            {
-                $totalAmount = $totalAmount + $order->amount;
-                $totalKg = $totalKg + $order->totalItem;
-                $totalOrder++;
-
-                if($order->isFinish)
+            if(count($orders) > 0){
+                foreach($orders as $order)
                 {
-                    $totalFinishOrder++;
+                    $totalAmount = $totalAmount + $order->amount;
+                    $totalKg = $totalKg + $order->totalItem;
+                    $totalOrder++;
+    
+                    if($order->isFinish)
+                    {
+                        $totalFinishOrder++;
+                    }
                 }
+                $orderByPercent = ($totalFinishOrder / $totalOrder) * 100;
             }
-            $orderByPercent = ($totalFinishOrder / $totalOrder) * 100;
             $newestOrders = $orderRepository->getNewestOrderLimit(array("*"),false,5);
         }
 

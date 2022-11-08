@@ -34,6 +34,23 @@
                 <span>Orderan Cucian</span>
             </a>
         </li>
+        <div class="sidebar-heading">
+                Master Data
+        </div>
+
+        <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo" style="background-color: <?= str_contains(uri_string(), "admin/users") ? "#21aee4" : "transparent" ?>;">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Akun</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="<?= base_url("/admin/users/")?>">Pengguna</a>
+                        <a class="collapse-item" href="<?= base_url("/admin/users?is_admin=".true)?>">Admin</a>
+                    </div>
+                </div>
+            </li>
     <?php endif ?>
 
 

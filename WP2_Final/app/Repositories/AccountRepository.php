@@ -55,4 +55,12 @@ class AccountRepository extends Account
     public function getAdminUser(array $columns = ["*"]){
         return $this->query->select($columns)->where("isAdmin", true)->get()->getResultObject();
     }
+    public function getRawUser(array $columns=['*'])
+    {
+        return $this->query->select($columns)->orderBy("created_at","DESC");
+    }
+    public function getUserByID(string $id,array $columns = ["*"])
+    {
+        return $this->query->select($columns)->where("id", $id)->get()->getResultObject();
+    }
 }

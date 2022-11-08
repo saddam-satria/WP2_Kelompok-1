@@ -185,6 +185,7 @@
                                <h6>User Terbaru</h6>
                         </div>
                        <div class="">
+                           <?php if(count($accounts) > 0):?>
                         <table class="table table-striped">
                                 <thead class="bg-primary text-white">
                                     <tr>
@@ -203,6 +204,11 @@
                                     <?php endforeach?>
                                 </tbody>
                             </table>
+                            <?php else:?>
+                                <div class="text-center py-2">
+                                    <span>Data Kosong</span>
+                                </div>
+                            <?php endif?>
                        </div>
                    </div>
                 </div>
@@ -212,7 +218,8 @@
                         <div class="card-header bg-primary text-white">
                                <h6>Orderan Terbaru</h6>
                         </div>
-                       
+                        
+                        <?php if(count($newestOrders) > 0):?>
                         <table class="table table-striped">
                             <thead class="bg-primary text-white">
                                 <tr>
@@ -222,16 +229,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($newestOrders as $order):?>
-                                <tr>
-                                    <td><?= $order->token?></td>
-                                    <td><?= number_format($order->amount,0,".",".")?></td>
-                                    <td><?= date_format(date_create($order->created_at), "d-m-Y H:i:s")?></td>
-                                </tr>
-                                <?php endforeach?>
-                            </tbody>
-                        </table>
-                   </div>
+                                    <?php foreach($newestOrders as $order):?>
+                                        <tr>
+                                            <td><?= $order->token?></td>
+                                            <td><?= number_format($order->amount,0,".",".")?></td>
+                                            <td><?= date_format(date_create($order->created_at), "d-m-Y H:i:s")?></td>
+                                        </tr>
+                                        <?php endforeach?>
+                                    </tbody>
+                                </table>
+                                <?php else:?>
+                                    <div class="text-center py-2">
+                                        <span>Data Kosong</span>
+                                    </div>
+                                <?php endif?>
+                    </div>
                 </div>
             </div>
 

@@ -25,10 +25,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <div class="form-group">
-                            <label for="status">Status Cucian</label>
-                            <input disabled value="<?= $order->status?>" type="text" class="form-control" name="status" id="status" >
-                        </div>
+                        <label for="status">Status Cucian</label>
+                        <input disabled value="<?= $order->status?>" type="text" class="form-control" name="status" id="status" >
                     </div>
 
                     <div class="mb-3">
@@ -70,8 +68,5 @@
         </div>
     </div>
 </section>
-
-<?= view("components/cart_notification") ?>
-
 
 <?= $this->endSection(); ?>

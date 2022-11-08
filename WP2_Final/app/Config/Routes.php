@@ -86,6 +86,12 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->get("order/(:any)", "Admin\OrderController::detail/$1");
         $routes->post("order/(:any)", "Admin\OrderController::destroy/$1");
         $routes->get("order-data", "Admin\OrderController::orderAjax");
+
+        $routes->get("users", "Admin\UserController::index");
+        $routes->get("user-data", "Admin\UserController::userDataAjax");
+        $routes->get("user/(:any)", "Admin\UserController::detail/$1");
+        $routes->post("user/(:any)", "Admin\UserController::destroy/$1");
+
     });
 });
 

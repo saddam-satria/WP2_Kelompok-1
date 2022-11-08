@@ -2,6 +2,7 @@
 
 <?= $this->section("content"); ?>
 
+
 <?php if (session()->getFlashdata("success")) : ?>
     <?= view("components/alert", array("key" => "success", "alert" => "success")) ?>
 <?php else : ?>
@@ -9,7 +10,15 @@
 <?php endif; ?>
 
 
-<?= view("components/table", array("tableName" => "orders")) ?>
+<?php if(!is_null($isAdmin)):?>
+
+   <div class="mb-4">
+        <a href="#" class="btn btn-sm btn-primary text-capitalize">tambah admin</a>
+   </div>
+
+<?php endif?>    
+
+<?= view("components/table", array("tableName" => "users")) ?>
 
 
 <?= $this->endSection(); ?>
@@ -19,11 +28,11 @@
 
 <script>
     $(document).ready(function() {
-        $('#orders').DataTable({
+        $('#users').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
-            ajax: '<?= base_url("admin/order-data") ?>',
+            ajax: '<?= $isAdmin ? base_url("admin/user-data?is_admin=" . true) : base_url("admin/user-data") ?>',
             columns: [
 
                 {
@@ -34,25 +43,18 @@
                     searchable: false,
                 },
                 {
-                    data: 'amount',
-                    name: "amount",
-                    title: "Total Bayar",
+                    data: 'name',
+                    name: "name",
+                    title: "Nama Lengkap",
                     orderable: false,
                     searchable: false,
                 },
                 {
-                    data: 'paymentMethod',
-                    name: "paymentMethod",
-                    title: "Metode Pembayaran",
+                    data: 'address',
+                    name: "address",
+                    title: "Alamat",
                     orderable: false,
                     searchable: false,
-                },
-                {
-                    data: 'token',
-                    name: "token",
-                    title: "Kode Pembayaran",
-                    orderable: false,
-                    searchable: true,
                 },
                 {
                     data: 'action',
@@ -61,6 +63,7 @@
                     orderable: false,
                     searchable: false,
                 },
+               
             ]
         });
     });
