@@ -23,7 +23,7 @@
                 {
                     data: 'email',
                     name: "email",
-                    title: "Email Client",
+                    title: "Email",
                     orderable: false,
                     searchable: false,
                 },
