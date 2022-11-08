@@ -52,7 +52,7 @@ class OrderRepository extends Order
     }
     public function getOrdersAjax($columns = ["*"])
     {
-        return $this->query->select($columns)->join("account", "account.id = laundry_order.account_id");
+        return $this->query->select($columns)->join("account", "account.id = laundry_order.account_id")->orderBy("laundry_order.created_at", "DESC");
     }
     public function getOrders(array $columns = ["*"])
     {
@@ -63,6 +63,6 @@ class OrderRepository extends Order
         return $this->query->select($columns)->where("isFinish", $isFinish)->get()->getResultObject();
     }
     public function getNewestOrderLimit(array $columns=["*"], bool $status=false,?int $limit = 0, ?int $offset =0){
-        return $this->query->select($columns)->where("isFinish", $status)->get($limit,$offset)->getResultObject();
+        return $this->query->select($columns)->where("isFinish", $status)->orderBy("created_at","DESC")->get($limit,$offset)->getResultObject();
     }
 }

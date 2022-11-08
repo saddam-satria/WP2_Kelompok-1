@@ -50,7 +50,7 @@ class AccountRepository extends Account
     }
     public function getAccounts(array $columns=["*"], ?int $limit = 0, ?int $offset =0)
     {
-        return $this->query->select($columns)->where("isAdmin", false)->orderBy("created_at","ASC")->get($limit,$offset)->getResultObject();        
+        return $this->query->select($columns)->where("isAdmin", false)->orderBy("created_at","DESc")->get($limit,$offset)->getResultObject();        
     }
     public function getAdminUser(array $columns = ["*"]){
         return $this->query->select($columns)->where("isAdmin", true)->get()->getResultObject();
