@@ -40,6 +40,19 @@ class OrderController extends BaseController
                 </div>
 
             ';
+        })->add("status", function($row) {
+            return '
+            <div class="d-flex">
+                <a href="'.base_url("admin/order/edit/" .$row->orderID).'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+            </div>
+
+        ';
+        })->add("isFinish", function($row){
+            return '
+            <div class="d-flex">
+                <a href="'.base_url("admin/order/edit/" .$row->orderID).'" class="btn btn-primary btn-sm"><i class="fas fa-check"></i></a>
+            </div>
+        ';
         })->toJson(true);
     }
     public function edit(string $id)
