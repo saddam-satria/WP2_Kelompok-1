@@ -81,6 +81,8 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
 
     $routes->group("admin", array("filter" => ["isAdmin"]), function ($routes) {
         $routes->get("orders", "Admin\OrderController::index");
+        $routes->get("order/edit/(:any)", "Admin\OrderController::edit/$1");
+        $routes->get("order/(:any)", "Admin\OrderController::detail/$1");
         $routes->get("order-data", "Admin\OrderController::orderAjax");
     });
 });
