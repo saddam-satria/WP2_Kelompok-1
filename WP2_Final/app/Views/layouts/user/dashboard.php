@@ -35,3 +35,7 @@
     </div>
 </div>
 <?= $this->endSection(); ?>
+
+<?= $this->section("scripts"); ?>
+<?= $this->renderSection("scripts"); ?>
+<?= $this->endSection(); ?>

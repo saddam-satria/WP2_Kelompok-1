@@ -27,6 +27,14 @@
             </a>
         </li>
     <?php endif ?>
+    <?php if (session()->current_user[0]->isAdmin) : ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("admin/orders") ?>" style="background-color: <?= str_contains(uri_string(), "admin/orders") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-cash-register"></i>
+                <span>Orderan Cucian</span>
+            </a>
+        </li>
+    <?php endif ?>
 
 
 

@@ -31,7 +31,7 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Auth\RedirectController::index');
 
 $routes->group("auth", function ($routes) {
     $routes->get("login", "Auth\LoginController::index");
@@ -74,6 +74,11 @@ $routes->group("user", array("filter" => ["isLogged", "getCart"]), function ($ro
 
 
     $routes->post("claim-voucher", "User/VoucherController::claimingVoucher");
+});
+
+$routes->group("admin", function ($routes) {
+    $routes->get("orders", "Admin\OrderController::index");
+    $routes->get("order-data", "Admin\OrderController::orderAjax");
 });
 
 
