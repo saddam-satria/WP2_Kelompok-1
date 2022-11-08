@@ -36,50 +36,56 @@ $routes->get('/', 'Auth\RedirectController::index');
 $routes->group("auth", function ($routes) {
     $routes->get("login", "Auth\LoginController::index");
     $routes->post("login", "Auth\LoginController::login");
-
     $routes->get("signup", "Auth\RegisterController::index");
     $routes->post("signup", "Auth\RegisterController::signup");
-
-
-    $routes->post("logout", "Auth\LogoutController::logout");
 });
 
-$routes->group("user", array("filter" => ["isLogged", "getCart"]), function ($routes) {
-    $routes->get("dashboard", "User\DashboardController::index");
-    $routes->get("profile", "User\ProfileController::index");
-    $routes->post("profile", "User\ProfileController::update");
-    $routes->post("update-password", "User\ProfileController::updatePassword");
-    $routes->get("orders", "User\OrderController::index");
-    $routes->get("order/(:any)", "User\OrderController::detail/$1");
-    $routes->get("histories", "User\OrderController::histories");
-    $routes->get("notification/(:any)", "User\NotificationController::index/$1");
-    $routes->post("notification/(:any)", "User\NotificationController::updateIsRead/$1");
+$routes->group("", array("filter" => "isLogged"), function ($routes) {
+    $routes->get("user/profile", "User\ProfileController::index");
+    $routes->post("user/profile", "User\ProfileController::update");
+    $routes->post("auth/logout", "Auth\LogoutController::logout");
 
-    $routes->group("", array("filter" => "currentCart"), function ($routes) {
-        $routes->get("new-order", "User\OrderController::create");
+
+    $routes->group("user", array("filter" => ["getCart"]), function ($routes) {
+        $routes->get("dashboard", "User\DashboardController::index");
+
+        $routes->group("", array("filter" => ["isMember", "getCart"]), function ($routes) {
+            $routes->post("update-password", "User\ProfileController::updatePassword");
+            $routes->get("orders", "User\OrderController::index");
+            $routes->get("order/(:any)", "User\OrderController::detail/$1");
+            $routes->get("histories", "User\OrderController::histories");
+            $routes->get("notification/(:any)", "User\NotificationController::index/$1");
+            $routes->post("notification/(:any)", "User\NotificationController::updateIsRead/$1");
+
+            $routes->group("", array("filter" => ["isMember", "getCart", "currentCart"]), function ($routes) {
+                $routes->get("new-order", "User\OrderController::create");
+            });
+
+            $routes->post("add-item-to-cart",  "User\CartController::storeItem");
+            $routes->post("add-to-cart", "User\CartController::store");
+
+            $routes->group("", array("filter" => ["isMember", "getCart", "isCartEmpty"]), function ($routes) {
+                $routes->get("checkout", "User\CheckoutController::index");
+                $routes->post("payment", "User\CheckoutController::payment");
+                $routes->get("select-item", "User\CartController::create");
+                $routes->post("select-voucher", "User\CheckoutController::selectVoucher");
+            });
+            $routes->get("payment", "User\OrderController::orderComplete");
+            $routes->get("cart", "User\CartController::index");
+            $routes->post("cart", "User\CartController::updateCart");
+
+
+            $routes->post("claim-voucher", "User/VoucherController::claimingVoucher");
+        });
     });
 
-    $routes->post("add-item-to-cart",  "User\CartController::storeItem");
-    $routes->post("add-to-cart", "User\CartController::store");
-
-    $routes->group("", array("filter" => "isCartEmpty"), function ($routes) {
-        $routes->get("checkout", "User\CheckoutController::index");
-        $routes->post("payment", "User\CheckoutController::payment");
-        $routes->get("select-item", "User\CartController::create");
-        $routes->post("select-voucher", "User\CheckoutController::selectVoucher");
+    $routes->group("admin", array("filter" => ["isAdmin"]), function ($routes) {
+        $routes->get("orders", "Admin\OrderController::index");
+        $routes->get("order-data", "Admin\OrderController::orderAjax");
     });
-    $routes->get("payment", "User\OrderController::orderComplete");
-    $routes->get("cart", "User\CartController::index");
-    $routes->post("cart", "User\CartController::updateCart");
-
-
-    $routes->post("claim-voucher", "User/VoucherController::claimingVoucher");
 });
 
-$routes->group("admin", function ($routes) {
-    $routes->get("orders", "Admin\OrderController::index");
-    $routes->get("order-data", "Admin\OrderController::orderAjax");
-});
+
 
 
 /*
