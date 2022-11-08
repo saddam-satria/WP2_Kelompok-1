@@ -14,7 +14,7 @@
     <div>
         <div class="row">
             <div class="col-sm-12 col-md-8">
-                <form method="POST" action="<?= base_url("user/add-item-to-cart?cart_id=" . $cart_id) ?>" method="POST">
+                <form action="<?= base_url("user/add-item-to-cart?cart_id=" . $cart_id) ?>" method="POST">
                     <div class="d-flex flex-column">
 
                         <div class="mb-3">

@@ -39,6 +39,8 @@ class DashboardController extends BaseController
         $totalFinishOrder =0;
         $totalAccount = 0;
         $accounts = null;
+        $orderByPercent = 0;
+        $newestOrders = null;
 
         if($isAdmin){
             $orderRepository = new OrderRepository();
@@ -58,11 +60,11 @@ class DashboardController extends BaseController
                     $totalFinishOrder++;
                 }
             }
-
+            $orderByPercent = ($totalFinishOrder / $totalOrder) * 100;
+            $newestOrders = $orderRepository->getNewestOrderLimit(array("*"),false,5);
         }
 
-        $orderByPercent = ($totalFinishOrder / $totalOrder) * 100;
-        $newestOrders = $orderRepository->getNewestOrderLimit(array("*"),false,5);
+     
         
         return view("user/dashboard", compact("services", "order", "totalAmount","totalKg","totalOrder","orderByPercent", "totalAccount", "accounts","newestOrders"));
     }

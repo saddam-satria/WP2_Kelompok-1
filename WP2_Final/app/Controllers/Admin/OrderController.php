@@ -34,7 +34,9 @@ class OrderController extends BaseController
                 <div class="d-flex">
                     <a href="'.base_url("admin/order/edit/" .$row->orderID).'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                     <a href="'.base_url("admin/order/" .$row->orderID).'" class="btn btn-secondary btn-sm mx-2"><i class="fas fa-eye"></i></a>
-                    <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                    <form action="'. base_url("admin/order/" . $row->orderID) .'" method="POST">
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
+                    </form>
                 </div>
 
             ';
@@ -65,5 +67,52 @@ class OrderController extends BaseController
         $order = $order[0];
 
         return view("admin/order/detail", compact("title", "order"));
+    }
+    public function update(string $id)
+    {
+        $order = $this->orderRepository->getOrderByID($id, array("amount","totalItem"));
+        $data = array(
+            "payment" => $this->request->getVar("payment"),
+            "paymentMethod" => $this->request->getVar("paymentMethod"),
+            "description" => $this->request->getVar("description"),
+        );
+
+        if(count($order)< 1)
+        {
+            return redirect()->to(base_url("/admin/orders"))->with("error", "order tidak ditemukan");
+        }
+
+        $order = $order[0];
+
+
+
+        if($order->amount > (float)$data["payment"])
+        {
+            return redirect()->to(base_url("/admin/order/edit/" . $id))->with("error", "nominal kurang");
+        }
+
+
+        
+
+        $updatedOrder = $this->orderRepository->update($id, $data);
+
+        if(!$updatedOrder){
+            return redirect()->to(base_url("/admin/order/". $id))->with("error", "terjadi kesalahan");
+        }
+
+        return redirect()->to(base_url("/admin/order/edit/". $id))->with("success", "sukses mengubah data orderan");
+
+    }
+    public function destroy(string $id)
+    {
+        $result = $this->orderRepository->delete($id);
+
+        if(!$result){
+            return redirect()->to(base_url("/admin/orders"))->with("error", "terjadi kesalahan");
+        }
+
+        return redirect()->to(base_url("/admin/orders"))->with("success", "sukses menghapus data orderan");
+
+
     }
 }

@@ -49,7 +49,7 @@
                   
                     <div class="mb-3">
                         <label for="isFinish" class="form-label">Status Cucian</label>
-                        <input disabled value="<?= $order->isFinish ? "Selesai" : "Tidak Selesai"?>" type="text" class="form-control" name="isFinish" id="isFinish" >
+                        <input disabled value="<?= $order->isFinish ? "Selesai" : "Belum Selesai"?>" type="text" class="form-control" name="isFinish" id="isFinish" >
                     </div>
 
 

@@ -11,7 +11,7 @@
 <section>
     <div class="row">
         <div class="col-sm-12 col-md-6">
-            <form method="POST" action="<?= base_url("user/add-to-cart") ?>" method="POST">
+            <form action="<?= base_url("admin/order/edit/" . $order->id) ?>" method="POST">
                 <div class="d-flex flex-column">
 
                     <div class="mb-3">
@@ -24,18 +24,10 @@
                         <input value="<?= $order->paymentMethod?>" type="text" class="form-control" name="paymentMethod" id="paymentMethod" >
                     </div>
 
-                    <div class="mb-3">
-                        <div class="form-group">
-                            <label for="status">Status Cucian</label>
-                            <select class="form-control" id="status" name="status">
-                                <option>1</option>
-                            </select>
-                        </div>
-                    </div>
 
                     <div class="mb-3">
                         <label for="totalItem" class="form-label">Total Timbangan</label>
-                        <input value="<?= $order->totalItem?>" type="text" class="form-control" id="totalItem" name="totalItem" >
+                        <input disabled value="<?= $order->totalItem?>" type="text" class="form-control" id="totalItem" name="totalItem" >
                     </div>
 
                     <div class="mb-3">

@@ -5,8 +5,8 @@ namespace App\Services;
 use App\Models\DetailOrder;
 use App\Models\Notification;
 use App\Models\Order;
+use App\Repositories\AccountRepository;
 use App\Repositories\CartRepository;
-use App\Repositories\OrderRepository;
 use App\Repositories\PackageRepository;
 use App\Repositories\ServiceRepository;
 use App\Repositories\VoucherRepository;
@@ -114,7 +114,25 @@ class PaymentService
             "message" => "orderan dengan id" . $order_id . " " . "berhasil, silahkan melanjutkan ke pembayaran"
         );
 
+        $userRepository = new AccountRepository();
+
+        $adminUsers = $userRepository->getAdminUser(array("email"));
+
+        
         $notificationModel->insert($payloadNotification);
+        if(count($adminUsers) > 0)
+        {
+            foreach($adminUsers as $admin){
+                $payloadAdminNotification = array(
+                    "to" => $admin->email,
+                    "from" => "Sistem",
+                    "message" => "orderan baru dari" . " " . $currentUser->email . " " . "dengan order id" . " " . $order_id
+                );
+                $notificationModel->insert($payloadAdminNotification);
+            }
+
+        }
+        
 
 
 

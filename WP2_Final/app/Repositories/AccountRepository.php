@@ -52,4 +52,7 @@ class AccountRepository extends Account
     {
         return $this->query->select($columns)->where("isAdmin", false)->orderBy("created_at","ASC")->get($limit,$offset)->getResultObject();        
     }
+    public function getAdminUser(array $columns = ["*"]){
+        return $this->query->select($columns)->where("isAdmin", true)->get()->getResultObject();
+    }
 }

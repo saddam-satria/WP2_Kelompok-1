@@ -44,7 +44,8 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
     $routes->get("user/profile", "User\ProfileController::index");
     $routes->post("user/profile", "User\ProfileController::update");
     $routes->post("auth/logout", "Auth\LogoutController::logout");
-
+    $routes->get("user/notification/(:any)", "User\NotificationController::index/$1");
+    $routes->post("user/notification/(:any)", "User\NotificationController::updateIsRead/$1");
 
     $routes->group("user", array("filter" => ["getCart"]), function ($routes) {
         $routes->get("dashboard", "User\DashboardController::index");
@@ -54,8 +55,7 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
             $routes->get("orders", "User\OrderController::index");
             $routes->get("order/(:any)", "User\OrderController::detail/$1");
             $routes->get("histories", "User\OrderController::histories");
-            $routes->get("notification/(:any)", "User\NotificationController::index/$1");
-            $routes->post("notification/(:any)", "User\NotificationController::updateIsRead/$1");
+        
 
             $routes->group("", array("filter" => ["isMember", "getCart", "currentCart"]), function ($routes) {
                 $routes->get("new-order", "User\OrderController::create");
@@ -82,7 +82,9 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
     $routes->group("admin", array("filter" => ["isAdmin"]), function ($routes) {
         $routes->get("orders", "Admin\OrderController::index");
         $routes->get("order/edit/(:any)", "Admin\OrderController::edit/$1");
+        $routes->post("order/edit/(:any)", "Admin\OrderController::update/$1");
         $routes->get("order/(:any)", "Admin\OrderController::detail/$1");
+        $routes->post("order/(:any)", "Admin\OrderController::destroy/$1");
         $routes->get("order-data", "Admin\OrderController::orderAjax");
     });
 });
