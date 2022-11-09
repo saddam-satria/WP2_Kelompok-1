@@ -31,8 +31,7 @@ class PackageController extends BaseController
             return '
                 
                 <div class="d-flex">
-                    <a href="'.base_url("admin/package/edit/" .$row->packageID).'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                    <a href="'.base_url("admin/package/" .$row->packageID).'" class="btn btn-secondary btn-sm mx-2"><i class="fas fa-eye"></i></a>
+                    <a href="'.base_url("admin/package/edit/" .$row->packageID).'" class="btn btn-primary btn-sm mr-3"><i class="fas fa-edit"></i></a>
                     <form action="'. base_url("admin/package/" . $row->packageID) .'" method="POST">
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                     </form>
@@ -78,6 +77,67 @@ class PackageController extends BaseController
             return redirect()->to(base_url("admin/packages"))->with("error", "terjadi kesalahan");
         }
         return redirect()->to(base_url("admin/packages"))->with("success", "berhasil menyimpan paket cucian");
+        
+    }
+    public function destroy(string $id)
+    {
+        $result = $this->packageRepository->delete($id);
+
+       
+        if(!$result) {
+            return redirect()->to(base_url("admin/packages"))->with("error", "terjadi kesalahan");
+        }
+        return redirect()->to(base_url("admin/packages"))->with("success", "berhasil menghapus paket cucian");
+        
+
+    }
+    public function edit(string $id)
+
+    {
+        $title = "Admin Edit Paket Cucian";
+        $package = $this->packageRepository->getPackageByID($id,array("packageID","packageName","packagePrice"));
+        if(count($package) < 1) {
+            return redirect()->to(base_url("admin/packages"))->with("error","order tidak ditemukan");
+        }
+        $package = $package[0];
+        return view("admin/package/edit", compact("title","package"));
+    }
+    public function update(string $id)
+    {
+        $rules = array(
+            "packageName" => array("required"),
+            "packagePrice" => array("required", "numeric")
+        );
+        $messages = array(
+            "packageName" => array(
+                "required" =>  "kolom nama paket harus diisi"
+            ),
+            "packagePrice" => array(
+                "required" => "kolom harga paket harus diisi",
+                "numeric" => "kolom harga paket harus angka"
+            )
+        );
+
+
+        if (!$this->validate($rules, $messages)) {
+            $validation = $this->validator;
+            $package = $this->packageRepository->getPackageByID($id, array("packageID", "packageName", "packagePrice"))[0];
+            return view("admin/package/edit", compact("validation", "package"));
+        }
+
+
+            
+        $data = array(
+            "packageName" => $this->request->getVar("packageName"),
+            "packagePrice" => $this->request->getVar("packagePrice")
+        );
+
+        $result = $this->packageRepository->update($id,$data);
+
+        if(!$result) {
+            return redirect()->to(base_url("admin/packages"))->with("error", "terjadi kesalahan");
+        }
+        return redirect()->to(base_url("admin/packages"))->with("success", "berhasil mengupdate paket cucian");
         
     }
 }

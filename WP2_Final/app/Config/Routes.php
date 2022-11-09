@@ -47,7 +47,7 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
     $routes->get("user/notification/(:any)", "User\NotificationController::index/$1");
     $routes->post("user/notification/(:any)", "User\NotificationController::updateIsRead/$1");
 
-    $routes->group("user", array("filter" => ["getCart"]), function ($routes) {
+    $routes->group("user", array("filter" => ["isLogged","getCart"]), function ($routes) {
         $routes->get("dashboard", "User\DashboardController::index");
 
         $routes->group("", array("filter" => ["isMember", "getCart"]), function ($routes) {
@@ -57,14 +57,14 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
             $routes->get("histories", "User\OrderController::histories");
         
 
-            $routes->group("", array("filter" => ["isMember", "getCart", "currentCart"]), function ($routes) {
+            $routes->group("", array("filter" => ["isLogged","isMember", "getCart", "currentCart"]), function ($routes) {
                 $routes->get("new-order", "User\OrderController::create");
             });
 
             $routes->post("add-item-to-cart",  "User\CartController::storeItem");
             $routes->post("add-to-cart", "User\CartController::store");
 
-            $routes->group("", array("filter" => ["isMember", "getCart", "isCartEmpty"]), function ($routes) {
+            $routes->group("", array("filter" => ["isLogged","isMember", "getCart", "isCartEmpty"]), function ($routes) {
                 $routes->get("checkout", "User\CheckoutController::index");
                 $routes->post("payment", "User\CheckoutController::payment");
                 $routes->get("select-item", "User\CartController::create");
@@ -79,7 +79,7 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         });
     });
 
-    $routes->group("admin", array("filter" => ["isAdmin"]), function ($routes) {
+    $routes->group("admin", array("filter" => ["isLogged","isAdmin"]), function ($routes) {
         $routes->get("orders", "Admin\OrderController::index");
         $routes->get("order/edit/(:any)", "Admin\OrderController::edit/$1");
         $routes->post("order/edit/(:any)", "Admin\OrderController::update/$1");
@@ -97,6 +97,9 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->get("packages", "Admin\PackageController::index");
         $routes->get("package-data", "Admin\PackageController::packageAjax");
         $routes->post("packages/create", "Admin\PackageController::store");
+        $routes->post("package/(:any)", "Admin\PackageController::destroy/$1");
+        $routes->get("package/edit/(:any)", "Admin\PackageController::edit/$1");
+        $routes->post("package-edit/(:any)", "Admin\PackageController::update/$1");
 
     });
 });

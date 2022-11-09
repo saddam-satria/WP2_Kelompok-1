@@ -25,4 +25,8 @@ class PackageRepository extends Package
     {
         return $this->packageTable->select($columns);
     }
+    public function getPackageByID(string $id, array $columns=["*"])
+    {
+        return $this->packageTable->select($columns)->where("packageID", $id)->get()->getResultObject();
+    }
 }
