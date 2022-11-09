@@ -28,7 +28,8 @@ class Filters extends BaseConfig
         "currentCart" => \App\Filters\CurrentCart::class,
         "isLogged" => \App\Filters\IsLoggedIn::class,
         "isAdmin" => \App\Filters\IsAdmin::class,
-        "isMember" => \App\Filters\IsMember::class
+        "isMember" => \App\Filters\IsMember::class,
+        "auth" => \App\Filters\Auth::class
     ];
 
     /**

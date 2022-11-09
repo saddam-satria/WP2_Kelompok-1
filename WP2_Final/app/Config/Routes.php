@@ -33,7 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth\RedirectController::index');
 
-$routes->group("auth", function ($routes) {
+$routes->group("auth", array("filter" => "auth") , function ($routes) {
     $routes->get("login", "Auth\LoginController::index");
     $routes->post("login", "Auth\LoginController::login");
     $routes->get("signup", "Auth\RegisterController::index");
@@ -91,6 +91,8 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->get("user-data", "Admin\UserController::userDataAjax");
         $routes->get("user/(:any)", "Admin\UserController::detail/$1");
         $routes->post("user/(:any)", "Admin\UserController::destroy/$1");
+        $routes->get("users/create", "Admin\UserController::create");
+        $routes->post("users/create", "Admin\UserController::store");
 
     });
 });

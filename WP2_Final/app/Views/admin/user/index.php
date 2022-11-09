@@ -13,7 +13,7 @@
 <?php if(!is_null($isAdmin)):?>
 
    <div class="mb-4">
-        <a href="#" class="btn btn-sm btn-primary text-capitalize">tambah admin</a>
+        <a href="<?= base_url("/admin/users/create")?>" class="btn btn-sm btn-primary text-capitalize">tambah admin</a>
    </div>
 
 <?php endif?>    

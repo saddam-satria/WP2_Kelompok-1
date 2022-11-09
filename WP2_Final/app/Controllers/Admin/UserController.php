@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\Account;
 use App\Repositories\AccountRepository;
 use Hermawan\DataTables\DataTable;
 
@@ -66,7 +67,8 @@ class UserController extends BaseController
     }
     public function destroy(string $id)
     {
-        $user = $this->accountRepository->getUserByID($id, array("isAdmin"));
+        $user = $this->accountRepository->getUserByID($id, array("id","isAdmin"));
+        $currentUser = session()->current_user;
 
         if(count($user) < 1)
         {
@@ -74,10 +76,11 @@ class UserController extends BaseController
         }
 
         $user = $user[0];
+        $currentUser = $currentUser[0];
+        $base_url = $user->isAdmin ? "/admin/users?is_admin=" . true : "/admin/users";
 
-
-        if($user->isAdmin){
-            return redirect()->to(base_url("/admin/users"))->with("error" ,"admin tidak dapat dihapus");
+        if($user->id == $currentUser->id){
+            return redirect()->to(base_url($base_url))->with("error" ,"user tidak dapat dihapus");
         }
 
 
@@ -85,9 +88,50 @@ class UserController extends BaseController
 
         if(!$result)
         {
-            return redirect()->to(base_url("/admin/users"))->with("error" ,"terjadi kesalahan");
+            return redirect()->to(base_url($base_url))->with("error" ,"terjadi kesalahan");
         }
-        return redirect()->to(base_url("/admin/users"))->with("sukses" ,"berhasil menghapus akun");
+        return redirect()->to(base_url($base_url))->with("success" ,"berhasil menghapus akun");
+
+    }
+    public function create()
+    {
+        $title = "Admin Tambah Pengguna";
+        helper("form");
+        return view("admin/user/add", compact("title"));
+    }
+    public function store()
+
+    {
+        $rules = array(
+            "email" => array("required", "valid_email", "is_unique[account.email]"),
+            "firstname" => array("required"),
+            "password" => array("required", "min_length[8]")
+        );
+
+
+        if (!$this->validate($rules)) {
+            helper("form");
+            $validation = $this->validator;
+            $title = "Admin Tambah Pengguna";
+            return view("admin/user/add", compact("validation","title"));
+        }
+
+        $data = array(
+            "firstname" => $this->request->getVar("firstname"),
+            "lastname" => $this->request->getVar("lastname"),
+            "email" => $this->request->getVar("email"),
+            "password" => password_hash($this->request->getVar("password"),PASSWORD_BCRYPT),
+            "isAdmin" => true
+        );
+
+        $userModel = new Account();
+        $result = $userModel->insert($data);
+
+        if(!$result) {
+            return redirect()->to(base_url("/admin/users?is_admin=". true))->with("error", "terjadi kesalahan");
+        }
+
+        return redirect()->to(base_url("/admin/users?is_admin=" . true))->with("success", "berhasil menambahkan admin");
 
     }
 }

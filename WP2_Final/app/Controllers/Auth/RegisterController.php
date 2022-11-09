@@ -27,7 +27,6 @@ class RegisterController extends BaseController
 
         $rules = array(
             "email" => array("required", "valid_email", "is_unique[account.email]"),
-            "lastname" => array("required"),
             "firstname" => array("required"),
             "password" => array("required", "min_length[8]")
         );
