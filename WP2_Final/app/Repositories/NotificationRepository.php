@@ -15,10 +15,10 @@ class NotificationRepository extends Notification
     }
     public function getNotificationByAccount(string $email, array $columns = ["*"])
     {
-        return $this->notificationTable->where("to", $email)->select($columns)->get()->getResultObject();
+        return $this->notificationTable->where("to", $email)->orderBy("created_at", "DESC")->select($columns)->get()->getResultObject();
     }
     public function getNotificationByAccountWhereNotRead(string $email, array $columns = ["*"])
     {
-        return $this->notificationTable->where("to", $email)->where("isRead", false)->select($columns)->get()->getResultObject();
+        return $this->notificationTable->where("to", $email)->orderBy("created_at", "DESC")->where("isRead", false)->select($columns)->get()->getResultObject();
     }
 }

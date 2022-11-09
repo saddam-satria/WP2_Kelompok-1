@@ -94,6 +94,10 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->get("users/create", "Admin\UserController::create");
         $routes->post("users/create", "Admin\UserController::store");
 
+        $routes->get("packages", "Admin\PackageController::index");
+        $routes->get("package-data", "Admin\PackageController::packageAjax");
+        $routes->post("packages/create", "Admin\PackageController::store");
+
     });
 });
 

@@ -40,5 +40,11 @@ class RegisterController extends BaseController
 
 
         $result = $this->accountService->signUp($email, $firstname, $lastname, $password);
+
+        if(!$result) {
+            return redirect()->to(base_url("auth/register"))->with("error","terjadi kesalahan");
+        }
+        return redirect()->to(base_url("auth/login"))->with("success","berhasil register, silahkan login");
+
     }
 }

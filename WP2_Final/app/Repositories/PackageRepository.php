@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Item;
+use App\Models\Package;
 
-class PackageRepository extends Item
+class PackageRepository extends Package
 {
     private $packageTable;
     public function __construct()
@@ -20,5 +20,9 @@ class PackageRepository extends Item
     public function getPackageByName(string $packageName, $columns = ["*"])
     {
         return $this->packageTable->select($columns)->where("packageName", $packageName)->get()->getResultObject();
+    }
+    public function getRawPackages(array $columns =[ "*"])
+    {
+        return $this->packageTable->select($columns);
     }
 }
