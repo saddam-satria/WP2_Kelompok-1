@@ -71,7 +71,7 @@
                     data: 'packagePrice',
                     name: "packagePrice",
                     title: "Harga Paket",
-                    orderable: false,
+                    orderable: true,
                     searchable: false,
                 },
                 {

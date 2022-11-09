@@ -21,4 +21,12 @@ class ItemRepository extends Item
     {
         return $this->itemTable->select($columns)->where("itemName", $itemName)->get()->getResultObject();
     }
+    public function getRawItems(array $columns=["*"])
+    {
+        return $this->itemTable->select($columns);
+    }
+    public function getItemByID(string $id, array $columns=["*"])
+    {
+        return $this->itemTable->select($columns)->where("itemID", $id)->get()->getResultObject();
+    }
 }
