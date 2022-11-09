@@ -28,29 +28,55 @@
         </li>
     <?php endif ?>
     <?php if (session()->current_user[0]->isAdmin) : ?>
+        
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url("admin/orders") ?>" style="background-color: <?= str_contains(uri_string(), "admin/orders") ? "#21aee4" : "transparent" ?>;">
                 <i class="fa-solid fa-cash-register"></i>
                 <span>Orderan Cucian</span>
             </a>
         </li>
-        <div class="sidebar-heading">
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <div class="sidebar-heading mb-3">
                 Master Data
         </div>
 
         <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo" style="background-color: <?= str_contains(uri_string(), "admin/users") ? "#21aee4" : "transparent" ?>;">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Akun</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="<?= base_url("/admin/users/")?>">Pengguna</a>
-                        <a class="collapse-item" href="<?= base_url("/admin/users?is_admin=".true)?>">Admin</a>
-                    </div>
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                aria-expanded="true" aria-controls="collapseTwo" style="background-color: <?= str_contains(uri_string(), "admin/users") ? "#21aee4" : "transparent" ?>;">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Akun</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="<?= base_url("/admin/users/")?>">Pengguna</a>
+                    <a class="collapse-item" href="<?= base_url("/admin/users?is_admin=".true)?>">Admin</a>
                 </div>
-            </li>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("admin/packages") ?>" style="background-color: <?= str_contains(uri_string(), "admin/packages") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-cash-register"></i>
+                <span>Paket Cucian</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("admin/items") ?>" style="background-color: <?= str_contains(uri_string(), "admin/items") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-cash-register"></i>
+                <span>Jenis Pakaian</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("admin/services") ?>" style="background-color: <?= str_contains(uri_string(), "admin/services") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-cash-register"></i>
+                <span>Jenis Cucian</span>
+            </a>
+        </li>
     <?php endif ?>
 
 
