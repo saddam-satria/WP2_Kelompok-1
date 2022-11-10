@@ -15,7 +15,7 @@
                 <div class="d-flex flex-column">
 
                     <div class="d-flex justify-content-center my-3">
-                        <img style="width: 80px; height: 80px; object-fit: contain;" src="<?= is_null($item->itemLogo) ? base_url("assets/img/tshirt.png"): base_url("assets/items/" . $item->itemLogo)?>" class="img-fluid circle" alt="">
+                        <img style="width: 80px; height: 80px; object-fit: contain;" src="<?= is_null($item->itemLogo) ? base_url("assets/img/tshirt.png"): base_url("assets/img/" . $item->itemLogo)?>" class="img-fluid circle" alt="">
                     </div>
                     
                     <div class="mb-3">

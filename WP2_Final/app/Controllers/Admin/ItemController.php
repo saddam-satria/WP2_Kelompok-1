@@ -57,7 +57,7 @@ class ItemController extends BaseController
             "itemName" => array("required"),
             "itemPrice" => array("required", "numeric"),
             "quantityPerKG" => array("required", "numeric"),
-            "itemLogo" => array("")
+            "itemLogo" => array("max_size[itemLogo,2048]","mime_in[itemLogo,image/png,image/jpg,image/jpeg,image/svg]","ext_in[itemLogo,png,jpg,jpeg,svg]", "is_image[itemLogo]")
         );
         $messages = array(
             "itemName" => array(
@@ -70,6 +70,12 @@ class ItemController extends BaseController
             "quantityPerKG" => array(
                 "required" => "kolom jumlah per kg harus diisi",
                 "numeric" => "kolom jumlah per kg harus angka"
+            ),
+            "itemLogo" => array(
+                "max_size" => "file terlalu besar max 2mb",
+                "mime_in" => "file harus berupa gambar",
+                "ext_in" => "file harus berupa gambar",
+                "is_image" => "file harus berupa gambar",
             )
         );
 
@@ -81,7 +87,11 @@ class ItemController extends BaseController
             return redirect()->to(base_url("admin/items"))->with("error", $messages);
         }
 
+        $image = $this->request->getFile("itemLogo");
 
+        $fileName = $image->getRandomName();
+
+        $image->move("assets/img/items", $fileName,true);
 
 
         $data = array(
@@ -89,9 +99,16 @@ class ItemController extends BaseController
             "itemPrice" => $this->request->getVar("itemPrice"),
             "quantityPerKG" => $this->request->getVar("quantityPerKG"),
             "isSneaker" => $this->request->getVar("isSneaker") == "on",
-
+            "itemLogo" => "items/" . $fileName
         );
 
-        dd($data);
+
+        $result = $this->itemRepository->insert($data);
+
+        if(!$result){
+            return redirect()->to(base_url("admin/items"))->with("error", "terjadi kesalahan");
+        }
+        return redirect()->to(base_url("admin/items"))->with("error", "berhasil disimpan");
+ 
     }
 }

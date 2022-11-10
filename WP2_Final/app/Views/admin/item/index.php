@@ -17,7 +17,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form action="<?= base_url("admin/items")?>" method="POST">
+                    <form action="<?= base_url("admin/items")?>" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group mb-3">
                         <label for="itemLogo">Pakaian Thumbnail</label>
@@ -27,7 +27,6 @@
                     <div class="mb-3">
                         <label for="itemName" class="form-label">Jenis Pakaian</label>
                         <input type="text" class="form-control" name="itemName" id="itemName" >
-                        
                     </div>
 
 
@@ -37,8 +36,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="quanitityPerKG" class="form-label">Jumlah perKG</label>
-                        <input type="text" class="form-control" name="quanitityPerKG" id="quanitityPerKG" >
+                        <label for="quantityPerKG" class="form-label">Jumlah perKG</label>
+                        <input type="text" class="form-control" name="quantityPerKG" id="quantityPerKG" >
                     </div>
 
 
