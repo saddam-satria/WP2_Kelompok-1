@@ -114,6 +114,8 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->get("service-data", "Admin\ServiceController::serviceAjax");
         $routes->post("services", "Admin\ServiceController::store");
         $routes->get("service/(:any)", "Admin\ServiceController::detail/$1");
+        $routes->get("service-edit/(:any)", "Admin\ServiceController::edit/$1");
+        $routes->post("service-edit/(:any)", "Admin\ServiceController::update/$1");
         $routes->post("service/(:any)", "Admin\ServiceController::destroy/$1");
     });
 });

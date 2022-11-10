@@ -26,7 +26,7 @@ class ServiceController extends BaseController
             return '
                 
                 <div class="d-flex">
-                    <a href="'.base_url("admin/service/edit/" .$row->serviceID).'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                    <a href="'.base_url("admin/service-edit/" .$row->serviceID).'" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                     <a href="'.base_url("admin/service/" .$row->serviceID).'" class="btn btn-secondary btn-sm mx-2"><i class="fas fa-eye"></i></a>
                     <form action="'. base_url("admin/service/" . $row->serviceID) .'" method="POST">
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
@@ -127,6 +127,90 @@ class ServiceController extends BaseController
         
         return redirect()->to(base_url("admin/services"))->with("success", "berhasil menghapus servis");
 
+
+    }
+    public function edit(string $id)
+    {
+        $title =  "Admin Edit Servis";
+
+        $service = $this->serviceRepository->getServiceByID($id,array("serviceID","serviceName","serviceLogo","servicePrice"));
+       
+        if(count($service) < 1){    
+            return redirect()->to(base_url("admin/services"))->with("error", "servis tidak ditemukan");
+        }
+        $service = $service[0];
+        return view("admin/service/edit", compact("title", "service"));
+    }
+    public function update(string $id)
+    {
+        $rules = array(
+            "serviceName" => array("required"),
+            "servicePrice" => array("required", "numeric"),
+            "serviceLogo" => array("max_size[serviceLogo,2048]","mime_in[serviceLogo,image/png,image/jpg,image/jpeg,image/svg]","ext_in[serviceLogo,png,jpg,jpeg,svg]", "is_image[serviceLogo]")
+        );
+        $messages = array(
+            "serviceName" => array(
+                "required" =>  "kolom nama servis harus diisi",
+                "is_unique" => "kolom nama sudah ada"
+            ),
+            "servicePrice" => array(
+                "required" => "kolom harga servis harus diisi",
+                "numeric" => "kolom harga servis harus angka"
+            ),
+            "serviceLogo" => array(
+                "max_size" => "file terlalu besar max 2mb",
+                "mime_in" => "file harus berupa gambar",
+                "ext_in" => "file harus berupa gambar",
+                "is_image" => "file harus berupa gambar",
+            )
+        );
+
+        $service = $this->serviceRepository->getServiceByID($id,array("serviceID","serviceName","serviceLogo","servicePrice"));
+       
+        if(count($service) < 1){    
+            return redirect()->to(base_url("admin/services"))->with("error", "servis tidak ditemukan");
+        }
+        $service = $service[0];
+     
+        
+
+        if (!$this->validate($rules, $messages)) {
+            helper("form");
+            $validation = $this->validator;
+            $messages = join(", ", $validation->getErrors());
+           
+            return view("admin/service/edit", compact("title", "service"));
+        }
+
+        $image = $this->request->getFile("serviceLogo");
+        $isImageError = $image->getError() == 4;
+        $prevImage = $service->serviceLogo;
+        $fileName = $image->getRandomName();
+
+        $data = array(
+            "serviceName" => $this->request->getVar("serviceName"),
+            "servicePrice" => $this->request->getVar("servicePrice"),
+        );
+
+        if(!is_null($prevImage) && !$isImageError)
+        {
+            $completePath = FCPATH . "assets/img/" . $prevImage;
+            unlink($completePath);
+        }
+
+        if(!$isImageError)
+        {
+            $image->move("assets/img/services", $fileName,true);
+            $data["serviceLogo"] = "services/" . $fileName;
+        }
+
+        $result = $this->serviceRepository->update($id, $data);
+        
+
+        if(!$result){
+            return redirect()->to(base_url("admin/services"))->with("error", "terjadi kesalahan");
+        }
+        return redirect()->to(base_url("admin/service-edit/" . $service->serviceID))->with("success", "berhasil diupdate");
 
     }
 }
