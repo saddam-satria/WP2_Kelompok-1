@@ -31,7 +31,7 @@
         
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url("admin/orders") ?>" style="background-color: <?= str_contains(uri_string(), "admin/orders") ? "#21aee4" : "transparent" ?>;">
-                <i class="fa-solid fa-cash-register"></i>
+                <i class="fa-solid fa-hand-holding-heart"></i>
                 <span>Orderan Cucian</span>
             </a>
         </li>
@@ -59,21 +59,21 @@
 
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url("admin/packages") ?>" style="background-color: <?= str_contains(uri_string(), "admin/packages") ? "#21aee4" : "transparent" ?>;">
-                <i class="fa-solid fa-cash-register"></i>
+                <i class="fa-solid fa-cube"></i>
                 <span>Paket Cucian</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url("admin/items") ?>" style="background-color: <?= str_contains(uri_string(), "admin/items") ? "#21aee4" : "transparent" ?>;">
-                <i class="fa-solid fa-cash-register"></i>
+                <i class="fa-solid fa-box-open"></i>
                 <span>Jenis Pakaian</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url("admin/services") ?>" style="background-color: <?= str_contains(uri_string(), "admin/services") ? "#21aee4" : "transparent" ?>;">
-                <i class="fa-solid fa-cash-register"></i>
+                <i class="fa-solid fa-box"></i>
                 <span>Jenis Cucian</span>
             </a>
         </li>

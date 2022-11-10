@@ -76,7 +76,7 @@
                             <a href="<?= base_url("user/new-order?service=" . $service->serviceName) ?>" class="text-decoration-none">
                                 <div class="card" style="width: 100%; height: 100%;">
                                     <div class="d-flex justify-content-center align-items-center flex-column py-3" style="height: 100%;">
-                                        <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="Theme Background" style="object-fit: contain;">
+                                        <img src="<?= is_null($service->serviceLogo) ? base_url("assets/img/tshirt.png"): base_url("assets/img/" . $service->serviceLogo)?>" alt="Theme Background" style="object-fit: contain;">
                                         <h6 class="py-2 text-capitalize" style="color: #4663be; font-weight: 600;"><?= $service->serviceName; ?></h6>
                                     </div>
                                 </div>

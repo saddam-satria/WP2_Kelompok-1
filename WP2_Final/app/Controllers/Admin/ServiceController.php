@@ -80,7 +80,7 @@ class ServiceController extends BaseController
         $data = array(
             "serviceName" => $this->request->getVar("serviceName"),
             "servicePrice" => $this->request->getVar("servicePrice"),
-            "itemLogo" => "items/" . $fileName
+            "serviceLogo" => "services/" . $fileName
         );
 
 
@@ -96,11 +96,36 @@ class ServiceController extends BaseController
         $title =  "Admin Data Detail Servis";
 
         $service = $this->serviceRepository->getServiceByID($id,array("serviceID","serviceName","serviceLogo","servicePrice"));
-        
-        if(count($service) < 1){
+       
+        if(count($service) < 1){    
             return redirect()->to(base_url("admin/services"))->with("error", "servis tidak ditemukan");
         }
         $service = $service[0];
         return view("admin/service/detail", compact("title", "service"));
+    }
+    public function destroy(string $id)
+    {
+
+        $service = $this->serviceRepository->getServiceByID($id,array("serviceID","serviceLogo"));
+        
+        if(count($service) < 1){
+            return redirect()->to(base_url("admin/services"))->with("error", "servis tidak ditemukan");
+        }
+
+        $service=$service[0];
+        $prevImage = $service->serviceLogo;
+
+        
+        $this->serviceRepository->delete($service->serviceID);
+        
+        if(!is_null($prevImage))
+        {
+            $completePath = FCPATH . "assets/img/" . $prevImage;
+            unlink($completePath);
+        }
+        
+        return redirect()->to(base_url("admin/services"))->with("success", "berhasil menghapus servis");
+
+
     }
 }
