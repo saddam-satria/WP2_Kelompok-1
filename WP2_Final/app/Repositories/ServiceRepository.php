@@ -21,4 +21,8 @@ class ServiceRepository extends Service
     {
         return $this->serviceTable->select($columns)->where("serviceName", $serviceName)->get()->getResultObject();
     }
+    public function getRawServices(array $columns=["*"])
+    {
+        return $this->serviceTable->select($columns)->orderBy("created_at","DESC");
+    }
 }
