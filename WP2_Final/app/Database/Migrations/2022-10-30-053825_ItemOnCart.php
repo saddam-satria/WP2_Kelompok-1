@@ -33,11 +33,8 @@ class ItemOnCart extends Migration
             )
         );
         $this->forge->addPrimaryKey(array("id"));
-        // $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
-        // $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
-        // $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
         $this->forge->addForeignKey("cart_id", "cart", "cartId", "CASCADE", "CASCADE");
-        $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "CASCADE");
+        $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "NULL");
         $this->forge->createTable("item_on_cart");
     }
 

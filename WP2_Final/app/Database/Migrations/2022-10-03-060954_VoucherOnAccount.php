@@ -22,8 +22,8 @@ class VoucherOnAccount extends Migration
                 'updated_at datetime default current_timestamp on update current_timestamp',
             )
         );
-        $this->forge->addForeignKey("voucher_id", "voucher", "voucherID", "CASCADE", "NULL");
-        $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "NULL");
+        $this->forge->addForeignKey("voucher_id", "voucher", "voucherID", "CASCADE", "CASCADE");
+        $this->forge->addForeignKey("account_id", "account", "id", "CASCADE", "CASCADE");
         $this->forge->createTable("voucher_on_account");
     }
 

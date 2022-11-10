@@ -27,10 +27,8 @@ class DetailOrder extends Migration
                 'updated_at datetime default current_timestamp on update current_timestamp',
             )
         );
-        // $this->forge->addForeignKey("service_id", "service", "serviceID", "CASCADE", "CASCADE");
-        // $this->forge->addForeignKey("package_id", "package", "packageID", "CASCADE", "CASCADE");
-        $this->forge->addForeignKey("order_id", "laundry_order", "id", "CASCADE", "CASCADE");
-        $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "CASCADE");
+        $this->forge->addForeignKey("order_id", "laundry_order", "id", "CASCADE", "NULL");
+        $this->forge->addForeignKey("item_id", "item", "itemID", "CASCADE", "NULL");
         $this->forge->createTable("detail_order");
     }
 
