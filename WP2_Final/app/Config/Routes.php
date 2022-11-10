@@ -112,6 +112,8 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
 
         $routes->get("services", "Admin\ServiceController::index");
         $routes->get("service-data", "Admin\ServiceController::serviceAjax");
+        $routes->post("services", "Admin\ServiceController::store");
+        $routes->get("service/(:any)", "Admin\ServiceController::detail/$1");
     });
 });
 

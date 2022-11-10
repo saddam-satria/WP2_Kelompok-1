@@ -25,4 +25,8 @@ class ServiceRepository extends Service
     {
         return $this->serviceTable->select($columns)->orderBy("created_at","DESC");
     }
+    public function getServiceByID(string $service_id, $columns = ["*"])
+    {
+        return $this->serviceTable->select($columns)->where("serviceID", $service_id)->get()->getResultObject();
+    }
 }

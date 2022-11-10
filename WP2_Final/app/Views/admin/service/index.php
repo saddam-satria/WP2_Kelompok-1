@@ -17,7 +17,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <form action="<?= base_url("admin/items")?>" method="POST" enctype="multipart/form-data">
+                    <form action="<?= base_url("admin/services")?>" method="POST" enctype="multipart/form-data">
 
                     <div class="form-group mb-3">
                         <label for="serviceLogo">Servis Logo</label>

@@ -25,7 +25,7 @@
 
                     <div class="mb-3">
                         <label for="itemPrice" class="form-label">Harga Per KG</label>
-                        <input disabled value="<?= $item->itemPrice ?>" type="text" class="form-control" id="itemPrice" readonly >
+                        <input disabled value="<?= number_format($item->itemPrice,0,".",'.') ?>" type="text" class="form-control" id="itemPrice" readonly >
                     </div>
                     
                     <div class="mb-3">
