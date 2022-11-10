@@ -46,7 +46,7 @@
                                         <?php foreach ($items as $item) : ?>
                                             <div class="d-flex flex-column my-3">
                                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                                    <img src="<?= is_null($item->itemLogo) ? base_url("assets/img/tshirt.png"): base_url("assets/img/" . $item->itemLogo)?>" alt="<?= $item->itemName?>">
+                                                    <img style="width: 80px; height: 80px; object-fit: contain;" src="<?= is_null($item->itemLogo) ? base_url("assets/img/tshirt.png"): base_url("assets/img/" . $item->itemLogo)?>" alt="<?= $item->itemName?>">
                                                     <div class="d-flex flex-column">
                                                         <h6 class="clothes-list"><?= $item->itemName ?></h6>
                                                         <span><?= $item->quantityPerKG ?> pcs / kg</span>

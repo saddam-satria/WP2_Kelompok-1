@@ -38,7 +38,7 @@ if (!is_null($carts)) {
                 <?php foreach ($carts as $cart) : ?>
                     <div class="mb-5">
                         <div class="d-flex justify-content-between align-items-center">
-                            <img src="<?= base_url("assets/img/tshirt.png") ?>" alt="Pakaian">
+                            <img style="width: 80px; height: 80px; object-fit: contain;"  src="<?= is_null($cart->itemLogo) ? base_url("assets/img/tshirt.png"): base_url("assets/img/" . $cart->itemLogo)?>" alt="Pakaian">
                             <div class="d-flex flex-column">
                                 <span style="font-weight: 600;">Jumlah</span>
                                 <span><?= $cart->quantity / $cart->quantityPerKG ?> kg</span>
