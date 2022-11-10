@@ -23,8 +23,6 @@ class ProfileController extends BaseController
         $currentUser = $this->accountService->accountRepository->getByID(session()->current_user[0]->id, array("firstname", "email", "lastname", "gender", "image", "address"));
         $currentUser = $currentUser[0];
 
-        // dd($currentUser);
-
         return view("user/profile/index", compact("currentUser"));
     }
     private function edit()
@@ -52,7 +50,9 @@ class ProfileController extends BaseController
             $avatars = array(
                 "assets/img/avatar.jpg", "assets/img/mickey-mouse.png", "assets/img/spongebob.png", "assets/img/doraemon.png",
             );
-            return view("user/profile/edit", compact("avatars", "validation"));
+            $currentUser = $this->accountService->accountRepository->getByID(session()->current_user[0]->id, array("firstname", "email", "lastname", "gender", "image", "address"));
+            $currentUser = $currentUser[0];
+            return view("user/profile/edit", compact("avatars", "validation","currentUser"));
         }
 
         $avatar = $this->request->getVar("avatar") == "" ? null : $this->request->getVar("avatar");

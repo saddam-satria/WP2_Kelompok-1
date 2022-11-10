@@ -41,13 +41,14 @@ class ServiceController extends BaseController
     public function store()
     {
         $rules = array(
-            "serviceName" => array("required"),
+            "serviceName" => array("required","is_unique[service.serviceName]"),
             "servicePrice" => array("required", "numeric"),
             "serviceLogo" => array("max_size[serviceLogo,2048]","mime_in[serviceLogo,image/png,image/jpg,image/jpeg,image/svg]","ext_in[serviceLogo,png,jpg,jpeg,svg]", "is_image[serviceLogo]")
         );
         $messages = array(
             "serviceName" => array(
-                "required" =>  "kolom nama servis harus diisi"
+                "required" =>  "kolom nama servis harus diisi",
+                "is_unique" => "kolom nama sudah ada"
             ),
             "servicePrice" => array(
                 "required" => "kolom harga servis harus diisi",

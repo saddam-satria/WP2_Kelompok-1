@@ -43,12 +43,13 @@ class PackageController extends BaseController
     public function store()
     {
         $rules = array(
-            "packageName" => array("required"),
+            "packageName" => array("required","is_unique[package.packageName]"),
             "packagePrice" => array("required", "numeric")
         );
         $messages = array(
             "packageName" => array(
-                "required" =>  "kolom nama paket harus diisi"
+                "required" =>  "kolom nama paket harus diisi",
+                "is_unique" => "kolom nama sudah ada"
             ),
             "packagePrice" => array(
                 "required" => "kolom harga paket harus diisi",
