@@ -9,6 +9,60 @@
 <?php endif; ?>
 
 
+<div class="mb-3">
+    <button class="btn btn-sm btn-primary text-capitalize" data-toggle="modal" data-target="#itemModal">
+        <i class="fas fa-plus"></i>
+    </button>
+    <div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="itemModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="<?= base_url("admin/items")?>" method="POST">
+
+                    <div class="form-group mb-3">
+                        <label for="itemLogo">Pakaian Thumbnail</label>
+                        <input name="itemLogo" type="file" class="form-control-file" id="itemLogo">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="itemName" class="form-label">Jenis Pakaian</label>
+                        <input type="text" class="form-control" name="itemName" id="itemName" >
+                        
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="itemPrice" class="form-label">Harga Per KG</label>
+                        <input type="text" class="form-control" name="itemPrice" id="itemPrice" >
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quanitityPerKG" class="form-label">Jumlah perKG</label>
+                        <input type="text" class="form-control" name="quanitityPerKG" id="quanitityPerKG" >
+                    </div>
+
+
+                    <div class="form-check mb-3">
+                        <input name="isSneaker" class="form-check-input" type="checkbox" id="isSneaker">
+                         <label class="form-check-label" for="isSneaker">
+                            Sneaker atau Bukan
+                        </label>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="ml-auto">
+                            <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Tambah</button>
+                        </div>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <?= view("components/table", array("tableName" => "orders")) ?>
 
 

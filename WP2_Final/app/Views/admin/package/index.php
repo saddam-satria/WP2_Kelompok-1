@@ -9,10 +9,10 @@
 <?php endif; ?>
 
 <div class="mb-4">
-    <button class="btn btn-sm btn-primary text-capitalize" data-toggle="modal" data-target="#exampleModalCenter">
+    <button class="btn btn-sm btn-primary text-capitalize" data-toggle="modal" data-target="#packageModal">
         <i class="fas fa-plus"></i>
     </button>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="packageModal" tabindex="-1" role="dialog" aria-labelledby="packageModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body">

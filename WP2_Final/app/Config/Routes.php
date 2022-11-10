@@ -102,6 +102,7 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->post("package-edit/(:any)", "Admin\PackageController::update/$1");
 
         $routes->get("items", "Admin\ItemController::index");
+        $routes->post("items", "Admin\ItemController::store");
         $routes->get("item-data", "Admin\ItemController::itemAjax");
         $routes->get("item/(:any)", "Admin\ItemController::detail/$1");
 

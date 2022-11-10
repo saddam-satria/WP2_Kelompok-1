@@ -50,4 +50,48 @@ class ItemController extends BaseController
         $item= $item[0];
         return view("admin/item/detail", compact("title","item"));
     }
+    public function store(){
+
+
+        $rules = array(
+            "itemName" => array("required"),
+            "itemPrice" => array("required", "numeric"),
+            "quantityPerKG" => array("required", "numeric"),
+            "itemLogo" => array("")
+        );
+        $messages = array(
+            "itemName" => array(
+                "required" =>  "kolom jenis pakaian harus diisi"
+            ),
+            "itemPrice" => array(
+                "required" => "kolom harga per kg harus diisi",
+                "numeric" => "kolom harga per kg harus angka"
+            ),
+            "quantityPerKG" => array(
+                "required" => "kolom jumlah per kg harus diisi",
+                "numeric" => "kolom jumlah per kg harus angka"
+            )
+        );
+
+
+        if (!$this->validate($rules, $messages)) {
+            $validation = $this->validator;
+            $messages = join(", ",$validation->getErrors());
+
+            return redirect()->to(base_url("admin/items"))->with("error", $messages);
+        }
+
+
+
+
+        $data = array(
+            "itemName" => $this->request->getVar("itemName"),
+            "itemPrice" => $this->request->getVar("itemPrice"),
+            "quantityPerKG" => $this->request->getVar("quantityPerKG"),
+            "isSneaker" => $this->request->getVar("isSneaker") == "on",
+
+        );
+
+        dd($data);
+    }
 }
