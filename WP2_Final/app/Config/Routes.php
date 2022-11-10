@@ -105,6 +105,9 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->post("items", "Admin\ItemController::store");
         $routes->get("item-data", "Admin\ItemController::itemAjax");
         $routes->get("item/(:any)", "Admin\ItemController::detail/$1");
+        $routes->post("item/(:any)", "Admin\ItemController::destroy/$1");
+        $routes->get("item-edit/(:any)", "Admin\ItemController::edit/$1");
+        $routes->post("item-edit/(:any)", "Admin\ItemController::update/$1");
 
     });
 });

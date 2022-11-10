@@ -8,7 +8,7 @@ class Item extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'item';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'itemID';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
