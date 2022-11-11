@@ -48,7 +48,7 @@ class OrderRepository extends Order
     }
     public function getOrderByID(string $order_id, array $columns = ["*"])
     {
-        return $this->query->select($columns)->where("id", $order_id)->join("service", "laundry_order.service_id = service.serviceID")->join("package", "laundry_order.package_id = package.packageID")->get()->getResultObject();
+        return $this->query->select($columns)->where("laundry_order.id", $order_id)->join("service", "laundry_order.service_id = service.serviceID")->join("package", "laundry_order.package_id = package.packageID")->join("account","account.id = laundry_order.account_id")->get()->getResultObject();
     }
     public function getOrdersAjax($columns = ["*"])
     {

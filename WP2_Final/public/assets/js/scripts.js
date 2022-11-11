@@ -13,7 +13,7 @@ const packageList = document.querySelectorAll('.package-list');
 
 const clothesInput = document.querySelector('#clothes');
 const clothesList = document.querySelectorAll('.clothes-list');
-const clothesBtn = document.querySelector('#clothes-btn');
+const clothesBtn = document.querySelectorAll('#clothes-btn');
 
 const quantityInput = document.querySelector('#quantity');
 
@@ -57,8 +57,8 @@ if (packageInput || packageList.length > 0) {
 }
 
 if (clothesInput || clothesList.length > 0 || clothesBtn) {
-  clothesList.forEach((clothes) => {
-    clothesBtn.addEventListener('click', () => {
+  clothesList.forEach((clothes,index) => {
+    clothesBtn[index].addEventListener('click', () => {
       clothesInput.value = clothes.textContent;
     });
   });

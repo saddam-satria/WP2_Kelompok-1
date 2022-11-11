@@ -116,8 +116,11 @@ class ServiceController extends BaseController
         $service=$service[0];
         $prevImage = $service->serviceLogo;
 
-        
-        $this->serviceRepository->delete($service->serviceID);
+        try {
+            $this->serviceRepository->delete($service->serviceID);
+        } catch (\Throwable $th) {
+            return redirect()->to(base_url("admin/services"))->with("error", "orderan sedang tidak kosong");
+        }
         
         if(!is_null($prevImage))
         {

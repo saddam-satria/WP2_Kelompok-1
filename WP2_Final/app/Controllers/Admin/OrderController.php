@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use App\Models\DetailOrder;
 use App\Repositories\ItemRepository;
+use App\Repositories\NotificationRepository;
 use App\Repositories\OrderRepository;
 use \Hermawan\DataTables\DataTable;
 
@@ -51,7 +52,7 @@ class OrderController extends BaseController
         $orderStatus = $this->orderRepository->getStatusOrder();
       
 
-        $order = $this->orderRepository->getOrderByID($id, array("token","paymentMethod","status","totalItem","amount","payment","id", "description","isTrouble"));
+        $order = $this->orderRepository->getOrderByID($id, array("token","paymentMethod","status","totalItem","amount","payment","laundry_order.id", "description","isTrouble"));
 
         if(count($order) < 1)
         {
@@ -73,7 +74,7 @@ class OrderController extends BaseController
     public function detail(string $id)
     {
         $title = "Admin Detail Order";
-        $order = $this->orderRepository->getOrderByID($id, array("isFinish","isTrouble","token","paymentMethod","status","totalItem","amount","payment","id", "description"));
+        $order = $this->orderRepository->getOrderByID($id, array("isFinish","isTrouble","token","paymentMethod","status","totalItem","amount","payment","laundry_order.id", "description"));
 
         if(count($order) < 1)
         {
@@ -87,7 +88,7 @@ class OrderController extends BaseController
     }
     public function update(string $id)
     {
-        $order = $this->orderRepository->getOrderByID($id, array("amount","totalItem"));
+        $order = $this->orderRepository->getOrderByID($id, array("amount","totalItem","account.email"));
         $data = array(
             "payment" => $this->request->getVar("payment"),
             "paymentMethod" => $this->request->getVar("paymentMethod"),
@@ -112,6 +113,15 @@ class OrderController extends BaseController
 
         if(str_contains(strtolower($data['status']),"sudah di ambil"))
         {
+            $notifRepository = new NotificationRepository();
+            $payloadNotification = array(
+                "to" => $order->email,
+                "from" => "admin sistem",
+                "message" => "Pesanan Anda Sudah Selesai, Terima Kasih Sudah Menggunakan Layanan Kami"
+            );
+
+            $notifRepository->insert($payloadNotification);
+    
             $data['isFinish'] = true; 
         }
         

@@ -51,7 +51,8 @@ class OrderController extends BaseController
         $title = "detail cucian";
         $orderRepository = new OrderRepository();
 
-        $orderModel = $orderRepository->getOrderByID($id);
+        $columns= array("laundry_order.id","laundry_order.account_id","laundry_order.totalItem","laundry_order.paymentMethod","service.serviceName","service.servicePrice","package.packagePrice","package.packageName","laundry_order.status","laundry_order.description","laundry_order.amount","laundry_order.payment","laundry_order.isTrouble","laundry_order.isFinish");
+        $orderModel = $orderRepository->getOrderByID($id, $columns);
 
         if (count($orderModel) < 1) {
             return redirect()->to("/user/orders");
@@ -99,7 +100,7 @@ class OrderController extends BaseController
         $orderRepository = new OrderRepository();
 
 
-        $orderModel = $orderRepository->getOrderByID($order_id, array("token", "id"));
+        $orderModel = $orderRepository->getOrderByID($order_id, array("token", "laundry_order.id"));
 
         if (count($orderModel) < 1) {
             return redirect()->to(base_url("/user/orders"));

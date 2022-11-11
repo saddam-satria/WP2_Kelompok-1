@@ -125,7 +125,11 @@ class ItemController extends BaseController
         $prevImage = $item->itemLogo;
 
         
-        $this->itemRepository->delete($item->itemID);
+        try {
+            $this->itemRepository->delete($item->itemID);
+        } catch (\Throwable $th) {
+            return redirect()->to(base_url("admin/items"))->with("error", "orderan sedang tidak kosong");
+        }
         
         if(!is_null($prevImage))
         {

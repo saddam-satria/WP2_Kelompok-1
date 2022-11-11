@@ -82,11 +82,10 @@ class PackageController extends BaseController
     }
     public function destroy(string $id)
     {
-        $result = $this->packageRepository->delete($id);
-
-       
-        if(!$result) {
-            return redirect()->to(base_url("admin/packages"))->with("error", "terjadi kesalahan");
+        try {
+            $this->packageRepository->delete($id);
+        } catch (\Throwable $th) {
+            return redirect()->to(base_url("admin/packages"))->with("error", "orderan sedang tidak kosong");
         }
         return redirect()->to(base_url("admin/packages"))->with("success", "berhasil menghapus paket cucian");
         
