@@ -3,6 +3,8 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\DetailOrder;
+use App\Repositories\ItemRepository;
 use App\Repositories\OrderRepository;
 use \Hermawan\DataTables\DataTable;
 
@@ -78,8 +80,10 @@ class OrderController extends BaseController
             return redirect()->to(base_url("admin/orders"));
         }
         $order = $order[0];
+        $detailOrderModel = new DetailOrder();
+        $items = $detailOrderModel->select()->where("order_id", $order->id)->join("item", "item.itemID=detail_order.item_id")->get()->getResultObject();
 
-        return view("admin/order/detail", compact("title", "order"));
+        return view("admin/order/detail", compact("title", "order","items"));
     }
     public function update(string $id)
     {
