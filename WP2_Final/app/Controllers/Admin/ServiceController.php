@@ -144,7 +144,7 @@ class ServiceController extends BaseController
     public function update(string $id)
     {
         $rules = array(
-            "serviceName" => array("required"),
+            "serviceName" => array("required","is_unique[service.serviceName,serviceID,{serviceID}]"),
             "servicePrice" => array("required", "numeric"),
             "serviceLogo" => array("max_size[serviceLogo,2048]","mime_in[serviceLogo,image/png,image/jpg,image/jpeg,image/svg]","ext_in[serviceLogo,png,jpg,jpeg,svg]", "is_image[serviceLogo]")
         );
@@ -178,8 +178,8 @@ class ServiceController extends BaseController
             helper("form");
             $validation = $this->validator;
             $messages = join(", ", $validation->getErrors());
-           
-            return view("admin/service/edit", compact("title", "service"));
+            $title = "Admin Edit Servis";
+            return view("admin/service/edit", compact("title", "service", "validation"));
         }
 
         $image = $this->request->getFile("serviceLogo");

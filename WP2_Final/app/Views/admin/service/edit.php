@@ -44,6 +44,10 @@
                     </div>
 
 
+                    <div class="mb-3">
+                        <input readonly value="<?= $service->serviceID?>" type="text" class="form-control d-none" name="serviceID" id="serviceID" >
+                    </div>
+
                     <div class="ml-auto">
                         <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Update</button>
                     </div>

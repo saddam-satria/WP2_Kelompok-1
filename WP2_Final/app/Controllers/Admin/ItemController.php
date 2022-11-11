@@ -159,14 +159,15 @@ class ItemController extends BaseController
 
 
         $rules = array(
-            "itemName" => array("required"),
+            "itemName" => array("required","is_unique[item.itemName,itemID,{itemID}]"),
             "itemPrice" => array("required", "numeric"),
             "quantityPerKG" => array("required", "numeric"),
             "itemLogo" => array("max_size[itemLogo,2048]","mime_in[itemLogo,image/png,image/jpg,image/jpeg,image/svg]","ext_in[itemLogo,png,jpg,jpeg,svg]", "is_image[itemLogo]")
         );
         $messages = array(
             "itemName" => array(
-                "required" =>  "kolom jenis pakaian harus diisi"
+                "required" =>  "kolom jenis pakaian harus diisi",
+                "is_unique" => "kolom nama sudah ada"
             ),
             "itemPrice" => array(
                 "required" => "kolom harga per kg harus diisi",

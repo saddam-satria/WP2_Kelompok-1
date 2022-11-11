@@ -52,6 +52,10 @@
                     </div>
                   
 
+                    <div class="mb-3">
+                        <input readonly value="<?= $item->itemID?>" type="text" class="form-control d-none" name="itemID" id="itemID" >
+                    </div>
+
 
                     <div class="ml-auto">
                         <button type="submit" class="btn btn-sm" style="background-color: #85f1fe; color: #000000;">Update</button>

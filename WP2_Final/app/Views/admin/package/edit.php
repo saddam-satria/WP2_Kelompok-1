@@ -14,6 +14,10 @@
             <form action="<?= base_url("admin/package-edit/" . $package->packageID)?>" method="POST">
 
                 <div class="mb-3">
+                    <input readonly value="<?= $package->packageID?>" type="text" class="form-control d-none" name="packageID" id="packageID" >
+                </div>
+
+                <div class="mb-3">
                     <label for="packageName" class="form-label">Nama Paket</label>
                     <input value="<?= $package->packageName?>" type="text" class="form-control" name="packageName" id="packageName" >
                     <?php if (isset($validation) && $validation->getError("packageName")) : ?>
