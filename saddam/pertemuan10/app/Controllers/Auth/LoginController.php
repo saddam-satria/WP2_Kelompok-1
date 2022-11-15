@@ -10,4 +10,24 @@ class LoginController extends BaseController
     {
         return view("auth/login");
     }
+    public function login()
+    {
+        $email = $this->request->getVar("email");
+        $password = $this->request->getVar("password");
+
+        $data = array(
+            "email" => $email,
+            "password" => $password
+        );
+
+        if($email != "admin@gmail.com" || $password != "admin"){
+            return redirect()->to(base_url("auth/login"));
+        }
+
+
+        return redirect()->to(base_url("/"));
+
+
+
+    }
 }
