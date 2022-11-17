@@ -28,7 +28,7 @@
         </li>
     <?php endif ?>
     <?php if (session()->current_user[0]->isAdmin) : ?>
-        
+
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url("admin/orders") ?>" style="background-color: <?= str_contains(uri_string(), "admin/orders") ? "#21aee4" : "transparent" ?>;">
                 <i class="fa-solid fa-hand-holding-heart"></i>
@@ -40,19 +40,18 @@
         <hr class="sidebar-divider d-none d-md-block">
 
         <div class="sidebar-heading mb-3">
-                Master Data
+            Master Data
         </div>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                aria-expanded="true" aria-controls="collapseTwo" style="background-color: <?= str_contains(uri_string(), "admin/users") ? "#21aee4" : "transparent" ?>;">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" style="background-color: <?= str_contains(uri_string(), "admin/users") ? "#21aee4" : "transparent" ?>;">
                 <i class="fas fa-fw fa-users"></i>
                 <span>Akun</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="<?= base_url("/admin/users/")?>">Pengguna</a>
-                    <a class="collapse-item" href="<?= base_url("/admin/users?is_admin=".true)?>">Admin</a>
+                    <a class="collapse-item" href="<?= base_url("/admin/users/") ?>">Pengguna</a>
+                    <a class="collapse-item" href="<?= base_url("/admin/users?is_admin=" . true) ?>">Admin</a>
                 </div>
             </div>
         </li>
@@ -75,6 +74,13 @@
             <a class="nav-link" href="<?= base_url("admin/services") ?>" style="background-color: <?= str_contains(uri_string(), "admin/services") ? "#21aee4" : "transparent" ?>;">
                 <i class="fa-solid fa-box"></i>
                 <span>Jenis Cucian</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url("admin/vouchers") ?>" style="background-color: <?= str_contains(uri_string(), "admin/vouchers") ? "#21aee4" : "transparent" ?>;">
+                <i class="fa-solid fa-box"></i>
+                <span>Voucher</span>
             </a>
         </li>
     <?php endif ?>

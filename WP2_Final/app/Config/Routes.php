@@ -33,7 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth\RedirectController::index');
 
-$routes->group("auth", array("filter" => "auth") , function ($routes) {
+$routes->group("auth", array("filter" => "auth"), function ($routes) {
     $routes->get("login", "Auth\LoginController::index");
     $routes->post("login", "Auth\LoginController::login");
     $routes->get("signup", "Auth\RegisterController::index");
@@ -47,7 +47,7 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
     $routes->get("user/notification/(:any)", "User\NotificationController::index/$1");
     $routes->post("user/notification/(:any)", "User\NotificationController::updateIsRead/$1");
 
-    $routes->group("user", array("filter" => ["isLogged","getCart"]), function ($routes) {
+    $routes->group("user", array("filter" => ["isLogged", "getCart"]), function ($routes) {
         $routes->get("dashboard", "User\DashboardController::index");
 
         $routes->group("", array("filter" => ["isMember", "getCart"]), function ($routes) {
@@ -55,16 +55,16 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
             $routes->get("orders", "User\OrderController::index");
             $routes->get("order/(:any)", "User\OrderController::detail/$1");
             $routes->get("histories", "User\OrderController::histories");
-        
 
-            $routes->group("", array("filter" => ["isLogged","isMember", "getCart", "currentCart"]), function ($routes) {
+
+            $routes->group("", array("filter" => ["isLogged", "isMember", "getCart", "currentCart"]), function ($routes) {
                 $routes->get("new-order", "User\OrderController::create");
             });
 
             $routes->post("add-item-to-cart",  "User\CartController::storeItem");
             $routes->post("add-to-cart", "User\CartController::store");
 
-            $routes->group("", array("filter" => ["isLogged","isMember", "getCart", "isCartEmpty"]), function ($routes) {
+            $routes->group("", array("filter" => ["isLogged", "isMember", "getCart", "isCartEmpty"]), function ($routes) {
                 $routes->get("checkout", "User\CheckoutController::index");
                 $routes->post("payment", "User\CheckoutController::payment");
                 $routes->get("select-item", "User\CartController::create");
@@ -79,7 +79,7 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         });
     });
 
-    $routes->group("admin", array("filter" => ["isLogged","isAdmin"]), function ($routes) {
+    $routes->group("admin", array("filter" => ["isLogged", "isAdmin"]), function ($routes) {
         $routes->get("orders", "Admin\OrderController::index");
         $routes->get("order/edit/(:any)", "Admin\OrderController::edit/$1");
         $routes->post("order/edit/(:any)", "Admin\OrderController::update/$1");
@@ -117,6 +117,11 @@ $routes->group("", array("filter" => "isLogged"), function ($routes) {
         $routes->get("service-edit/(:any)", "Admin\ServiceController::edit/$1");
         $routes->post("service-edit/(:any)", "Admin\ServiceController::update/$1");
         $routes->post("service/(:any)", "Admin\ServiceController::destroy/$1");
+
+        $routes->get("vouchers", "Admin\VoucherController::index");
+        $routes->post("vouchers", "Admin\VoucherController::store");
+        $routes->get("voucher-data", "Admin\VoucherController::voucherAjax");
+        $routes->post("voucher/(:any)", "Admin\VoucherController::destroy/$1");
     });
 });
 

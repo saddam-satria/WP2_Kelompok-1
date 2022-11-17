@@ -23,4 +23,8 @@ class VoucherRepository extends Voucher
     {
         return $this->voucheronAccountTable->select($columns)->where("account_id", $account_id)->join("voucher", "voucher.voucherID = voucher_on_account.voucher_id")->get()->getResultObject();
     }
+    public function getRawVoucher(array $columns = ["*"])
+    {
+        return $this->voucherTable->select($columns);
+    }
 }
